@@ -1,0 +1,196 @@
+*** RUNNING PRE-GRADING TESTS ON 2015-01-26 23:03:30 CST ***
+* Language is Java
+* Compiled sources successfully
+
+* Running test #1
+* Arguments: @57
+** DC:    (-1237, 33) (-1219, 14) 26.1725046566048
+** NAIVE: (2411, 29) (2419, 53) 5.029733718731742
+* Validating divide-and-conquer output
+** FAIL: reported distance 26.1725046566048 does not match expected distance 25.298221281347036
+** expected (2411, 29) (2419, 53) 25.298221281347036
+* Validating naive output
+** FAIL: reported distance 5.029733718731742 does not match expected distance 25.298221281347036
+** FAIL: reported distance 5.029733718731742 does not match actual interpoint distance 25.298221281347036
+** expected (2411, 29) (2419, 53) 25.298221281347036
++++ FAILED test #1
+
+* Running test #2
+* Arguments: @421
+* FAIL: program terminated abnormally:
+Exception in thread "main" java.lang.NullPointerException
+	at ClosestPairDC.helper(ClosestPairDC.java:108)
+	at ClosestPairDC.helper(ClosestPairDC.java:83)
+	at ClosestPairDC.helper(ClosestPairDC.java:83)
+	at ClosestPairDC.helper(ClosestPairDC.java:83)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.findClosestPair(ClosestPairDC.java:25)
+	at Lab1.main(Lab1.java:83)
+* Validating divide-and-conquer output
+** FAIL: no output generated
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #2
+
+* Running test #3
+* Arguments: @3216
+* FAIL: program terminated abnormally:
+Exception in thread "main" java.lang.NullPointerException
+	at ClosestPairDC.helper(ClosestPairDC.java:108)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:83)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.findClosestPair(ClosestPairDC.java:25)
+	at Lab1.main(Lab1.java:83)
+* Validating divide-and-conquer output
+** FAIL: no output generated
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #3
+
+* Running test #4
+* Arguments: @8192
+* FAIL: program terminated abnormally:
+Exception in thread "main" java.lang.NullPointerException
+	at ClosestPairDC.helper(ClosestPairDC.java:108)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.findClosestPair(ClosestPairDC.java:25)
+	at Lab1.main(Lab1.java:83)
+* Validating divide-and-conquer output
+** FAIL: no output generated
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #4
+
+* Running test #5
+* Arguments: @17436
+* FAIL: program terminated abnormally:
+Exception in thread "main" java.lang.NullPointerException
+	at ClosestPairDC.helper(ClosestPairDC.java:108)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.findClosestPair(ClosestPairDC.java:25)
+	at Lab1.main(Lab1.java:83)
+* Validating divide-and-conquer output
+** FAIL: no output generated
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #5
+
+* Running test #6
+* Arguments: @21213
+* FAIL: program terminated abnormally:
+Exception in thread "main" java.lang.NullPointerException
+	at ClosestPairDC.helper(ClosestPairDC.java:108)
+	at ClosestPairDC.helper(ClosestPairDC.java:83)
+	at ClosestPairDC.helper(ClosestPairDC.java:83)
+	at ClosestPairDC.helper(ClosestPairDC.java:83)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.findClosestPair(ClosestPairDC.java:25)
+	at Lab1.main(Lab1.java:83)
+* Validating divide-and-conquer output
+** FAIL: no output generated
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #6
+
+* Running test #7
+* Arguments: /home/warehouse/cse241/lab-code/test-cases/testing/lab1/zero-case.txt
+** DC:    (12, 21) (12, 21) 0.0
+** NAIVE: (12, 21) (12, 21) 0.0
+* Validating divide-and-conquer output
+** OK
+* Validating naive output
+** OK
++++ PASSED test #7
+
+* Running test #8
+* Arguments: /home/warehouse/cse241/lab-code/test-cases/testing/lab1/y-case-1.txt
+* FAIL: program terminated abnormally:
+Exception in thread "main" java.lang.NullPointerException
+	at ClosestPairDC.helper(ClosestPairDC.java:108)
+	at ClosestPairDC.helper(ClosestPairDC.java:83)
+	at ClosestPairDC.findClosestPair(ClosestPairDC.java:25)
+	at Lab1.main(Lab1.java:83)
+* Validating divide-and-conquer output
+** FAIL: no output generated
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #8
+
+* Running test #9
+* Arguments: /home/warehouse/cse241/lab-code/test-cases/testing/lab1/y-case-2.txt
+* FAIL: program terminated abnormally:
+Exception in thread "main" java.lang.NullPointerException
+	at ClosestPairDC.helper(ClosestPairDC.java:108)
+	at ClosestPairDC.helper(ClosestPairDC.java:83)
+	at ClosestPairDC.findClosestPair(ClosestPairDC.java:25)
+	at Lab1.main(Lab1.java:83)
+* Validating divide-and-conquer output
+** FAIL: no output generated
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #9
+
+* Running test #10
+* Arguments: /home/warehouse/cse241/lab-code/test-cases/testing/lab1/stress.txt
+* FAIL: program terminated abnormally:
+Exception in thread "main" java.lang.NullPointerException
+	at ClosestPairDC.helper(ClosestPairDC.java:108)
+	at ClosestPairDC.helper(ClosestPairDC.java:83)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.helper(ClosestPairDC.java:82)
+	at ClosestPairDC.findClosestPair(ClosestPairDC.java:25)
+	at Lab1.main(Lab1.java:83)
+* Validating divide-and-conquer output
+** FAIL: no output generated
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #10
+
++++ SUMMARY: passed 1/10 tests

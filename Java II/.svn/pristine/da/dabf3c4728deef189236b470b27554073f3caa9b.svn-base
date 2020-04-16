@@ -1,0 +1,57 @@
+package studio1.percent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+
+import studio1.lecture.ViewAsSlider;
+import studio1.lecture.ViewAsText;
+// import javax.swing.event.ChangeEvent;
+// import javax.swing.event.ChangeListener;
+
+public class Controller extends JPanel implements ActionListener {
+
+	private String label;
+	private PercentModel model;
+	
+	public Controller() {
+		label = "Wet";
+		this.add(new JLabel(label));
+                // add other things you want to see here:
+		this.add(new JLabel("HJR ain't got no type"));
+		
+		model = new PercentModel();
+		this.add(new ViewAsSlider(model, false));
+		this.add(new ViewAsSlider(model, false));
+		
+		this.add(new ViewAsText(model));
+		
+		JButton button1 = new JButton("Randomize!");
+		button1.addActionListener(this);
+		this.add(button1);
+	}
+	
+	
+	public static void main(String[] args) {
+		Controller panel = new Controller();
+		//
+		// What you see below is what 
+		// Sedewick's code did for you in 131
+		// When you create a new JFrame, by default it can't be seen
+		//   It's a bit surprising at first, and
+		//     not a good thing when you are starting out
+		//
+		JFrame frame = new JFrame();
+		frame.add(panel);
+		frame.pack();
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getActionCommand().equals("Randomize!"))
+			model.setValue((int)(Math.random()*100));
+	}
+
+}
+

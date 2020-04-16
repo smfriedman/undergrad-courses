@@ -1,0 +1,16 @@
+package ChoiceAndIteration;
+
+public class Swap {
+
+	public static void main(String[] args) {
+		
+		int x = 7;
+		int y = 10;
+		
+		if (y > x) {
+			int temp = x;
+			x = y;
+			y = temp;
+		}
+	}
+}

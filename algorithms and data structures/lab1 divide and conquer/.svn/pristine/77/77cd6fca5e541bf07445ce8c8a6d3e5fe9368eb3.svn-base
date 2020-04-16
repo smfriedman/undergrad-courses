@@ -1,0 +1,125 @@
+*** RUNNING PRE-GRADING TESTS ON 2015-01-26 00:01:58 CST ***
+* Language is Java
+* Compiled sources successfully
+
+* Running test #1
+* Arguments: @57
+* FAIL: program terminated abnormally:
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 29
+	at ClosestPairDC.findClosestPair(ClosestPairDC.java:46)
+	at Lab1.main(Lab1.java:83)
+* Validating divide-and-conquer output
+** FAIL: no output generated
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #1
+
+* Running test #2
+* Arguments: @421
+* FAIL: program terminated abnormally:
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 211
+	at ClosestPairDC.findClosestPair(ClosestPairDC.java:46)
+	at Lab1.main(Lab1.java:83)
+* Validating divide-and-conquer output
+** FAIL: no output generated
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #2
+
+* Running test #3
+* Arguments: @3216
+* FAIL: program terminated abnormally:
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 1609
+	at ClosestPairDC.findClosestPair(ClosestPairDC.java:46)
+	at Lab1.main(Lab1.java:83)
+* Validating divide-and-conquer output
+** FAIL: no output generated
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #3
+
+* Running test #4
+* Arguments: @8192
+* FAIL: program terminated abnormally:
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 4097
+	at ClosestPairDC.findClosestPair(ClosestPairDC.java:46)
+	at Lab1.main(Lab1.java:83)
+* Validating divide-and-conquer output
+** FAIL: no output generated
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #4
+
+* Running test #5
+* Arguments: @17436
+* FAIL: program terminated abnormally:
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 8719
+	at ClosestPairDC.findClosestPair(ClosestPairDC.java:46)
+	at Lab1.main(Lab1.java:83)
+* Validating divide-and-conquer output
+** FAIL: no output generated
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #5
+
+* Running test #6
+* Arguments: @21213
+* FAIL: program terminated abnormally:
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 10607
+	at ClosestPairDC.findClosestPair(ClosestPairDC.java:46)
+	at Lab1.main(Lab1.java:83)
+* Validating divide-and-conquer output
+** FAIL: no output generated
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #6
+
+* Running test #7
+* Arguments: /home/warehouse/cse241/lab-code/test-cases/testing/lab1/zero-case.txt
+* FAIL: program terminated abnormally:
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 3
+	at ClosestPairDC.findClosestPair(ClosestPairDC.java:46)
+	at Lab1.main(Lab1.java:83)
+* Validating divide-and-conquer output
+** FAIL: no output generated
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #7
+
+* Running test #8
+* Arguments: /home/warehouse/cse241/lab-code/test-cases/testing/lab1/y-case-1.txt
+* FAIL: program terminated abnormally:
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 4
+	at ClosestPairDC.findClosestPair(ClosestPairDC.java:46)
+	at Lab1.main(Lab1.java:83)
+* Validating divide-and-conquer output
+** FAIL: no output generated
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #8
+
+* Running test #9
+* Arguments: /home/warehouse/cse241/lab-code/test-cases/testing/lab1/y-case-2.txt
+* FAIL: program terminated abnormally:
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 4
+	at ClosestPairDC.findClosestPair(ClosestPairDC.java:46)
+	at Lab1.main(Lab1.java:83)
+* Validating divide-and-conquer output
+** FAIL: no output generated
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #9
+
+* Running test #10
+* Arguments: /home/warehouse/cse241/lab-code/test-cases/testing/lab1/stress.txt
+* FAIL: program terminated abnormally:
+Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 10001
+	at ClosestPairDC.findClosestPair(ClosestPairDC.java:46)
+	at Lab1.main(Lab1.java:83)
+* Validating divide-and-conquer output
+** FAIL: no output generated
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #10
+
++++ SUMMARY: passed 0/10 tests

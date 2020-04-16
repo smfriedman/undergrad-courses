@@ -1,0 +1,124 @@
+package lab2.autogen;
+import java_cup.runtime.*;
+import lab2.IntPair;
+import common.Listing;
+import java.util.*;
+
+// $Id: addhaque.cup 49 2010-05-23 21:25:22Z cytron $
+
+terminal Integer  number;
+terminal         plus, minus, sum, product, times, negate, mean;
+terminal         lparen, rparen;
+
+non terminal Integer  				Program, File, Lists, Lists2, List, Expression;
+non terminal Integer  				Operand1, Operand2, Atom, Operand;
+non terminal LinkedList<Integer> 	Operands, Operands2;
+
+start with Program;
+
+Program
+	::= File
+	;
+
+File   
+	::= Lists
+	;
+	
+Lists
+	::= List:L Lists2:L2
+		{:  Listing.get().EmitMessage("Value: " + L.intValue());  :}
+	;
+
+Lists2
+	::= List:L Lists2:L2
+		{:  Listing.get().EmitMessage("Value: " + L.intValue());  :}
+	|	/* lambda */
+		{:  :}
+	;
+		
+List
+	::= lparen Expression:Ex rparen
+		{: RESULT = Ex; :}
+	;
+
+Expression
+	::= plus    Operand1:Op1 Operand2:Op2
+		{: RESULT = Op1 + Op2; :}
+	|   minus   Operand1:Op1 Operand2:Op2
+		{: RESULT = Op1 - Op2; :}
+	|   times   Operand1:Op1 Operand2:Op2
+		{: RESULT = Op1 * Op2; :}
+	|   negate  Operand:Op
+		{: RESULT = 0 - Op; :}
+	|   sum     Operands:Ops
+		{: 
+			int count = Ops.size();
+			int total = 0;
+			for(int i = 0; i < count; i++){
+				total += Ops.pop();
+			}
+			RESULT = total; 
+		:}
+	|   product Operands:Ops
+		{: 
+			int count = Ops.size();
+			int total = 0;
+			if (count > 0) total = Ops.pop();
+			for(int i = 1; i < count; i++){
+				total *= Ops.pop();
+			}
+			RESULT = total; 
+		:}
+	|   mean    Operands:Ops
+		{: 
+			int count = Ops.size();
+			int total = 0;
+			for(int i = 0; i < count; i++){
+				total += Ops.pop();
+			}
+			if(count > 0) total /= count;
+			RESULT = total; 
+		:}
+	;
+
+Operand1
+	::= Atom:At
+		{: RESULT = At; :}
+	;
+
+Operand2
+	::= Atom:At
+		{: RESULT = At; :}
+	;
+
+Operand
+	::= Atom:At
+		{: RESULT = At; :}
+	;
+
+Operands
+	::= Operand:Op Operands2: Ops
+		{: 
+			Ops.add(Op);
+			RESULT = Ops; 
+		:}
+//	|   /* lambda (no operands) */
+//		{: RESULT = new LinkedList<Integer>(); :}
+	;
+
+Operands2
+	::= Operand:Op Operands2:Ops
+		{: 
+			Ops.add(Op);
+			RESULT = Ops;
+		:}
+	| /* lambda */
+		{: RESULT = new LinkedList<Integer>(); :}
+	;
+
+Atom
+	::= List:L
+		{: RESULT = L; :}
+	|   number:nu
+		{: RESULT = nu; :}
+	;

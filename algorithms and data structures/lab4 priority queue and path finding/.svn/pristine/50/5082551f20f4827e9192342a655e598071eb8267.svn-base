@@ -1,0 +1,153 @@
+import java.util.ArrayList;
+
+//
+// PRIORITYQUEUE.JAVA
+// A priority queue class supporting sundry operations needed for
+// Dijkstra's algorithm.
+//
+
+class PriorityQueue<T> {
+	ArrayList<Node<T>> pq;
+    // constructor
+    //
+    public PriorityQueue()
+    {														//done
+    	this.pq = new ArrayList<Node<T>>();
+    	this.pq.add(null);
+    }
+    
+    // Return true iff the queue is empty.
+    //
+    public boolean isEmpty()								//done
+    {
+    	if(pq.size() <= 1) return true;
+    	return false;
+    }
+    
+    // Insert a pair (key, value) into the queue, and return
+    // a Handle to this pair so that we can find it later in
+    // constant time.
+    //
+    Handle insert(int key, T value)
+    {
+//    	ArrayList<Node<T>> pqtemp = new ArrayList<Node<T>>(pq.size() + 1);		//done
+//    	for(int i = 0; i < pqtemp.size(); i++){
+//    		pqtemp.set(i, pq.get(i));
+//    	}
+//    	pq = pqtemp;
+
+    	int j = pq.size();	
+    	while(j > 1 && key < pq.get(Math.floorDiv(j, 2)).getKey()){
+    		if(j == pq.size()){
+    			pq.add(pq.get(Math.floorDiv(j, 2)));
+    		} else {
+    			pq.set(j, pq.get(Math.floorDiv(j, 2)));
+    		}
+    		pq.get(j).setHandle(new Handle(j));
+    		j = Math.floorDiv(j, 2);
+    	}
+    	Node<T> node = new Node<T>(key, value, new Handle(j));
+    	if(j == pq.size()){
+    		pq.add(node);
+    	}else{
+    		pq.set(j, node);
+    	}
+    	return node.getHandle();
+    }
+    
+    // Return the smallest key in the queue.
+    //
+    public int min()
+    {		
+    	if(pq.size() > 1) return pq.get(1).getKey();				//done
+    	else return Integer.MIN_VALUE;
+    }
+    
+    // Extract the (key, value) pair associated with the smallest
+    // key in the queue and return its "value" object.
+    //
+    public T extractMin()
+    {																		//done
+    	T result = pq.get(1).getValue();
+    	pq.get(1).setHandle(new Handle(-1));
+    	
+    	pq.set(1, pq.get(pq.size() - 1));
+    	pq.get(1).setHandle(new Handle(1));
+    	pq.remove(pq.size() - 1);
+    	heapify(1);
+    	return result;
+    }
+    
+    public void heapify(int index){														//done
+    	if(index <= Math.floorDiv(pq.size() - 1, 2)){
+    		int j = index * 2;
+    		if(pq.size() - 1 > index*2 && 
+    				pq.get(j).getKey() > pq.get(index*2 + 1).getKey()){
+    			j = j + 1;
+    		}
+    		if(pq.get(j).getKey() < pq.get(index).getKey()){
+    			swap(index, j);
+    			heapify(j);
+    		}
+    	}
+    }
+    
+    public void swap(int i, int j){
+		Node<T> temp = new Node<T>(pq.get(j).getKey(), pq.get(j).getValue(), new Handle(i));
+		pq.set(j, new Node(pq.get(i).getKey(), pq.get(i).getValue(), new Handle(j)));
+		pq.set(i, temp);
+    }
+    
+    
+    // Look at the (key, value) pair referenced by Handle h.
+    // If that pair is no longer in the queue, or its key
+    // is <= newkey, do nothing and return false.  Otherwise,
+    // replace "key" by "newkey", fixup the queue, and return
+    // true.
+    //
+    public boolean decreaseKey(Handle h, int newkey)
+    {
+    	if(h.getIndex() != -1 || pq.get(h.getIndex()).getKey() <= newkey){
+    		return false;
+    	} else {
+    		pq.get(h.getIndex()).setKey(newkey);
+    		
+    		
+    		return true;
+    	}
+    }
+    
+    
+    // Get the key of the (key, value) pair associated with a 
+    // given Handle. (This result is undefined if the handle no longer
+    // refers to a pair in the queue.)
+    //
+    public int handleGetKey(Handle h)									//done
+    {
+    	return pq.get(h.getIndex()).getKey();
+    }
+
+    // Get the value object of the (key, value) pair associated with a 
+    // given Handle. (This result is undefined if the handle no longer
+    // refers to a pair in the queue.)
+    //
+    public T handleGetValue(Handle h)
+    {
+    	if(h.getIndex() != -1){												//done
+    		return pq.get(h.getIndex()).getValue(); 
+    	} else {
+    		return null;
+    	}
+    }
+    
+    // Print every element of the queue in the order in which it appears
+    // in the implementation (i.e. the array representing the heap).
+    public String toString()
+    {
+    	String result = "";													//done
+    	for(int i = 1; i < pq.size(); i++){
+    		result = result + "(" + pq.get(i).getKey() + ", " + pq.get(i).getValue().toString() + ")" + '\n';
+    	}
+    	return result;
+    }
+}

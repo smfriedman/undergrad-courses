@@ -1,0 +1,13 @@
+package lamepackage;
+
+import lists.ScopeExample;
+
+public class ScopeExample3 {
+
+	public static void main(String[] args) {
+		System.out.println(ScopeExample.publicVar);
+		// System.out.println(ScopeExample.packageVar);
+		// System.out.println(ScopeExample.privateVar);
+	}
+
+}

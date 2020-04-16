@@ -1,0 +1,127 @@
+*** RUNNING PRE-GRADING TESTS ON 2015-01-21 23:48:39 CST ***
+* Language is Java
+* Compiled sources successfully
+
+* Running test #1
+* Arguments: @57
+** DC:    (2411,29) (2419,53) 5.029733718731742For n = 57, the elapsed time is 6 milliseconds.
+** DC:    (2411,29) (2419,53) 5.029733718731742For n = 57, the naive elapsed time is 0 milliseconds.
+* Validating divide-and-conquer output
+** WARNING: ignoring all but first line of output
+** FAIL: reported distance 5.029733718731742 does not match expected distance 25.298221281347036
+** FAIL: reported distance 5.029733718731742 does not match actual interpoint distance 25.298221281347036
+** expected (2411, 29) (2419, 53) 25.298221281347036
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #1
+
+* Running test #2
+* Arguments: @421
+** DC:    (786,78) (795,76) 3.036370276710811For n = 421, the elapsed time is 19 milliseconds.
+** DC:    (786,78) (795,76) 3.036370276710811For n = 421, the naive elapsed time is 5 milliseconds.
+* Validating divide-and-conquer output
+** WARNING: ignoring all but first line of output
+** FAIL: reported distance 3.036370276710811 does not match expected distance 9.219544457292887
+** FAIL: reported distance 3.036370276710811 does not match actual interpoint distance 9.219544457292887
+** expected (786, 78) (795, 76) 9.219544457292887
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #2
+
+* Running test #3
+* Arguments: @3216
+** DC:    (105484,261) (105491,256) 2.932972087668518For n = 3216, the elapsed time is 312 milliseconds.
+** DC:    (105484,261) (105491,256) 2.932972087668518For n = 3216, the naive elapsed time is 286 milliseconds.
+* Validating divide-and-conquer output
+** WARNING: ignoring all but first line of output
+** FAIL: reported distance 2.932972087668518 does not match expected distance 8.602325267042627
+** FAIL: reported distance 2.932972087668518 does not match actual interpoint distance 8.602325267042627
+** expected (105484, 261) (105491, 256) 8.602325267042627
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #3
+
+* Running test #4
+* Arguments: @8192
+** DC:    (-23573,2156) (-23572,2153) 1.7782794100389228For n = 8192, the elapsed time is 1905 milliseconds.
+** DC:    (-23573,2156) (-23572,2153) 1.7782794100389228For n = 8192, the naive elapsed time is 1859 milliseconds.
+* Validating divide-and-conquer output
+** WARNING: ignoring all but first line of output
+** FAIL: reported distance 1.7782794100389228 does not match expected distance 3.1622776601683795
+** FAIL: reported distance 1.7782794100389228 does not match actual interpoint distance 3.1622776601683795
+** expected (-23573, 2156) (-23572, 2153) 3.1622776601683795
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #4
+
+* Running test #5
+* Arguments: @17436
+** DC:    (7317,730) (7320,731) 1.7782794100389228For n = 17436, the elapsed time is 8470 milliseconds.
+** DC:    (7317,730) (7320,731) 1.7782794100389228For n = 17436, the naive elapsed time is 8434 milliseconds.
+* Validating divide-and-conquer output
+** WARNING: ignoring all but first line of output
+** FAIL: reported distance 1.7782794100389228 does not match expected distance 3.1622776601683795
+** FAIL: reported distance 1.7782794100389228 does not match actual interpoint distance 3.1622776601683795
+** expected (7317, 730) (7320, 731) 3.1622776601683795
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #5
+
+* Running test #6
+* Arguments: @21213
+** DC:    (-32718,4684) (-32718,4684) 0.0For n = 21213, the elapsed time is 12542 milliseconds.
+** DC:    (-32718,4684) (-32718,4684) 0.0For n = 21213, the naive elapsed time is 12457 milliseconds.
+* Validating divide-and-conquer output
+** WARNING: ignoring all but first line of output
+** OK
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #6
+
+* Running test #7
+* Arguments: /home/warehouse/cse241/lab-code/test-cases/testing/lab1/zero-case.txt
+** DC:    (12,21) (12,21) 0.0For n = 5, the elapsed time is 3 milliseconds.
+** DC:    (12,21) (12,21) 0.0For n = 5, the naive elapsed time is 0 milliseconds.
+* Validating divide-and-conquer output
+** WARNING: ignoring all but first line of output
+** OK
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #7
+
+* Running test #8
+* Arguments: /home/warehouse/cse241/lab-code/test-cases/testing/lab1/y-case-1.txt
+** DC:    (10,7) (10,8) 1.0For n = 7, the elapsed time is 4 milliseconds.
+** DC:    (10,7) (10,8) 1.0For n = 7, the naive elapsed time is 0 milliseconds.
+* Validating divide-and-conquer output
+** WARNING: ignoring all but first line of output
+** OK
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #8
+
+* Running test #9
+* Arguments: /home/warehouse/cse241/lab-code/test-cases/testing/lab1/y-case-2.txt
+** DC:    (17,7) (17,8) 1.0For n = 6, the elapsed time is 5 milliseconds.
+** DC:    (17,7) (17,8) 1.0For n = 6, the naive elapsed time is 0 milliseconds.
+* Validating divide-and-conquer output
+** WARNING: ignoring all but first line of output
+** OK
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #9
+
+* Running test #10
+* Arguments: /home/warehouse/cse241/lab-code/test-cases/testing/lab1/stress.txt
+** DC:    (-3,73770) (3,73770) 2.449489742783178For n = 20000, the elapsed time is 11171 milliseconds.
+** DC:    (-3,93920) (3,93920) 2.449489742783178For n = 20000, the naive elapsed time is 11106 milliseconds.
+* Validating divide-and-conquer output
+** WARNING: ignoring all but first line of output
+** FAIL: reported distance 2.449489742783178 does not match expected distance 6.0
+** FAIL: reported distance 2.449489742783178 does not match actual interpoint distance 6.0
+** expected (3, 93920) (-3, 93920) 6.0
+* Validating naive output
+** FAIL: no output generated
++++ FAILED test #10
+
++++ SUMMARY: passed 0/10 tests

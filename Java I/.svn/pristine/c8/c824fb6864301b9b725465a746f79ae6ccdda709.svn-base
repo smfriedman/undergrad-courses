@@ -1,0 +1,14 @@
+package recursion;
+
+public class BasicFunction {
+
+	public static void sayHi() {
+		System.out.println("Hi!");
+	}
+
+	public static void main(String[] args) {
+		int a = 5;
+		sayHi();
+		System.out.println(a);
+	}
+}

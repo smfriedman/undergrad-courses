@@ -1,0 +1,92 @@
+*** RUNNING PRE-TURNIN TESTS ON 2015-03-30 02:24:59 CDT ***
+* Language is Java
+
+* Running test #1
+* Arguments: skip/fewEvents.txt skip/query0.txt
+ERROR: program terminated abnormally:
+  Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 8
+	at EventList.findMostRecent(EventList.java:104)
+	at Main.RunTest(Main.java:97)
+	at Main.main(Main.java:58)
+--- FAILED test #1
+
+* Running test #2
+* Arguments: skip/allEvents.txt skip/query1.txt
+ERROR: output differs from expected result:
+@@ -1,55 +1,9 @@
+ > FINDRANGE 1788 1789
+-1788 First settlement in Ohio is Marietta, named for Marie Antoinette
+-1788 Johann Gottfried Muthel, German composer and organist, dies
+-1788 Joseph Lagrange presents Lagrange's equations of motion in  Mecanique Analytique
+-1788 K.P.E. Bach dies
+-1788 Mozart: The three "great" symphonies: E flat, G minor, Jupiter
+-1788 New Hampshire is 9th state to ratify Constitution.  It is now the law
+-1789 Antoine Lavoisier states the law of conservation of mass
+-1789 Charles Burney "History of Music" finished
+-1789 Franz Xaver Richter, German composer, dies
+-1789 French Revolution. Bastille falls Jul 14. Declaration of Rights Aug 26th
+-1789 Friedrich Silcher, German composer, born
+-1789 George Washington & John Adams elected as first President & VP
+-1789 Gretry: "Raoul Barbe-Bleue," opera, Paris
+-1789 Mackenzie reaches Arctic Ocean via Mackenzie River in W. Canada
+-1789 Mutiny on the H.M.S. Bounty; survivors establish Pitcairn Is. colony
+-1789 The Judiciary Act specifies numbers of Federal courts and judges
+-1789 William Herschel finishes a 49 inch optical reflecting telescope -- located in Slough, England
+ > FINDRANGE 1745 1747
+-1745 "The Campbells are coming," Scottish national song, published
+-1745 Charles Dibdin, English composer and singer, born
+-1745 Johann Stamitz becomes court Kapellmeister in Mannheim
+-1746 College of New Jersey, now called Princeton Univ., founded
+-1747 Handel: "Judas Maccabaeus," oratorio, Covent Garden, London
+-1747 J.S. Bach: "Das Musikalische Opfer"
+-1747 James Lind discovers that citrus fruits prevent scurvy
+-1747 New York State Bar Association is first in this continent
+-1747 Pierre-Louis Moreau de Maupertuis applies minimum principles to mechanics
+-1747 Rousseau: "Les Muses galantes," opera
+ > DELETE 1746
+ > FINDRANGE 1745 1747
+-1745 "The Campbells are coming," Scottish national song, published
+-1745 Charles Dibdin, English composer and singer, born
+-1745 Johann Stamitz becomes court Kapellmeister in Mannheim
+-1747 Handel: "Judas Maccabaeus," oratorio, Covent Garden, London
+-1747 J.S. Bach: "Das Musikalische Opfer"
+-1747 James Lind discovers that citrus fruits prevent scurvy
+-1747 New York State Bar Association is first in this continent
+-1747 Pierre-Louis Moreau de Maupertuis applies minimum principles to mechanics
+-1747 Rousseau: "Les Muses galantes," opera
+ > FINDRANGE 1658 1658
+-1658 Birth of Antoine de la Mothe, sieur de Cadillac; he dies in 1730
+-1658 Christian Huygens experimentally discovers that balls placed anywhere inside an inverted cycloid reach the lowest point of the cycloid in the same time
+-1658 Christopher Wren shows that the length of a cycloid is four times the diameter of its generating circle
+-1658 Jan Swammerdam observes red blood cells under a microscope
+-1658 Johann Caspar von Kerll "Applausi Festivi," opera, Munich
+ > DELETE 1658
+ > FINDRANGE 1658 1658
+ > FINDRANGE -6000 -4000
+--4000 Copper metallurgy is invented and copper is used for ornamentation
+--4000 Harps and flutes played in Egypt
+ > FINDRANGE 2002 2015
+-2002 Dr. Jeremy Buhler teaches CS241 for the first time
+-2004 The Great Course Renumbering (CS -> CSE)
+-2015 Dr. Jeremy Buhler face-plants spectacularly on stage in CSE 241
+--- FAILED test #2
+
+* Running test #3
+* Arguments: skip/allEvents.txt skip/query2.txt
+ERROR: program terminated abnormally:
+  Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 16
+	at EventList.findMostRecent(EventList.java:104)
+	at Main.RunTest(Main.java:97)
+	at Main.main(Main.java:58)
+--- FAILED test #3
+
+* Running test #4
+* Arguments: skip/allEvents.txt skip/query3.txt
+ERROR: program terminated abnormally:
+  Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 16
+	at EventList.findMostRecent(EventList.java:104)
+	at Main.RunTest(Main.java:97)
+	at Main.main(Main.java:58)
+--- FAILED test #4
+
+* Passed 0/4 tests

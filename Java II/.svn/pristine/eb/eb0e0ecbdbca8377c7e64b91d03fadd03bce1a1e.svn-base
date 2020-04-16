@@ -1,0 +1,89 @@
+package lecture5s2;
+import hawup.util.Wrappers;
+
+
+public class SimpleWaitNotify {
+
+
+	// we say volatile to tell Java that i could change
+	//  outside of the code it is looking at
+	//
+	private volatile int i;
+	public SimpleWaitNotify() {
+		this.i = 0;
+	}
+
+	public void w() {
+		//
+		// wait until this.i becomes 1
+		//
+		// following works, but is a bad idea because
+		//   it waste's the CPU resources on my computer
+		// I wish I could just wait until this.i becomes 1
+		//		while (this.i != 1) {
+		//			// do nothing, spin
+		//		}
+		//
+		// wait for a given predicate p to become true
+		//  you always write it this way
+		//   while (!p) {
+		//        wait();   // this doesn't spin, it suspends execution
+		//   }
+		//  here, p must be true
+		// this is only 1/2 of the solution
+		// the other half:  any thread that could make p true
+		//   must say  notifyAll()
+		//
+		// so here we do:
+
+		while (this.i != 1) {
+			// wait();
+			//  above is same thing as this.wait();
+			// or used the Wrapped version
+			Wrappers.wait(this);
+		}
+		//
+		// here, this.i == 1
+
+
+		//
+		// Loop predicate's complement is true here,
+		//   so this. == 1
+		System.out.println("Saw 1 finally");
+
+	}
+
+	public void n() {
+		// delay a bit
+		// and then set this.i = 1
+		this.i = 12;
+		synchronized(this) {
+			notifyAll();
+		}
+		System.out.println("Set it to 12");
+		Wrappers.sleep(10000);
+		this.i = 1;
+		// following fails if we don't have a lock on "this"
+		//
+		synchronized(this) {
+			this.notifyAll();
+		}
+
+	}
+
+	public static void main(String[] args) {
+		SimpleWaitNotify swn = new SimpleWaitNotify();
+
+		//		swn.w();  // wait for i to become 1 -- we never get past here
+		// instead run swn.w() in a separate thread
+		new Thread() {
+			public void run() {
+				swn.w();
+			}
+		}.start();
+		Wrappers.sleep(2000);   // wait 2 seconds
+		swn.n();                // set i == 1
+		System.out.println("Ended");
+	}
+
+}

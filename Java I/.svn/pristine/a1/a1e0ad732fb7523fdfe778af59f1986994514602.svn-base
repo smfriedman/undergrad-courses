@@ -1,0 +1,11 @@
+package lab10;
+
+import frogger.controls.ControlDemo;
+
+public class FroggerMain {
+	public static void main(String[] args) {
+		FroggerGame g = new ControlDemo();
+		g.playGame();
+		System.exit(0);
+	}
+}

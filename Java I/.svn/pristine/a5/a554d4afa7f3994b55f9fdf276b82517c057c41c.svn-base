@@ -1,0 +1,26 @@
+package maps;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+
+public class DNASequence {
+	//Instance variables here
+	
+	public DNASequence(String s) {
+		//FIXME
+	}
+	
+	public void computeBases() {
+		//FIXME
+	}
+	
+	public void printBasePercentages() {
+		//FIXME
+	}
+	
+	public static void main(String[] args) {
+		DNASequence d = new DNASequence("AAAAAAAAAAAAAAAAAAAAAAAAAACCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCTG");
+		d.computeBases();
+		d.printBasePercentages();
+	}
+}

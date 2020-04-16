@@ -1,0 +1,10 @@
+Steven Friedman 431474
+Matt Schiller 429346
+
+ec2: ec2-52-89-4-160.us-west-2.compute.amazonaws.com
+entry point: ec2-52-89-4-160.us-west-2.compute.amazonaws.com/~mschiller/homepage.php
+
+For out creative portion, we implemented a navigation bar that includes a link to a random story.
+
+matt, pw1
+sammy, pw2

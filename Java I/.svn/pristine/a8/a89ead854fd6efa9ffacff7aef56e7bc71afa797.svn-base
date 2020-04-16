@@ -1,0 +1,82 @@
+package lab10;
+
+import java.awt.Color;
+
+import sedgewick.StdDraw;
+
+public class Car implements Drawable{
+	private double posX;
+	private double posY;
+	private double halfWidth;
+	private double halfHeight;
+	private double speed;
+	private Color color;
+	
+	public Car(double posX, double posY, double speed){
+		this.posX = posX;
+		this.posY = posY;
+		this.halfWidth = .3;
+		this.halfHeight = .1;
+		this.speed = speed;
+		this.color = Color.RED;
+	}
+	
+	public double getPosX() {
+		return posX;
+	}
+
+	public void setPosX(double posX) {
+		this.posX = posX;
+	}
+
+	public double getPosY() {
+		return posY;
+	}
+
+	public void setPosY(double posY) {
+		this.posY = posY;
+	}
+
+	public double getHalfWidth() {
+		return halfWidth;
+	}
+
+	public void setHalfWidth(double halfWidth) {
+		this.halfWidth = halfWidth;
+	}
+
+	public double getHalfHeight() {
+		return halfHeight;
+	}
+
+	public void setHalfHeight(double halfHeight) {
+		this.halfHeight = halfHeight;
+	}
+
+	public double getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
+	public void draw(){
+		StdDraw.setPenColor(color);
+		StdDraw.filledRectangle(posX, posY, halfWidth, halfHeight);
+	}
+	
+	public void move(){
+		if (posX < 120)	this.posX = this.posX + speed;
+		else posX = -10;
+	}
+
+}

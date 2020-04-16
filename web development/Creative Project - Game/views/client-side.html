@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Game</title>
+	<style type="text/css">
+		#top_row, #bot_row{
+			margin: 30px;
+		}
+		.spacious{
+			margin-bottom: 7px;
+		}
+	</style>
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"> 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js">          
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+	<script>
+		var p1color = "dummy";
+		var p2color = "progress-bar-danger";
+
+		$(document).ready(function(){
+			$('#roll').on('click', rollDie);
+			$('#login').on('click', signInF);
+			$('#newUser').on('click', signInT);
+			$('#send_message').on('click', sendMessage);
+			$('#challenge').on('click', chal);
+			$('#p1BarColor').on('change', function(){
+				$('#p1bar').removeClass(p1color);
+				p1color = $('#p1BarColor').val();
+				$('#p1bar').addClass(p1color);				
+			});
+			$('#p2BarColor').on('change', function(){
+				$('#p2bar').removeClass(p2color);
+				p2color = $('#p2BarColor').val();
+				$('#p2bar').addClass(p2color);				
+			});			
+		});
+
+		var socketio = io.connect();
+		var nickname = null;
+		var myTurn = false;
+		var myScore = 0;
+		var opScore = 0;
+		var opponent = null;
+		var myBar = '#p1bar';
+		var opBar = '#p2bar';
+
+		socketio.on("message_to_client",function(data) {
+			//Append an HR thematic break and the escaped HTML of the new message
+			document.getElementById("chatLog").appendChild(document.createElement("hr"));
+			var text = data.author + ": " + data.message;
+
+			document.getElementById("chatLog").appendChild(document.createTextNode(text));
+		});
+
+		function sendMessage(){
+			//make sure user is signed in before sending messages
+			if(nickname === null){
+				window.alert("Please sign in to send messages");
+			}
+			else{
+				var msg = document.getElementById("message_input").value;
+				var name = nickname;
+				socketio.emit("message_to_server", {message:msg, user:name});
+			}
+		}
+
+		function chal(){
+			opponent = document.getElementById("challenger").value;
+			socketio.emit("challenge", {challenged:opponent, caller:nickname});
+		}
+
+		function rollDie(){
+			if(myTurn && opponent !== null){
+				//random number
+				var number = Math.floor(Math.random()*6+1); //Change to random
+				socketio.emit("roll", {number:number, name:nickname, opponent:opponent});
+				//alert(number);
+			}else if(!myTurn && opponent !== null){
+				alert("You can not roll until it is your turn!");
+			}else if(opponent === null){
+				alert("You must challenge someone to play!");
+			}
+		}
+
+
+		function signInF(){
+			var newUser = false;
+			nickname = document.getElementById('signin').value;
+			var password = document.getElementById('password').value;
+			console.log(password);
+			socketio.emit("sign_in", {name:nickname, newUser:newUser, password:password});
+			//myTurn = true;
+		}
+
+		function signInT(){
+			var newUser = true;
+			nickname = document.getElementById('signin').value;
+			var password = document.getElementById('password').value;
+			socketio.emit("sign_in", {name:nickname, newUser:newUser, password:password});
+		}
+
+		socketio.on("signin_to_client", function(data){
+			console.log(data.succ + "     " + data.news);
+			if(data.name==nickname && data.succ && !data.news){
+				alert("Welcome " + nickname);
+				$('.my_name').html(nickname);
+			}else if(data.name == nickname && !data.succ && !data.news){
+				alert("Sign in failed. Please correct your user name or password.");
+			}else if(data.name == nickname && data.succ && data.news){
+				alert("You have been successfully added. Enjoy.");
+		}
+
+		});
+
+		socketio.on("challenge_response", function(data){
+			if(data.challenged == nickname){
+			alert("You have been challenged by " + data.caller + ". Roll to begin the game");
+			opponent = data.caller;
+			myTurn = true;
+			}
+		});
+
+		socketio.on("roll_to_client", function(data){
+			var moveLog = document.getElementById("moveLog");
+
+			if(opScore === 0 && data.opponent==nickname){
+				moveLog.insertBefore(document.createElement("hr"), moveLog.childNodes[0]);
+				var recText = "You are playing " + data.name + ". Their record is " + data.wins + "-" + data.losses;
+				moveLog.insertBefore(document.createTextNode(recText), moveLog.childNodes[0]);
+				$('#op_info').html('You\'re playing <span class="opponent_name"></span> with record <span id="wins"></span>-<span id="losses"></span>.');
+				$('.opponent_name').html(data.name);
+				$('#wins').html(data.wins);
+				$('#losses').html(data.losses);
+			} 
+
+			if(data.name==nickname || data.opponent==nickname){
+				$('.my_name').html(nickname);
+				moveLog.insertBefore(document.createElement("hr"), moveLog.childNodes[0]);
+				var text = data.name + " rolled a: " + data.roll;
+				moveLog.insertBefore(document.createTextNode(text), moveLog.childNodes[0]);
+				if(data.name == nickname){
+					myScore += data.roll;
+					$(myBar).attr('aria-valuenow', myScore).css('width', (myScore*4) + "%");
+					$('.my_score').html(myScore);
+					if(myScore % 5 === 0){
+						socketio.emit("chanceCard", {name:nickname, opponent:data.opponent});
+					} 
+
+				}
+				else{
+					opScore += data.roll;
+					$(opBar).attr('aria-valuenow', opScore).css('width', (opScore*4) + "%");
+					$('.op_score').html(opScore);
+				}
+
+				if(myScore >= 25){
+					socketio.emit("win", {name:nickname});
+				}
+				if(data.name == nickname){
+					myTurn = false;
+				}else{
+					myTurn = true;
+				}
+			}
+		});
+
+		socketio.on("win_response", function(data){
+			if(data.winner == nickname){
+				alert("You won! Congratulations!");
+			}else{
+				socketio.emit("lose", {name: nickname});
+				alert("Sorry " + data.winner + " beat you. Try again next time!");
+			}
+		});
+
+		socketio.on("card_to_client", function(data){
+			if(data.name == nickname || data.opponent == nickname){
+				var moveLog = document.getElementById("moveLog");
+				moveLog.insertBefore(document.createElement("hr"), moveLog.childNodes[0]);
+				var text = data.name + " drew a chance card of: " + data.card.text;
+				moveLog.insertBefore(document.createTextNode(text), moveLog.childNodes[0]);
+				if(data.name==nickname){
+					myScore += data.card.move;
+					$(myBar).attr('aria-valuenow', myScore).css('width', (myScore*4) + "%");
+					$('.my_score').html(myScore);
+				}else{
+					opScore += data.card.move;
+					$(opBar).attr('aria-valuenow', opScore).css('width', (opScore*4) + "%");
+					$('.op_score').html(opScore);
+				}
+			}
+		});
+	</script>
+</head>
+<body>
+	<div class="row" id="top_row">
+		<div class="col-md-3 col-md-offset-2">
+			<div class="spacious">Name: <input type="text" id="signin"></div>
+			<div class="spacious">Password: <input type="password" id="password"></div>
+			<button class="btn btn-default" id="login">Sign in</button>
+			<button class="btn btn-default" id='newUser'>New User</button><br/>
+		</div>
+		<div class="col-md-3 col-md-offset-2">
+			<div class="spacious">Challenge: <input type="text" id="challenger"></div>
+			<button class="btn btn-default" id="challenge">Challenge</button>
+		</div>
+	</div>
+
+	<div class="row" id="bot_row">
+		<div id="movelog_wrapper" class="col-md-3">
+			<div id="moveLog"><div></div></div>
+		</div>
+
+		<div id="game_div" class="col-md-6">
+			<h1 id="op_info"></h1>
+			<div class="progress">
+				<div id="p1bar" class="progress-bar dummy progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="25">
+					<span class="my_name"></span> <span class="my_score"></span>
+				</div>
+			</div>
+			<div class="spacious">
+				Select color:
+				<select id="p1BarColor">
+					<option value="progress-bar-danger">Red</option>
+					<option value="dummy" selected>Blue</option>
+					<option value="progress-bar-success">Green</option>
+					<option value="progress-bar-warning">Yellow</option>
+				</select>
+			</div>
+			<br>
+			<div class="progress">
+				<div id="p2bar" class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="25">
+					<span class="opponent_name"></span> <span class="op_score"></span>
+				</div>
+			</div>	
+			<div class="spacious">
+				Select color:
+				<select id="p2BarColor">
+					<option value="progress-bar-danger" selected>Red</option>
+					<option value="dummy">Blue</option>
+					<option value="progress-bar-success">Green</option>
+					<option value="progress-bar-warning">Yellow</option>
+				</select>
+			</div>			
+			<br/>
+			<button class="btn btn-default" id="roll" >Roll Die</button>
+		</div>
+
+		<div id="chatlog_wrapper" class="col-md-3">
+			<div id="chatLog">
+			<div class="spacious">Message: <input type="text" id="message_input"></div>
+			<button class="btn btn-default" id="send_message">Send</button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

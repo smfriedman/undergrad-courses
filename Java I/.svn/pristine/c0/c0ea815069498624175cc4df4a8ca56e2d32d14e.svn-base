@@ -1,0 +1,26 @@
+package adt.lists;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class PointFun {
+
+	public static void main(String[] args) {
+		Point a = new Point(0,0);
+		Point b = new Point(0,1);
+		System.out.println(a);
+		System.out.println(b);
+		
+		Set<Point> points = new HashSet<Point>();
+		points.add(a);
+		points.add(b);
+		System.out.println("Points are " + points);
+		
+		points.add(a);
+		points.add(new Point(0,0));
+		System.out.println("Now points: " + points);
+		
+
+	}
+
+}

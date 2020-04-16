@@ -1,0 +1,14 @@
+package adt.books;
+
+public class AuthorList {
+	public static void main(String[] args) {
+		PaperBook pb = new PaperBook("Pride and Prejudice", "Jane Austen");
+
+		AudioBook ab = new AudioBook("Harry Potter and the Deathly Hallows",
+				"JK Rowling", "Stephen Fry");
+
+		System.out.println(pb.getAuthor());
+		System.out.println(ab.getAuthor());
+	}
+
+}

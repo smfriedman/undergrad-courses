@@ -1,0 +1,21 @@
+package module1;
+
+import cse131.ArgsProcessor;
+
+public class Pennies {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		ArgsProcessor ap = new ArgsProcessor(args);
+		
+		int cost = ap.nextInt("How many pennies are there?");
+		int dollars = cost / 100;
+		int cents = cost % 100;
+		System.out.println("$" + dollars + "." + cents);
+		
+		
+		
+	}
+
+}

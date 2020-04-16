@@ -1,0 +1,19 @@
+package methods;
+
+public class ValueParameters {
+
+	public static void method(int a){
+		a = a * 30;
+		System.out.println("A = " + a);
+	}
+	
+	
+	public static void main(String[] args) {
+		int x = 5;
+		System.out.println("x = " + x);
+		method(x);
+		System.out.println("x = " + x);
+		
+				
+	}
+}

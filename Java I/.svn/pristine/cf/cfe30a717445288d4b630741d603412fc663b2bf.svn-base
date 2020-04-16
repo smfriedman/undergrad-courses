@@ -1,0 +1,25 @@
+package recursion;
+
+public class Mult {
+
+	// idea:    x + x + x + ... + x    <---  y times
+	public static int multHelper(int x, int y) {
+		if (y == 0)
+			return 0;  // x * 0 = 0
+		else {
+			return x + mult(x,y-1);
+		}
+	}
+	public static int mult(int x, int y) {
+		if (y > x) {
+			return multHelper(y,x);
+		}
+		else return multHelper(x,y);
+	}
+	public static void main(String[] args) {
+		System.out.println(mult(10000,10));
+		System.out.println(mult(10,10000));
+
+	}
+
+}

@@ -1,0 +1,81 @@
+package lecturens2;
+
+import java.util.Random;
+
+public class QueueServedConcatter {
+
+	private String string;
+	private SIngleServerQueue queue;
+
+	public QueueServedConcatter() {
+		this.string = "";
+		this.queue = new SIngleServerQueue();
+		queue.start();
+	}
+
+	// now instead of using synchronized, we'll use that queue thing
+	public void append(String s) {
+		// throw all this work into the single service queue
+		queue.addToQueue(
+				new Runnable() {
+					public void run() {
+						char[] sarray = s.toCharArray();
+						for (char c : sarray) {
+							String before = string;
+							// window now open for bad things
+							snooze(200);
+							// almost end of window
+							String after = before + c;
+							string = after;
+						}
+					}
+				});
+	}
+
+	public String toString() {
+		return this.string;
+	}
+
+	public static void main(String[] args) {
+		// below works fine
+		//		Concatter cc = new Concatter();
+		//		cc.append("abc");
+		//		cc.append("123");
+		//		System.out.println("We have " + cc);
+		// now let's do the appends concurrently
+		final QueueServedConcatter cc = new QueueServedConcatter();
+		//
+		// one append goes in to another new thread
+		//
+		final Random r = new Random();
+		new Thread() {
+			public void run() {
+				snooze(r.nextInt(1000));
+				cc.append("abc");
+			}
+		}.start();
+		// the other one happens here
+		snooze(r.nextInt(1000));
+		cc.append("123");
+		//
+		// wait a second for both to complete (I should do Thread.join)
+		// you shouldn't do this!  You should do thread.join
+		// in fact in lecture, 1 second wasn't enough and it allowed
+		//  the print to be in a race with the String appends
+		//  so we saw only a partial result for the string
+		snooze(5000);
+		System.out.println("We have " + cc);
+
+
+	}
+
+	public static void snooze(int ms) {
+		try {
+			Thread.sleep(ms);
+		} catch (InterruptedException e) {
+			// FIXME Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}

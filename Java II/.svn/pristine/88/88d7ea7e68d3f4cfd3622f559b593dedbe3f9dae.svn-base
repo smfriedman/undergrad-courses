@@ -1,0 +1,38 @@
+Greetings from your synthetically friendly robotic CSE132 grader!
+Quiz report for steven.friedman:
+
+Question:
+   The methods write(int) and read(int) transmit what unit of data across a socket?
+   Grading function: answer=="1 byte"
+   Your answer was: 4 bytes
+No, that's not right.  Check and see what went wrong. This cost you 25 points.
+Please see a TA or the instructor if you need help!
+
+Explanation: Although the method takes an int, write sends only a single byte, which are the lower 8 bits of the provided int
+
+Question:
+   The Observer Pattern (PropertyChangeSupport) is useful for communicating a status change when:
+   Grading function: answer.length > 0
+   Your answer was: All of the above
+Glad you got that one! You have earned 25 points.
+
+Explanation: I took any answer for this question.  The answers are all appropriate
+
+Question:
+   A single two's-complement byte encodes the number of ships in our battleship game.  Which of the following is an ensuing limitation?
+   Grading function: answer.include?("battleships is limited")
+   Your answer was: The number of battleships is limited to 127
+Nice job! You have earned 25 points.
+
+Explanation: A byte can hold at most 127 in 2's complement
+
+Question:
+   By completing the course evaluation on-time, you will receive some participation points for this course
+   Grading function: answer.length > 0
+   Your answer was: TRUE
+You have chosen wisely! You have earned 25 points.
+
+Explanation: I took both answers, but you should fill out the course evaluation to get some participation points
+
+
+Your total score is 75.

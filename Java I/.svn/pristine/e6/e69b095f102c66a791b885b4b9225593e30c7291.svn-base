@@ -1,0 +1,27 @@
+package types;
+
+public class PokemonBattle {
+	
+	public static void main(String args[]) {
+		
+		int bulbHP = 20;
+		int charHP = 25;
+		bulbHP = bulbHP - 5; //Charmander used tackle!
+		charHP = charHP - 5; //Bulbasaur used scratch!
+		charHP = charHP + 20; //Red uses a potion!
+		int parasHP = 30; //Go! Paras!
+		parasHP = parasHP - 12; //Charmander used tackle!
+		parasHP = parasHP + 5; //Paras used leech!
+		charHP = charHP + 5;
+		parasHP = parasHP - parasHP; //Charmander used ember! It's super effective!
+									 //Paras fainted!
+		
+		System.out.print("Charizard: ");
+		System.out.println(charHP);
+		System.out.print("Bulbasaur: ");
+		System.out.println(bulbHP);
+		System.out.print("Paras: ");
+		System.out.println(parasHP);
+	}
+
+}

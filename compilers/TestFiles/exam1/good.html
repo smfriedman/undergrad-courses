@@ -1,0 +1,118 @@
+<HTML>
+   <TITLE>Exam 1 </TITLE>
+<BODY>
+
+<CENTER>
+<H2>
+Exam I<br>
+Given: 27 March 2017<br>
+Due: 10 April 2017, printed out (not emailed), turned in at start of class
+</H2></CENTER>
+
+<!-- Yes you must handle comments in HTML -->
+
+<H2>Rules:</H2>
+I want you to do some critical thinking on your own but to consider
+your classmates as people who can react to your ideas and give you
+feedback.  I realize the distinction is tricky, so please ask
+on <a href="https://piazza.com/class/ixtgwaka3mk193">piazza</a>, publicly,
+if you have questions
+about what is OK.
+<UL>
+  <LI> You may discuss concepts and design issues of
+        the questions below with your classmates. 
+  <LI> You may bounce ideas for your solutions off your
+        classmates, and ask for their critical advice.
+  <LI> Questions of the above sort should be of the form "what do you think
+        of this idea" and not "how do I do this" or "how do I get started"?
+  <LI> You must give credit to those who have given you critical
+        feedback.  
+   <UL>
+    <LI> Cite them (by name) on the exam paper you turn in, and 
+    <LI> credit them for the help they have given you.
+    </UL>
+ <LI> By turning in this exam, you acknowledge that you have:
+  <UL>
+    <LI>  abided by the above rules 
+    <LI> abided by the 
+         <a href="https://wustl.edu/about/compliance-policies/academic-policies/undergraduate-student-academic-integrity-policy/"> statement of academic integrity</a>, except
+as relaxed by the above rules, and
+     <LI> not done anything sneaky (seriously, just ask if you're unsure).
+   </UL>
+</UL>
+<p>
+OK here goes.
+<HR>
+<H2>Exam Questions</H2>
+<OL>
+  <LI> [20 points] The recognition and treatment of <I>comments</I> in programming
+languages is typically handled by the scanner and not the parser.
+For example:
+<PRE>
+// This is a comment
+int foo;  /* This is another comment */
+</PRE>
+Why should comments be handled by the scanner
+and not the parser?  Specifically, how would comments
+for Java
+be handled in a parser (instead of the scanner)
+using a context-free grammar?
+
+  <LI> [20 points] When a web browser fetches a page (URL), the contents of that page
+is parsed and the results are shown on the screen.  If the page's contents
+has a syntax error in its HTML text, no error is reported by your
+browser when the page is
+fetched.  For example,
+<a href="bad.html">this page</a> has many HTML syntax errors and 
+problems.  
+<p>
+Did you click on that link and everything looked OK?  Use your browser to
+View Source and see all of the obvious mistakes in the HTML on that page.
+<p>
+Why does your browser not complain?  What are good design goals
+for a browser that must handle bad HTML?
+  <LI> [60 points] On the other hand, <a href="http://validator.w3.org/"> this site</a>
+will validate an HTML page.  
+  <OL>
+   <LI> [5 points] Try it out:  What happens when you use that validation
+site on:
+  <UL>
+    <LI> <a href="http://www.google.com"> <KBD>www.google.com</KBD></a>?  
+   <LI>  itself? (<a href="http://validator.w3.org/">W3C Markup Validator</a>)
+   <LI> the <a href="http://www.wustl.edu"> WUSTL home page </a>
+   <LI> my <a href="bad.html">bad page</a>
+  </UL>
+  <LI> [55 points] Suppose you are asked to write a scanner and parser for HTML that
+should accept at least
+the HTML that comprises
+<a href="index.txt">the page you are now viewing</a>:
+(If you need a quick guide to the language,
+try the <a href="http://werbach.com/barebones/barebones.html"> bare bones </a> guide).
+<p>
+Conveniently, there is an <TT>exam1</TT> package in your repo for you to 
+do this work.
+ <OL>
+  <LI> [10 points] What are the
+classes of tokens (the terminal alphabet) you would use to parse HTML?
+  <LI> [5 points] What are the regular expressions for finding those tokens?
+    (You need <I>not</I> create a working scanner for this exam.)
+  <LI> [10 points] Write a context-free grammar for this subset of HTML (the one
+that includes at least the markups for <a href="index.txt">the page
+you are now viewing</a>,
+and turn that in as part
+of this problem. 
+  <LI> [15 points] Test your grammar using the code base given to you, 
+and try to get it to parse the good input file and reject the bad one.
+      Notes:
+     <UL>
+      <LI> Your parser need only work on the good input file, but don't
+just create rules that work for it.  Try to be as general as you can.
+     </UL>
+</OL>
+<LI> The printout you submit should include answers to the above questions
+and the console transcript of running the default
+ant build, which will apply your grammar to the three input files.
+<LI> Be sure to commit and push your code, as we will be looking at
+it as well as the printout.
+</OL>
+</OL>

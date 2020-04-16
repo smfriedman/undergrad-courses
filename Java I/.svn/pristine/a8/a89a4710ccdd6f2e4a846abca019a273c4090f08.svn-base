@@ -1,0 +1,36 @@
+package methods;
+
+import java.awt.Color;
+
+import sedgewick.StdDraw;
+
+public class DrawMethods {
+	public static void main(String[] args) {
+		
+		// Draw Head
+		StdDraw.setPenColor(Color.YELLOW);
+		StdDraw.filledCircle(.3, .3, .04);
+		
+		// Draw Eyes
+		StdDraw.setPenColor(Color.WHITE);
+		StdDraw.filledCircle(.29, .31, .01);
+		StdDraw.filledCircle(.31, .31, .01);
+		
+		// Use black ink
+		StdDraw.setPenColor();
+		// Outline Head
+		StdDraw.circle(.30, .30, .04);
+		
+		// Outline Eyes
+		StdDraw.circle(.29, .31, .01);
+		StdDraw.circle(.31, .31, .01);
+		
+		// Draw Pupils
+		StdDraw.filledCircle(.29, .31, .005);
+		StdDraw.filledCircle(.31, .31, .005);
+		
+		// Draw Smile
+		StdDraw.arc(.30, .30, .02, 180, 360);
+	}
+
+}

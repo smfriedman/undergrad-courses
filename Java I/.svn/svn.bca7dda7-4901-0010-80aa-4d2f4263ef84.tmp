@@ -1,0 +1,59 @@
+package module2;
+
+import java.util.LinkedList;
+
+public class Quiz8 {
+	public interface Measurable{
+		double area();
+		double perimeter();
+	}
+
+
+	public class Rectangle implements Measurable{
+		private double x;
+		private double y;
+		private double length;
+		private double width;
+		
+		public Rectangle(double x, double y, double length, double width){
+			this.x = x;
+			this.y = y;
+			this.length = length;
+			this.width = width;
+		}
+		
+		public double area(){
+			return this.length*this.width;
+		}
+		
+		public double perimeter(){
+			return 2*this.length + 2*this.width;
+		}
+	}
+
+	public class Circle implements Measurable{
+		private double x;
+		private double y;
+		private double radius;
+		
+		public Circle(double x, double y, double radius){
+			this.x = x;
+			this.y = y;
+			this.radius = radius;
+		}
+		
+		public double area(){
+			return Math.PI*radius*radius;
+		}
+		
+		public double perimeter(){
+			return 2*Math.PI*radius;
+		}
+	}
+
+	LinkedList<Measurable> list = new LinkedList<Measurable>();
+	Rectangle square = new Rectangle(0, 0, 5, 5);
+	list.add(square);
+	Circle circle = new Circle(0, 0, 5);
+	list.add(circle);
+}

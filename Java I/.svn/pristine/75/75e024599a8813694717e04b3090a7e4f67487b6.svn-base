@@ -1,0 +1,21 @@
+package maps;
+
+public class ComparablePractice {
+	
+	public static void main(String[] args) {
+		//It is often convenient for use to be able
+		//to compare or order things.
+		
+		//The comparable interface provides one method:
+		//compareTo()
+		
+		String a = "alpha";
+		String b = "beta";
+		String c = "alpha";
+		
+		System.out.println(a.compareTo(b));
+		System.out.println(b.compareTo(a));
+		System.out.println(a.compareTo(c));
+	}
+
+}

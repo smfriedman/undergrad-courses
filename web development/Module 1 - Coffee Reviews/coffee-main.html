@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Rate Your Coffee</title>
+	<style type="text/css">
+		body{
+			width: 760px; /* how wide to make your web page */
+			background-color: teal; /* what color to make the background */
+			margin: 0 auto;
+			padding: 0;
+			font:12px/16px Verdana, sans-serif; /* default font */
+		}
+		div#main{
+			background-color: #FFF;
+			margin: 0;
+			padding: 10px;
+		}
+		h1{
+			margin-left: auto;
+			margin-right: auto;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+ 		<h1>Rate Your Coffee</h1>
+
+ 		<p>Input the coffee you would like to find the past reviews of</p>
+ 		<form action="coffee-results.php" method="POST">
+ 			<label for="coffee">Coffee: </label>
+ 			<input type="text" id="coffee" name="coffee"/>
+ 			<input type="submit" value="Submit"/>
+ 		</form> 
+
+ 		<p>Input your username and the name of the coffee, and rate the coffee</p>
+ 		<form action="coffee-back-end.php" method="POST">
+ 			<label for="user">User: </label>
+ 			<input type="text" id="user" name="user"/>
+ 			<br/> 
+ 			<label for="coffee2">Coffee: </label>
+ 			<input type="text" id="coffee2" name="coffee"/> 
+ 			<br/>
+ 			<label>Rating: </label>	
+ 			<input type="radio" name="userRating" value="1.0">1
+ 			<input type="radio" name="userRating" value="2.0">2
+ 			<input type="radio" name="userRating" value="3.0">3
+ 			<input type="radio" name="userRating" value="4.0">4
+ 			<input type="radio" name="userRating" value="5.0">5
+ 			<br/>
+ 			<label for="comments">Comments: </label>
+ 			<textarea name="comments" id="comments"></textarea>
+ 			<br/>
+ 			<input type="submit" value="Submit"/>
+ 		</form>
+	</div>
+</body>
+</html>

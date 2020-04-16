@@ -1,0 +1,139 @@
+package lab10;
+
+import java.awt.Color;
+
+import sedgewick.StdDraw;
+
+public class Frogger implements FroggerGame {
+	//instance variables
+	private int score;
+	private Frog frog;
+	private Car[] cars;
+	private Goal[] goals;
+	
+	//constructor necessary?
+	public Frogger(){
+		this.score = 0;
+		this.frog = new Frog(.5, .005);
+		this.cars = new Car[18];
+		this.goals = new Goal[5];
+	}
+	
+	@Override
+	public void playGame() {
+		// TODO Auto-generated method stub
+		
+		while(true){
+			
+			for (int i = 0; i < cars.length; i++){
+				cars[i] = new Car (Math.random()*2.0 - 0.4, (i % 3) * 0.2 + 0.2, .0075 + Math.random() * 0.01);
+				if (Math.random() < 0.5) cars[i].setSpeed(-cars[i].getSpeed());
+				cars[i].setSpeed(cars[i % 3].getSpeed());
+			}
+			
+			for (int i = 0; i < goals.length; i++){
+				goals[i] = new Goal(i * 0.2 + 0.1, 0.9);
+			}
+			
+			//while(we still have lives) {
+			while(frog.getLives() > 0){
+			
+				//has the frog collided with a car?
+				//kill it
+				//move it back to start
+				//and move the cars
+				for(int i = 0; i < cars.length; i++){
+					if(frog.collide(cars[i])){
+						frog.setPosX(0.5);
+						frog.setPosY(0.005);
+						frog.setLives(frog.getLives()-1);
+					}
+					cars[i].move();
+				}
+				
+				//has the frog collided with a goal?
+					//update score
+					//move it back to start
+					//is that a goal they haven't visited before?
+				for(int i = 0; i < goals.length; i++){
+					if(frog.collide(goals[i]) && goals[i].getActive()){
+						frog.setPosX(0.5);
+						frog.setPosY(0.005);
+						score = score + goals[i].getValue();
+						goals[i].setActive(false);
+						goals[i].setColor(Color.BLACK);
+					}
+				}
+				
+				//have they visited all goals?
+					//reset all goals?
+				if(goals[0].getActive() == false && goals[1].getActive() == false && 
+						goals[2].getActive() == false && goals[3].getActive() == false &&
+						goals[4].getActive() == false){
+					for (int i = 0; i < goals.length; i++){
+						goals[i].setActive(true);
+						goals[i].setColor(Color.WHITE);
+					}
+				}
+				
+				//move frog
+				frog.move();
+			
+				//draw stuff:
+				//clear()
+				StdDraw.clear();
+				
+				//draw background
+				//default x/y scale form 0 to 1
+				StdDraw.setPenColor(Color.darkGray);
+				StdDraw.filledRectangle(.5, .5, 1, 1);
+				
+				//draw cars
+				for(int i = 0; i < cars.length; i++){
+					cars[i].draw();
+				}
+				
+				//draw goals
+				for(int i =0; i < goals.length; i++){
+					goals[i].draw();
+				}
+				
+				//draw frog
+				frog.draw();
+				
+				//draw score and lives
+				StdDraw.setPenColor(Color.white);
+				StdDraw.textLeft(0, 1, "Lives: " + frog.getLives());
+				StdDraw.textRight(1, 1, "Score: " + this.score);
+				
+				//StdDraw.show()
+				StdDraw.show(20);
+			}
+			//game over
+			StdDraw.setPenColor(Color.BLACK);
+			StdDraw.filledRectangle(.5, .5, 1, 1);
+			StdDraw.setPenColor(Color.WHITE);
+			StdDraw.text(.5, .5, "GAME OVER");
+			StdDraw.show();
+			StdDraw.pause(2100);
+			
+			//reset lives for next game (automatic restart)
+			frog.setLives(5);
+			score = 0;
+		}
+	}
+
+	@Override
+	public String getGameName() {
+		// TODO Auto-generated method stub
+		return "Frogger";
+	}
+
+	@Override
+	public String[] getTeamMembers() {
+		// TODO Auto-generated method stub
+		String[] members = { "Steven Friedman" };
+		return members;
+	}
+
+}

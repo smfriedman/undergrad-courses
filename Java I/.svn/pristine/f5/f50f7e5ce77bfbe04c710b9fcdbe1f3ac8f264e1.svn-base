@@ -1,0 +1,42 @@
+package arrays;
+
+import cse131.ArgsProcessor;
+
+public class Sieve {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// Sieve:  initially believe (almost) all is prime
+		//   find reasons things are not prime
+		// how to represent whether a number is prime
+		
+		ArgsProcessor ap = new ArgsProcessor(args);
+		int N = ap.nextInt("How big");
+		boolean[] nums = new boolean[N];
+		nums[0] = false;
+		nums[1] = false;
+		for (int i=2; i < N; ++i) {
+			nums[i] = true;
+		}
+		
+		// to find non primes, consider each integer 2 and bigger
+		//   and eliminate all multiples of those integers, except
+		//   the integer itself
+		
+		for (int i=2; i < N; ++i) {
+			for (int j=2*i; j < N; j = j + i) {
+				// aha, j is not prime!
+				nums[j] = false;
+			}
+		}
+		
+		for (int i=0; i < N; ++i) {
+			if (nums[i] == true) {
+				System.out.println("Yes indeed, "  + i + " is prime");
+			}
+		}
+	}
+
+}

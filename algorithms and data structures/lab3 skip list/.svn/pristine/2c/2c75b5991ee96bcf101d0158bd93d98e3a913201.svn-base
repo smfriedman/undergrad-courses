@@ -1,0 +1,95 @@
+//
+// EVENTLIST.JAVA
+// Skeleton code for your EventList collection type.
+//
+import java.util.*;
+
+class EventList {
+    
+    Random randseq;
+    Pillar head;
+    Pillar tail;
+    
+    ////////////////////////////////////////////////////////////////////
+    // Here's a suitable geometric random number generator for choosing
+    // pillar heights.  We use Java's ability to generate random booleans
+    // to simulate coin flips.
+    ////////////////////////////////////////////////////////////////////
+    
+    int randomHeight()
+    {
+	int v = 1;
+	while (randseq.nextBoolean()) { v++; }
+	return v;
+    }
+
+    
+    //
+    // Constructor
+    //
+    public EventList()
+    {
+	randseq = new Random(9989); // You may seed the PRNG however you like.
+	
+	head = new Pillar(new Event(-100000, "head"), 100);
+	tail = new Pillar(new Event(100000, "tail"), 100);
+	for(int i = 0; i < head.height; i++){
+		head.tower[i].next = tail.tower[i];
+		tail.tower[i].prev = head.tower[i];
+		head.tower[i].pillar = head;
+		tail.tower[i].pillar = tail;
+	}
+    }
+
+    
+    //
+    // Add an Event to the list.
+    //
+    public void insert(Event e)
+    {
+    int t = randomHeight();
+    Pillar p = new Pillar(e, t);
+    int l = head.height - 1;
+    Pillar x = head;
+    while(l >= 0){
+    	Node y = x.tower[l].next;
+    	if(y.pillar.event.year < x.event.year){
+    		x = y.pillar;
+    	} else {
+    		if (l < t){
+	    		Node z = new Node(p, y, x.tower[l]);
+	    		x.tower[l].next = z;
+	    		y.prev = z;
+	    		p.tower[l] = z;
+    		} 
+    		l--;	
+    	}
+    }
+    }
+
+    
+    //
+    // Remove all Events in the list with the specified year.
+    //
+    public void remove(int year)
+    {
+	
+    }
+    
+    //
+    // Find all events with greatest year <= input year
+    //
+    public Event [] findMostRecent(int year)
+    {
+	return null;
+    }
+    
+    
+    //
+    // Find all Events within the specific range of years (inclusive).
+    //
+    public Event [] findRange(int first, int last)
+    {
+	return null;
+    }
+}

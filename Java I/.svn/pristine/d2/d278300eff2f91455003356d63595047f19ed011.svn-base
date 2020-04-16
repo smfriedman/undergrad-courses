@@ -1,0 +1,71 @@
+package lab2;
+
+import cse131.ArgsProcessor;
+
+public class RPS {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		ArgsProcessor ap = new ArgsProcessor(args);
+		int n = ap.nextInt("How many games will be played?");
+		int i = 0;
+		
+		double p1;
+		String p1String = "";
+		int p2 = 0;
+		String p2String = "";
+		
+		while (i < n) {
+			i ++;
+			
+			p1 = 3 * Math.random();
+			if (p1 <= 1.0) {
+				p1String = p1String + "R";
+				boolean p1R = true;
+			}
+			else if (p1 <= 2.0) {
+				p1String = p1String + "P";
+				boolean p1P = true;
+			}
+			else if (p1 <= 3.0) {
+				p1String = p1String + "S";
+				boolean p1S = true;
+			}	
+			
+			p2 = p2 + 1;
+			if (p2 <= 1) {
+				p2String = p2String + "R";
+				boolean p2R = true;
+			}	
+			else if (p2 <= 2) {
+				p2String = p2String + "P";
+				boolean p2P = true;
+			}
+			else if (p2 <= 3) {
+				p2String = p2String + "S";
+				boolean p2S = true;
+			}
+			else if (p2 <= 4) {
+				p2 = 1;
+				p2String = p2String + "R";
+				boolean p2R = true;
+			}
+			boolean W = (p1R && p2S) || (p1P && p2R) || (p1S && p2P);
+			boolean D = (p1R && p2R) || (p1P && p2P) || (p1S && p2S);
+			boolean L = (p1S && p2R) || (p1R && p2P) || (p1P && p2S);
+			
+			
+					
+				
+			
+			
+		}
+		System.out.println(i);
+		System.out.println(n);
+		System.out.println(p1String);
+		System.out.println(p2String);
+		System.out.print(3 * Math.random());
+	}
+
+}

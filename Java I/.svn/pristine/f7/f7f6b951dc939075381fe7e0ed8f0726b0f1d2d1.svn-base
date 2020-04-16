@@ -1,0 +1,32 @@
+package arrays;
+
+public class SieveAgain {
+
+	public static void main(String[] args) {
+		// I need an array to represent whether a given integer is prime
+		boolean[] primes = new boolean[1000];
+		for (int i=2; i < primes.length; ++i) {
+			// assume all ints 3 and above are prime, initially
+			primes[i] = true;
+		}
+		// sieve by considering each integer and eliminating all positive multiples
+		for (int n=2; n < primes.length; ++n) {
+			// "eliminate" all multiples of n from the array
+			// by "eliminate" I mean set false
+			for (int m=2; m*n < primes.length; ++m) {
+				// consider m x n
+				primes[m*n] = false;
+			}
+		}
+		
+		// what do we have?
+		for (int i=0; i < primes.length;++i) {
+			if (primes[i] == true) {
+				System.out.print(i + " ");
+			}
+		}
+		
+
+	}
+
+}

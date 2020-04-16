@@ -1,0 +1,26 @@
+package recursion;
+
+public class FirstRecursiveFunction {
+
+	/* 
+	 * Recursive Solution
+	 */
+	public static void p(double x) {
+		System.out.println(x);
+		if (x > 1.0)
+			p(x / 2);
+	}
+
+	public static void main(String[] args) {
+		p(64.0);
+	}
+
+	/*
+	 * Iterative Solution
+	 */
+	public static void pBoring(double x) {
+		for (double p = x; p >= 1.0; p /= 2)
+			System.out.println(p);
+	}
+
+}

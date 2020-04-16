@@ -1,0 +1,59 @@
+package arrays;
+import cse131.ArgsProcessor;
+
+public class Birthday {
+	
+	public static void main(String[] args) {
+		//prompt user for number of people
+		ArgsProcessor ap = new ArgsProcessor (args);
+		int N = ap.nextInt("How many people?");
+		
+		//generate arrays to count people born on specific days, months, day numbers
+		int[][] a = new int[12][31];
+		int[] monthCount = new int [12];
+		int[] dayCount = new int [31];
+		
+		//assign birthdays and count
+		for(int k=0; k<N; k++){
+			int month = (int)(Math.random()*12);
+			int day = (int)(Math.random()*31);
+			for(int i=0; i<12; i++){
+				for(int j=0; j<31; j++){
+					if (i == month && j == day) {
+						a[i][j]++;
+						dayCount[j]++;
+					}
+				}
+			if (i == month) monthCount[i]++;	
+			}
+		}
+		
+		//print out percentages of people born in each month and their average
+		double monthSum = 0.0;
+		for(int i=0; i<12; i++){
+			System.out.println(((monthCount[i]*1000.0)/(N*10.0)) + "% of the people were born in month " + (i+1));
+			monthSum = monthSum + (monthCount[i]*1000.0)/(N*10.0);
+		}
+		System.out.println("An average of " + (monthSum / 12) + "% of people were born in each month");
+		System.out.println();
+		
+		//print out percentages of people born on each day and their average		
+		double daySum = 0.0;
+		for(int i=0; i<31; i++){
+			System.out.println(((dayCount[i]*1000.0)/(N*10.0)) + "% of the people were born on day " + (i+1));
+			daySum = daySum + (dayCount[i]*1000.0)/(N*10.0);
+		}
+		System.out.println("An average of " + (daySum / 31) + "% of people were born on each day number");
+		System.out.println();
+		
+		//print out the percentage of people born on the exact same day
+		double sameSum = 0.0;
+		for(int i=0; i<12; i++){
+			for(int j=0; j<31; j++){
+				if (a[i][j] > 1) sameSum = sameSum + (a[i][j] - 1);
+			}
+		}
+		System.out.println(((sameSum*1000.0)/(N*10.0)) + "% of people share a birthday with someone else");	
+	}
+
+}

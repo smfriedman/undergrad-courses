@@ -1,0 +1,39 @@
+I am your robotic CSE132 grader, and am pleased to provide the following report
+Quiz report for steven.friedman:
+
+Question:
+   Considering the code below, how many threads could be running concurrently, including the thread that runs the main method?
+   Grading function: answer=="1"
+   Your answer was: 2
+No, that's not right.  Check and see what went wrong. This cost you 25 points.
+Please see a TA or the instructor if you need help!
+
+Explanation: The .run() method calls the run method synchronously:  no thread is started using .run()
+
+Question:
+   Putting "synchronized" on a method foo in class A  accomplishes which of the following?
+   Grading function: answer.include?("Allows at most one thread")
+   Your answer was: Allows at most one thread to execute foo for any instance of A
+You have chosen wisely! You have earned 25 points.
+
+Explanation: At most one thread can execute foo for any given instance of A
+
+Question:
+   Deadlock is impossible if a thread never tries to acquire any locks if it is already holding one lock.
+   Grading function: answer=="TRUE"
+   Your answer was: FALSE
+Sorry, but that is not the right answer.  Try to find your mistake. This cost you 25 points.
+Please see a TA or the instructor if you need help!
+
+Explanation: Deadlock can only occur when a thread tries to hold more than one lock at a time
+
+Question:
+   Havender's Algorithm avoids deadlock by
+   Grading function: answer.include?("Requiring all threads to acquire")
+   Your answer was: Requiring all threads to acquire locks in a particular order
+Way to go! You have earned 25 points.
+
+Explanation: At most one thread can execute foo for any given instance of A
+
+
+Your total score is 50.

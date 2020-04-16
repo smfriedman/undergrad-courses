@@ -1,0 +1,38 @@
+I am your robotic CSE132 grader, and am pleased to provide the following report
+Quiz report for steven.friedman:
+
+Question:
+   Constructor code that assigns only instance varables requires no synchronization because
+   Grading function: answer.include?("no other thread")
+   Your answer was: Until the constructor finishes, no other thread can reference the object
+Glad you got that one! You have earned 25 points.
+
+Explanation: Such an object cannot be referenced by another thread until the constructor returns
+
+Question:
+   In your Node class, you should have synchronized around  currentTask = findAndRemoveTask().  Which situation below requires this synchronization?
+   Grading function: answer.include?("empty") or answer.include?("one entry")
+   Your answer was: The queue has one entry
+Glad you got that one! You have earned 25 points.
+
+Explanation: Before the call, one entry; after the call, the queue is empty
+
+Question:
+   If a class is immutable, then there are no circumstances that ever require obtaining a lock on any of its methods
+   Grading function: answer=="TRUE"
+   Your answer was: TRUE
+Nice job! You have earned 25 points.
+
+Explanation: Races require at least one write, and
+an immutable class cannot be changed
+
+Question:
+   Havender's Algorithm avoids deadlock by
+   Grading function: answer.include?("Requiring all threads to acquire")
+   Your answer was: Requiring all threads to acquire locks in a particular order
+Nice job! You have earned 25 points.
+
+Explanation: As explained in class, demonstrated in studio, and in lab
+
+
+Your total score is 100.

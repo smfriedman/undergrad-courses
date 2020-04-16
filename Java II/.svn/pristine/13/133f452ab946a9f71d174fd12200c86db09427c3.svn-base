@@ -1,0 +1,33 @@
+package lecture5s1;
+import static org.junit.Assert.*;
+import hawup.util.Wrappers;
+
+import org.junit.Test;
+
+
+public class TestWatchedRunnable {
+
+	@Test
+	public void test() {
+		Runnable r = new Runnable() {
+			public void run() {
+				Wrappers.sleep(8000);
+			}
+		};
+		
+		WatchedRunnable wr = new WatchedRunnable(r);
+		
+		new Thread(wr).start();
+		
+		System.out.println("Waiting for begun");
+		boolean begun = wr.waitUntilBegun();
+		System.out.println("Wait is over for begun");
+		assertTrue("begun should be true here, but was false", begun);
+		
+		System.out.println("Waiting for done");
+		boolean done = wr.waitUntilDone();
+		System.out.println("Wait is over for done");
+		assertTrue("done should be true here, but was false", done);
+	}
+
+}

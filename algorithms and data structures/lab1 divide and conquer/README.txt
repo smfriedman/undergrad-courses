@@ -1,0 +1,64 @@
+Steven Friedman
+Lab 1
+
+___________________________________________________________________________________________________
+
+ClosestPair DC implements the divide and conquer algorithm as discussed.  I decided 
+to store the two points and the minimum distance as static instance variables so they 
+wouldn't get lost in each level of recursion.  findClosestPair(pointsByX, pointsByY) 
+calls a recursive helper method that does all the work, and then findClosestPair puts 
+the points in the right order if they're out of order and prints them. helper(pointsByX, 
+pointsByY) carries out the recursive divide and conquer step and the compare (yStrip)
+step and returns the minimum distance.
+
+___________________________________________________________________________________________________
+
+The graph from "study 1" (6 different input sizes compared between DC and Naive) is in the
+file "graph.xlsx" in my lab1 java project.
+
+___________________________________________________________________________________________________
+
+The data for "study 2" is as follows:
+
+100 different inputs (using cases 101-200):
+	average: 29.65 ms
+	min: 28.0 ms
+	max: 45.0 ms
+100 trials of the same input (using cases 101-200)
+	average: 29.01 ms
+	min: 28.0 ms
+	max: 32.0 ms
+
+There's some variation in run time for both tests, although the data is right skewed, so on
+average, run times are closer to the minimum of the range than the maximum.  Minimums and
+averages are about equal between tests, but there's a much higher upper bound on the first test.
+
+___________________________________________________________________________________________________
+
+The data for part 3 is as follows (k = number of randomized trials, n = size of input):
+
+n = 25, k = 2,000,000
+dc avg: 0.005836 ms				dc total milliseconds (ms): 11672.0
+naive avg: 0.003304 ms			naive total ms: 6608.0
+
+n = 35, k = 2,000,000
+dc avg: 0.006308 				dc total ms: 12616.0
+naive avg: 0.0063495 			naive total ms: 12699.0
+
+n = 40, k = 2,000,000
+dc avg: 0.0076465 				dc total ms: 15293.0
+naive avg: 0.0082845 			naive total ms: 16569.0
+
+n = 50, k = 2,000,000
+dc avg: 0.0089665 				dc total ms: 17933.0
+naive avg: 0.0131015 			naive total ms:26203.0
+
+n = 100, k = 500,000
+dc avg: 0.02203 				dc total ms: 11015.0
+naive avg: 0.052766 			naive total ms: 26383.0
+
+The average run time for the naive algorithm is clearly larger for n = 100, n = 50 than for the 
+divide and conquer algorithm, and divide and conquer is clearly faster for n = 25. For n = 40, 
+naive is slower but is approaching equality with divide and conquer.  They're very similar at
+n = 35 (12.616 vs. 12.699 seconds for 2 million trials), but divide and conquer is slightly
+faster.  The crossing point is slightly below 35.

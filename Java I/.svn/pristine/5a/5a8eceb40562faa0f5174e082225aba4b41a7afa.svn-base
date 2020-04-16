@@ -1,0 +1,100 @@
+package recursion;
+
+import java.awt.Color;
+
+import sedgewick.StdDraw;
+import cse131.ArgsProcessor;
+
+public class TowersOfHanoi {
+	
+	/*
+	 * Boxes are stored as a two dimensional array with
+	 * dimensions 3xn. For N=3, it is initially 
+	 * towers[0] = 3 2 1
+	 * towers[1] = 0 0 0 
+	 * towers[2] = 0 0 0
+	 * 
+	 * In this arrangement, the top of the stack
+	 * has higher indices. 
+	 */
+	
+	public static void main(String[] args) {
+
+		ArgsProcessor p = new ArgsProcessor(args);
+		int n = p.nextInt("How many disks?");
+		int[][] towers = new int[3][n];
+		for (int i = 0; i < n; i++) {
+			towers[0][i] = n - i;
+		}
+
+		drawTowers(towers);
+		
+		// Move Boxes Here
+		moveTopBox(towers, 1, 2); // one move
+	}
+
+	/*
+	 * Moves a box from tower "from" to tower "to"
+	 */
+	public static void moveTopBox(int[][] towers, int from, int to) {
+		int fromI = topBoxIndex(towers[from]);
+		if (fromI == -1) {
+			throw new Error("No box in tower " + from);
+		}
+		int toI = topBoxIndex(towers[to]);
+		if (toI >= 0) {
+			if (towers[from][fromI] > towers[to][toI]) {
+				throw new Error("Illegal move!");
+			}
+		}
+
+		towers[to][toI + 1] = towers[from][fromI];
+		towers[from][fromI] = 0;
+
+		drawTowers(towers);
+
+	}
+
+	/*
+	 * Gets the index of the top box on the tower
+	 */
+	public static int topBoxIndex(int[] tower) {
+		for (int i = tower.length - 1; i >= 0; i--) {
+			if (tower[i] != 0)
+				return i;
+		}
+		return -1;
+	}
+
+	/*
+	 * Draw all three towers
+	 */
+	public static void drawTowers(int[][] towers) {
+		StdDraw.clear();
+		for (int i = 0; i < towers.length; i++) {
+			drawTower(towers[i], (i + 1) / 4.0);
+		}
+		StdDraw.show(1000);
+	}
+
+	/*
+	 * Draw a single tower
+	 */
+	public static void drawTower(int[] tower, double x) {
+		double height = .25;
+		StdDraw.filledRectangle(x, height / 2, .01, height / 2);
+		double boxHeight = height / tower.length;
+		for (int i = 0; i < tower.length; i++) {
+			int width = tower[i];
+			if (width == 0)
+				continue;
+			StdDraw.setPenColor(Color.BLUE);
+			StdDraw.filledRectangle(x, (i + 0.5) * boxHeight, .125
+					/ tower.length * width, boxHeight / 2);
+
+			StdDraw.setPenColor();
+			StdDraw.rectangle(x, (i + 0.5) * boxHeight, .125 / tower.length
+					* width, boxHeight / 2);
+		}
+	}
+}

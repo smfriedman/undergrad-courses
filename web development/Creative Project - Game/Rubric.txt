@@ -1,0 +1,24 @@
+1.	Submitted rubric to bitcbucket on time (5 points)
+2.	Game (75 Points)
+	a.	Log-in/info (15 points):
+		i.	Users must log in to play (5 points)
+		ii.	Browser displays opponent’s name and record (5 points)
+		iii.	Users must log in with a password (5 points)
+	b.	Implementation (55 points):
+		i.	Game works (40 points)
+			1.	Users can randomly roll a “die” (5 points)
+			2.	Landing on a “?” spot results in a chance card from the Database (10 points)
+			3.	Users can only roll a die when it’s their turn (5 points)
+			4.	When games ends, user is alerted and database is updated with new record (10 points)
+			5.	Users can challenge specific users to a game (10 points)
+		ii.	Real-time updating (15 Points)
+			1.	User can see opponents roll, movement, and chance card in real time (15 points)
+	c.	Best Practices (5 points):
+		i.	Code passes JSHint (3 points)
+		ii.	Code passes HTML validator (2 points)
+	d.	Creative Portion (20 points):
+
+Technologies:
+socket.io
+MEAN stack
+

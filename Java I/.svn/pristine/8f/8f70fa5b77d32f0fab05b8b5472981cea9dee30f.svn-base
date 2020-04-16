@@ -1,0 +1,47 @@
+package recursion;
+
+import java.awt.Color;
+
+import cse131.ArgsProcessor;
+
+import sedgewick.StdDraw;
+
+public class FancyTree {
+
+	public static void main(String[] args) {
+		StdDraw.setPenColor(new Color(50, 50, 255));
+		StdDraw.filledRectangle(.5, .5, .7, .7);
+		
+		ArgsProcessor p = new ArgsProcessor(args);
+		
+		int depth = p.nextInt("What depth?");
+		drawTree(0.5, 0.0, 0.3, Math.PI / 2, 1, depth);
+	}
+
+	private static void drawTree(double x0, double y0, double length,
+			double angle, int depth, int maxDepth) {
+		if (depth > maxDepth) {
+			StdDraw.setPenColor(getRandomGreen());
+			StdDraw.filledCircle(x0, y0, .3 / depth);
+
+			return;
+		}
+		StdDraw.setPenColor(new Color(115, 61, 0));
+		StdDraw.setPenRadius(.1 / depth);
+		double x1 = x0 + length * Math.cos(angle);
+		double y1 = y0 + length * Math.sin(angle);
+		StdDraw.line(x0, y0, x1, y1);
+		drawTree(x1, y1, length * .75, angle + Math.PI / 6, depth + 1, maxDepth);
+		drawTree(x1, y1, length * .66, angle - Math.PI / 3, depth + 1, maxDepth);
+	}
+
+	private static Color getRandomGreen() {
+		Color[] array = { new Color(26, 148, 49), new Color(0, 82, 33),
+				new Color(26, 102, 46), new Color(42, 111, 55),
+				new Color(63, 128, 70), new Color(125, 164, 120),
+				new Color(115, 195, 108), new Color(140, 207, 127),
+				new Color(166, 218, 149) };
+		return array[ (int)(Math.random()*array.length)];
+
+	}
+}

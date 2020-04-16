@@ -1,0 +1,187 @@
+package oldmidterm;
+
+import java.awt.Color;
+import java.util.Iterator;
+import java.util.Random;
+
+public class ColorSet<T> extends UnimplementedSet<T> {
+
+	final private Color color;
+	SetEntry<T> head;
+
+	private RWLock rwlock;
+
+	public ColorSet(Color initColor) {
+		this.color = initColor;
+		this.head  = null;
+		this.rwlock = new RWLock();
+	}
+
+	public ColorSet() {
+		//
+		// Pick a random color for this set
+		//
+		this(new Color(new Random().nextInt()));
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	/**
+	 * Takes this set and the other set and makes a new set that is the union of the two.
+	 * The color for the resulting set is based on the larger of the two input sets, this and that.
+	 * Neither this set nor that set is changed by this method.
+	 * This is similar to the code that computed the union of sets in Hall.java for your Maze lab
+	 *    when two rooms were joined.
+	 * @param that
+	 * @return
+	 */
+	public ColorSet<T> coloredMerge(ColorSet<T> that) {
+		//
+		// What locks should be obtained
+		//   so that this method operates reliably?
+		//
+		Color resultColor = this.color;
+		if (that.size() > this.size())
+			resultColor = that.color;
+
+		//
+		// Claim:  no other thread can access ans
+		//   until this method returns
+		//
+
+		ColorSet<T> ans = new ColorSet<T>(resultColor);
+
+		//
+		// Include all of this
+		//
+		for (T thing : this) {
+			ans.add(thing);
+		}
+		//
+		// Include all of that
+		//
+		for (T thing : that) {
+			ans.add(thing);
+		}
+		return ans;
+	}
+
+	/**
+	 * Satisfies the add method for a Set
+	 */
+	@Override
+	public boolean add(T element) {
+		if (!contains(element)) {
+			SetEntry<T> temp = new SetEntry<T>(element, head);
+			sleep();
+			head = temp;
+			return true;
+		}
+		else
+			return false;
+	}
+
+	/**
+	 * Does this set contain the specified element?
+	 *    A copy of the set is used for the test.
+	 */
+	@Override
+	public boolean contains(Object element) {
+		Object[] copy = this.toArray();
+
+		for (Object o : copy) {
+			if (o.equals(element))
+				return true;
+		}
+		return false;
+	}
+
+
+	/**
+	 * Returns the size of this set, computed by the length of its copy
+	 */
+	@Override
+	public int size() {
+		Object[] copy = this.toArray();
+		return copy.length;
+	}
+
+	/*
+	 * Satisfies the iterator method for a Set.
+	 *    Uses a copy of the set (via toArray()) as the basis of iteration.
+	 */
+	@Override
+	public Iterator<T> iterator() {
+		final Object[] copy = this.toArray();
+
+		return new Iterator<T>() {
+
+			private int i=0;
+
+			@Override
+			public boolean hasNext() {
+				return i < copy.length;
+			}
+
+			@Override
+			public T next() {
+				@SuppressWarnings("unchecked")
+				T ans = (T) copy[i++];
+				return ans;
+			}
+
+			@Override
+			public void remove() {
+				throw new UnsupportedOperationException("no remove");
+
+			}		
+		};
+	}
+
+	/**
+	 * Make an copy of this set, one element per slot of the returned array.
+	 * This method satisfies the Set interface, but is also used throughout
+	 *   this class as a helper.
+	 */
+	@Override
+	public Object[] toArray() {
+		int size=0;
+		for (SetEntry<T> p=head; p!=null; p=p.next) {
+			sleep();
+			++size;
+		}
+
+		Object[] ans = new Object[size];
+
+		for (SetEntry<T> p=head; p!=null; p=p.next) {
+			sleep();
+			ans[--size] = p.entry;
+		}
+		return ans;
+	}
+
+	/**
+	 * Computes hashCode based on a copy of this set.
+	 */
+
+	public int hashCode() {
+		throw new UnsupportedOperationException("hashCode not implemented");
+	}
+
+
+	public boolean equals(Object other) {
+		throw new UnsupportedOperationException("No equals, sorry");
+	}
+
+	private static void sleep() {
+		try {
+			Thread.sleep(new Random().nextInt(5));
+		} catch (InterruptedException e) {
+			throw new Error("Bad sleep");
+		}
+	}
+
+
+}

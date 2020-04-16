@@ -1,0 +1,29 @@
+package arrays;
+
+import cse131.ArgsProcessor;
+
+public class DNABases {
+
+	public static void main(String[] args) {
+		String[] dna = { "A", "T", "C", "G" };
+		System.out.println(dna.length);
+		ArgsProcessor ap = new ArgsProcessor(args);
+		int N = ap.nextInt("How many bases?");
+		String[] bases = new String[N];
+		for (int i=0; i < N; ++i) {
+			// pick a random integer in the range 0...3
+			int r = (int)(Math.random()      * 4);
+			bases[i] = dna[r];
+		}
+
+		// This won't actually print all the values 
+		System.out.println(bases);
+
+		// You have to loop through to print each value
+		for (int i=0; i < N; ++i) {
+			System.out.println(bases[i]);
+		}
+
+	}
+
+}

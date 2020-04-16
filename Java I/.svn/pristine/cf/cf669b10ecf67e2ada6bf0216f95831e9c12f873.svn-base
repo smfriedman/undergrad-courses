@@ -1,0 +1,5 @@
+<head><style>table, th, td { border: 1px solid black; }</style></head><table><tr><td>
+"Your WUSTL Key</td><td>Your Name</td><td>The number that shall not be named</td><td>What gets printed as a result of the above program? (30pts)</td><td>What is the value of f(15, 20) with the above function? (10pts)</td><td>What is the value of f(99, 77) with the above function? (10pts)</td><td>We can define every number in the table above as the sum of the number above it and the number to the left of it. Write a function called pascal that takes two integers x and y and returns the value for the table at those indexes. (50pts)</td><td>TA</td><td>Q1 (30pts)</td><td>Q2a (10pts)</td><td>Q2b (10pts)</td><td>Q3 (50pts)</td><td>Comments</td><td>Total"
+</td></tr><tr><td>
+"steven.friedman</td><td>Steven Friedman</td><td>431474</td><td>12321</td><td>5</td><td>11</td><td>public static int pascal(int x, int y){<br>	 if (x == 0 || y == 0) return 1;<br>	 return pascal(x-1, y) + pascal(x, y-1);<br>}</td><td>DanaA</td><td>30</td><td>10</td><td>10</td><td>50</td><td>None</td><td>100"
+</td></tr></table>

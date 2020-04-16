@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Chat</title>
+      <!--<link rel="stylesheet" type="text/css" href="style.css">-->
+      <style type="text/css">
+         .hidden{
+            display: none !important;
+         }
+
+         body{
+            background-color: #E8E8E8;
+            font-family: Verdana;
+         }
+
+         html, body{
+            width: 100%;
+            height: 100%;
+         }
+
+         input{
+            font-family: Verdana;
+            border-radius: none;
+            box-shadow: none;
+         }
+
+         input:focus{
+            box-shadow: 0px 0px 5px black;
+            outline: none;
+         }
+
+         #chatlog_wrapper{
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0px 0px 10px black;
+            background-color: #B3E0FF;
+            height: 100%;
+         }
+
+         #chatlog{
+            margin: 5px;
+         }
+
+         #top_wrapper div{
+            display: inline-block;
+            width: 49%;
+            vertical-align: middle;
+         }
+
+         #top_wrapper div button{
+            margin-left: auto;
+            margin-right: auto;
+         }
+
+         .flex{
+            display: flex;
+            justify-content: space-around;
+         }
+
+         button{
+            margin-right: 8px;
+            color: white;
+            background-color: #4C4C4C;
+            margin-bottom: 5px;
+         }
+
+         button:hover{
+            background-color: #FF0000;
+            cursor: pointer;
+         }
+      </style>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+      <script src="/socket.io/socket.io.js"></script>
+      <script>
+         $(document).ready(function(){
+            $('#add_room').on('click', addRoom);
+            $('#login').on('click', newUser);
+            $('#logout').on('click', logOut);
+            $('#send').on('click', sendMessage);
+            $('#sendPic').on('click', sendPic);
+            $('#rooms').on('change', changeRoom);
+            $('#boot').on('click', boot);
+            $('#ban').on('click', ban);
+         });
+
+         var nickname = null;
+         var socketio = io.connect();
+         var room = "Main Lobby";
+         var rooms = null;
+
+
+         socketio.on("pic_to_client", function(data) {
+            if(data['room'] == room){
+                document.getElementById("chatlog").appendChild(document.createElement("hr"));
+               $('#chatlog').append('<img src="' + data['link'] + '" width="50" height="50"/>');
+            }
+         });
+
+         socketio.on("message_to_client",function(data) {
+            //Append an HR thematic break and the escaped HTML of the new message
+            if((data["priv"].length < 1 || data["priv"] == nickname) && data['room'] == room){
+               document.getElementById("chatlog").appendChild(document.createElement("hr"));
+               var text = data['author'] + ": " + data['message'];
+               if(data["priv"] == nickname){
+                   text += "-------This is a private message";
+               }
+               document.getElementById("chatlog").appendChild(document.createTextNode(text));
+            }      
+         });
+
+         function sendMessage(){
+           //make sure user is signed in before sending messages
+            if(nickname == null){
+               window.alert("Please sign in to send messages");
+            }
+            else{
+               var msg = document.getElementById("message_input").value;
+               var private_msg = document.getElementById("private_msg").value;
+               var name = nickname;
+               socketio.emit("message_to_server", {message:msg, user:name, priv:private_msg, room: room});
+            }
+         }
+
+         function sendPic(){
+            if(nickname == null){
+               window.alert("Please sign in to send messages");
+            }
+            else{
+               var url = document.getElementById("pic_link").value;
+               var name = nickname;
+               socketio.emit("pic_to_server", {url:url, user:name, room: room});
+            }
+         }
+
+         socketio.on('failed_private_message', function(date){
+            window.alert(data[res]);
+         });
+
+         //Handle log ins
+         function newUser(){
+            nickname = document.getElementById("user").value;
+            socketio.emit("new_sign_in", {user:nickname});
+         }
+
+         //confirm log in
+         socketio.on("log_in_response", function(data) {
+            if(data["loggedIn"] == true) nickname = null;
+            else{
+               $('#login').addClass('hidden');
+               $('#user').addClass('hidden');
+               $('#logout').removeClass('hidden');
+            }
+
+            rooms = data["rooms"];
+            fillRooms(data["rooms"]);
+            fillUsers("Main Lobby");
+
+            window.alert(data["response"]);
+         });
+
+         //Handle Logout
+         function logOut(){
+            socketio.emit("log_out", {user:nickname});
+         }
+
+         //confirm logOut
+         socketio.on("log_out_response", function(data){
+            nickname = null;
+            $('#logout').addClass('hidden');
+            $('#user').removeClass('hidden');
+            $('#login').removeClass('hidden');
+            window.alert("You have been signed out.");
+         });
+
+         //Add chat room
+         function addRoom(){
+            var roomName = document.getElementById("newRoom").value;
+            var creator = nickname;
+            socketio.emit("new_room", {roomName:roomName, creator:creator});
+         }
+
+         socketio.on("new_room_response", function(data){
+            if(data.success){
+               window.alert('Room created');
+            }else{
+               window.alert('A room already exists with that name');
+            }
+         });
+
+         socketio.on("new_room_created", function(data){
+            rooms = data.rooms;
+            $('#rooms').append('<option>' + data['name'] + '</option>');
+            fillRooms(rooms);
+         });
+
+         function fillRooms(rooms){
+            $('#rooms').html("");
+            if(!rooms){
+               $('#rooms').append('<option">Main Lobby</option>');
+            } else{
+               for(var room in rooms){
+                  $('#rooms').append('<option>' + room + '</option>');
+               }
+            }
+         }
+
+         function fillUsers(roomName){
+            $('#users').html('');
+            for(var i = 0; i < rooms[roomName]['users'].length; i++){
+               $('#users').append('<option>' + rooms[roomName]['users'][i] + '</option>');         
+            }
+         }
+
+         //handle if creator of room
+         function changeRoom(){
+            var room_to_try = $('#rooms option:selected').text();
+            console.log(room_to_try);
+            socketio.emit("change_room", {oldRoom: room, room: room_to_try, user: nickname});            
+         }
+
+         socketio.on("change_room_response", function(data){
+            if(!data.success){
+               window.alert(data.res);
+            } else{
+               rooms[data.room.name] = data.room;
+               room = data.room.name;
+               $('#chatlog').html('');
+               addMsg("**Welcome to " + room + "**");
+               fillUsers(room);
+
+               if(data.creator == true){
+                  $('#boot').removeClass('hidden');
+                  $('#ban').removeClass('hidden');
+               }else{
+                  $('#boot').addClass('hidden');
+                  $('#ban').addClass('hidden');
+               }
+            }
+         });
+
+         socketio.on("someone_changed_rooms", function(data){
+            rooms[data.room.name] = data.room;
+            rooms[data.oldRoom.name] = data.oldRoom;
+            if(data['oldRoomName'] == room){
+               //remove user from list of users
+               $('#users option').filter(function(){
+                  return $(this).text() == data['user'];
+               }).remove();
+               if(!data.boot && !data.ban) addMsg("**" + data['user'] + " has left the room**");
+               else if(data.boot) addMsg("**" + data['user'] + " has been booted from the room**");
+               else if(data.ban) addMsg("**" + data['user'] + " has been permanently banned from the room**");
+            } else if(data['newRoomName'] == room){
+               $('#users').append('<option>' + data['user'] + '</option>');
+               addMsg("**" + data['user'] + " has joined the room**")
+            }
+         });
+
+         function boot(){
+            var booted_user = $('#users option:selected').text();
+            if(booted_user == nickname) window.alert("You can't boot yourself");
+            else socketio.emit("boot", {roomName: room, user: nickname, booted_user: booted_user});
+         }
+
+         socketio.on("boot_response", function(data){
+            if(data.success){
+               window.alert("User booted");
+            } else{
+               window.alert(data.res);
+            }
+         });
+
+         socketio.on("someone_booted", function(data){
+            if(nickname == data['booted_user'] && room == data.roomName){
+               window.alert("You've been booted from this chat room. You may rejoin in the future.");
+               fillRooms(rooms);
+               room = "Main Lobby";
+               $('#chatlog').html('');
+               addMsg("**Welcome to " + room + "**");
+               fillUsers(room);
+            }
+         });
+
+         function ban(){
+            var banned_user = $('#users option:selected').text();
+            if(banned_user == nickname) window.alert("You can't ban yourself");
+            else socketio.emit("ban", {roomName: room, user: nickname, banned_user: banned_user});
+         }
+
+         socketio.on("ban_response", function(data){
+            if(data.success){
+               window.alert("User banned");
+            } else{
+               window.alert(data.res);
+            }
+         });
+
+         socketio.on("someone_banned", function(data){
+            if(nickname == data['banned_user'] && room == data['roomName']){
+               window.alert("You've been permanently banned from this chat room. You may not rejoin in the future.");
+               fillRooms(rooms);
+               room = "Main Lobby";
+               $('#chatlog').html('');
+               addMsg("**Welcome to " + room + "**");
+               fillUsers(room);
+            }
+         });
+
+         function addMsg(text){
+            document.getElementById("chatlog").appendChild(document.createElement("hr"));
+            document.getElementById("chatlog").appendChild(document.createTextNode(text));
+         }
+
+      </script>
+   </head>
+   <body>
+      <input type="text" id="user"/>
+      <button id="login">Sign In</button>
+      <br/>
+      <button id="logout" class="hidden">Sign out</button>
+      <br/> 
+
+      <div id="top_wrapper">
+         <div id="msg_div">
+            <label for="message_input">Message: </label>
+            <input type="text" id="message_input"/>
+            <br/>
+            <label for="private_msg">Private recepient: </label>
+            <input type="text" id="private_msg" placeholder="Optional"/>
+            <br/>
+            <label for="pic_link">Picture URL: </label>
+            <input type="text" id="pic_link"/>
+            <button id="sendPic">Send Picture</button>
+            <br/>
+            <button id="send">send</button>
+            <br/>
+         </div>
+
+         <div id="room_div">
+            <label for="newRoom">New Room: </label>
+            <input type="text" id="newRoom"/>
+            <br/>
+            <label for="newRoomPW">Password: </label>
+            <input id="newRoomPW" type="password" placeholder="Optional"/>
+            <br/>      
+            <button id="add_room">Create new Chat Room</button>
+
+            <br/>
+            <br/>
+
+            <label for="rooms"> Open rooms: </label>
+            <select id="rooms">
+               <option>Main Lobby</option>
+            </select>
+
+            <br/>
+            <label for="users"> Users in this room: </label>
+            <select id="users">
+            </select>
+            <br/>
+            <div class="flex">
+               <button id="boot" class="hidden">Boot from room</button>
+               <button id="ban" class="hidden">Permanently ban</button>
+            </div>
+         </div>
+      </div>
+
+      <br/>
+      <div id="chatlog_wrapper">
+         <div id="chatlog"></div>
+      </div>
+
+   </body>
+</html>
+
+
+
+
+
+
+
+
+
+

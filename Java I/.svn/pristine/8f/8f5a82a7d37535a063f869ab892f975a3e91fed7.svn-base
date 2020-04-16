@@ -1,0 +1,32 @@
+package ChoiceAndIteration;
+
+import cse131.ArgsProcessor;
+
+public class MaxWithEquals {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		ArgsProcessor ap = new ArgsProcessor(args);
+		int x = ap.nextInt("Enter x");
+		int y = ap.nextInt("Enter y");
+
+		int max;
+		if ( x > y ) {
+			max = x;
+			System.out.println("x is bigger");
+		}
+		else if (x == y){
+			max = y;
+			System.out.println("They are the same");
+		}
+		else {
+			max = y;
+			System.out.println("y is bigger");
+		}
+		System.out.println("max is " + max);
+	}
+
+}
+

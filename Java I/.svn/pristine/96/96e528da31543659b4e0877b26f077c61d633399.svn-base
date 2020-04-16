@@ -1,0 +1,20 @@
+package ChoiceAndIteration;
+
+public class Coin {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		double r = Math.random();
+		// r has a value 0 <= r < 1
+
+		if (r < 0.5) {
+			System.out.println("head");
+		}
+		else {
+			System.out.println("tails");
+		}
+	}
+
+}

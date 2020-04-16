@@ -1,0 +1,27 @@
+package recursion;
+
+import sedgewick.StdDraw;
+
+public class GraphPaper {
+	
+	public static void oneIntoFour(double x, double y, double size) {
+		if (size < .025) { // base case, size ridiculously small
+			return;
+		}
+		
+		// Draw Cross
+		StdDraw.line(x+size/2, y, x+size/2, y+size);
+		StdDraw.line(x, y+size/2, x+size, y+size/2);
+
+		// four subcases
+		oneIntoFour(x, y+size/2, size/2); // top left
+		oneIntoFour(x+size/2, y+size/2, size/2); // top right
+		oneIntoFour(x, y, size/2); // bottom left
+		oneIntoFour(x+size/2, y, size/2); // bottom right
+	}
+	
+	public static void main(String[] args) {
+		oneIntoFour(0, 0, 1);
+	}
+
+}

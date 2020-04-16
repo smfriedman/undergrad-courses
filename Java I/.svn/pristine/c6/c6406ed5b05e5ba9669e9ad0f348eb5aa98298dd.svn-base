@@ -1,0 +1,30 @@
+package types;
+
+public class MathLibrary {
+
+	public static void main(String[] args) {
+
+		System.out.print("Maximum of -2 and 13.7: ");
+		System.out.println(Math.max(-2, 13.7));
+		
+		System.out.print("Minimum of -2 and 13.7: ");
+		System.out.println(Math.max(-2, 13.7));
+		
+		System.out.print("Value of pi: ");
+		System.out.println(Math.PI);
+		
+		System.out.print("Sin of 2pi: ");
+		System.out.println(Math.sin(2.0 * Math.PI)); //Wait, what?
+		
+		System.out.print("Random value: ");
+		System.out.println(Math.random());
+		
+		System.out.print("Rounded PI: ");
+		System.out.println(Math.round(Math.PI));
+		
+		System.out.print("4.5 to the third power: ");
+		System.out.println(Math.pow(4.5, 3.0));
+		
+	}
+
+}

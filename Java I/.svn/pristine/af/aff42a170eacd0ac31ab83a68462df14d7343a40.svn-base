@@ -1,0 +1,19 @@
+package lab10;
+
+/**
+ * 
+ * @author Steven Friedman, steven.friedman
+ * @author Vishal Vijay, vvijay
+ * Creates a new interface Drawable that can be implemented by rectangular drawable objects
+ */
+public interface Drawable {
+	public void draw();				//could include more properties that drawable objects share,
+									//like color, but it's unnecessary for collisions
+	public double getHalfHeight();
+
+	public double getPosY();
+
+	public double getHalfWidth();
+
+	public double getPosX();
+}

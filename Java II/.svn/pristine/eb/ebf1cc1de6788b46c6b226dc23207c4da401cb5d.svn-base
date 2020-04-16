@@ -1,0 +1,56 @@
+package lecture7s1;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class Server4 {
+
+	final private int port;
+
+	// works fine with client 2
+	
+	public Server4(int port) {
+		this.port = port;
+	}
+
+	public void run() throws IOException {
+		//  establish service at the port
+		char[] chars = new char[] { 'x', 'y', 'z' };
+		int cloc = 0;
+		ServerSocket ss = new ServerSocket(port);
+		while (true) {
+			// wait for a connection
+			Socket s = ss.accept();
+			// send 4 bytes (an int)
+			// now send 4 bytes
+			OutputStream os = s.getOutputStream();
+			InputStream  is = s.getInputStream();
+			DataOutputStream dos = new DataOutputStream(os);
+			DataInputStream  dis = new DataInputStream(is);
+			dos.writeChar(chars[cloc]);
+			// cloc goes 0, 1, 2, 0, 1, 2, ....
+			cloc = (cloc + 1) % chars.length;
+			
+			// get an integer from the client
+			//  we may wait a very long time for this to happen
+			//  and while we wait, we can't accept any other
+			//   clients who may wish for service...that's not good
+			//   so see Server5
+			int fromClient = dis.readInt();
+			
+			dos.writeInt(fromClient+1);
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Server4 server = new Server4(3000);
+		server.run();
+
+	}
+
+}

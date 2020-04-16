@@ -1,0 +1,183 @@
+package lab10;
+
+import java.awt.Color;
+
+import sedgewick.StdDraw;
+
+/*
+ * Grader: Doug Shook
+ * Result: Your game works great! I like the two player mode. Great job!
+ * Total: 100 / 100
+ */
+
+/**
+ * 
+ * @author Steven Friedman, steven.friedman
+ * @author Vishal Vijay, vvijay
+ * Creates a new object Frogger that implements FrgogerGame
+ * This is the main component of the game
+ */
+public class Frogger implements FroggerGame {
+	private Frog[] frogs;
+	private Car[] cars;
+	private Goal[] goals;
+
+	/**
+	 * creates a new Frogger with the number of players variable
+	 * @param players
+	 */
+	public Frogger(int players){
+		this.frogs = new Frog[players];
+		this.cars = new Car[18];
+		this.goals = new Goal[5];
+	}
+	
+	/**
+	 * turns a constructed object Frogger into the game
+	 * generates new goals and randomly generates new cars at the beginning of each game
+	 * shows game over screen after both players run out of lives (or one in single player)
+	 * restarts a new game automatically
+	 */
+	@Override
+	public void playGame() {
+		//white(true) makes the game to restart automatically when you lose instead of exiting
+		while(true){
+			
+			for (int i = 0; i < cars.length; i++){
+				//generate new car with -.4<random posX<1.6, posY on 1 of 3 rows, 0.01<random speed<0.0175
+				cars[i] = new Car (Math.random()*2.0 - 0.4, (i % 3) * 0.2 + 0.2, .0075 + Math.random() * 0.01);
+				//randomly assign some cars to go right to left
+				if (Math.random() < 0.5) cars[i].setSpeed(-cars[i].getSpeed());
+				//set all cars on each row to go the same speed, according to cars[0],[1],[2]
+				cars[i].setSpeed(cars[i % 3].getSpeed());
+			}
+			
+			//evenly spaced goals at top of screen
+			for (int i = 0; i < goals.length; i++){
+				goals[i] = new Goal(i * 0.2 + 0.1, 0.9);
+			}
+			
+			//create frog(s) with starting posX dependent on how many frogs (1/2 if 1; 1/3,2/3 if 2)
+			//each frog has unique color
+			for (int i = 0; i < frogs.length; i++){
+				frogs[i] = new Frog((i+1)*1.0/(frogs.length + 1), .05, i, new Color(0, 100*(i+1), 0));
+			}
+			
+			//while there are still lives for every frog
+			while(frogs[0].getLives() > 0 || (frogs.length == 2 && frogs[1].getLives() > 0)){
+			
+				//if a frog collides with a car, reset the frog and remove a life
+				//move cars
+				for(int i = 0; i < cars.length; i++){
+					for(int j = 0; j < frogs.length; j++){
+						if(frogs[j].collide(cars[i])){
+							frogs[j].setPosX((j+1)*1.0/(frogs.length + 1));
+							frogs[j].setPosY(0.005);
+							frogs[j].setLives(frogs[j].getLives()-1);
+						}
+					}
+					cars[i].move();
+				}
+				
+				//if a frog collides with a goal, reset the frog, add to its score, and deactivate the goal
+				for(int i = 0; i < goals.length; i++){
+					for(int j = 0; j < frogs.length; j++){
+						if(frogs[j].collide(goals[i]) && goals[i].getActive()){
+							frogs[j].setPosX((j+1)*1.0/(frogs.length + 1));
+							frogs[j].setPosY(0.005);
+							frogs[j].setScore(frogs[j].getScore() + goals[i].getValue());
+							goals[i].setActive(false);
+							goals[i].setColor(Color.BLACK);
+						}
+					}
+				}
+				
+				//if all the goals have been visited, reset all the goals
+				if(goals[0].getActive() == false && goals[1].getActive() == false && 
+						goals[2].getActive() == false && goals[3].getActive() == false &&
+						goals[4].getActive() == false){
+					for (int i = 0; i < goals.length; i++){
+						goals[i].setActive(true);
+						goals[i].setColor(Color.WHITE);
+					}
+				}
+			
+				//clear the screen and draw gray background (standard scale x,y from 0-1)
+				StdDraw.clear();
+				StdDraw.setPenColor(Color.darkGray);
+				StdDraw.filledRectangle(.5, .5, 1, 1);
+				
+				//draw cars
+				for(int i = 0; i < cars.length; i++){
+					cars[i].draw();
+				}
+				
+				//draw goals
+				for(int i =0; i < goals.length; i++){
+					goals[i].draw();
+				}
+				
+				//draw and move frogs
+				//if no lives left kill frog
+				for(int i = 0; i < frogs.length; i++){
+					frogs[i].draw();
+					frogs[i].move();
+					if (frogs[i].getLives() <= 0){
+						frogs[i].setSpeed(0);
+						frogs[i].setColor(Color.darkGray);
+						frogs[i].setHalfHeight(0);
+						frogs[i].setHalfWidth(0);
+					}
+				}
+				
+				//draw score and lives
+				StdDraw.setPenColor(Color.white);
+				if (frogs.length == 1) {
+					StdDraw.textLeft(0, 1, "Lives: " + frogs[0].getLives());
+					StdDraw.textRight(1, 1, "Score: " + frogs[0].getScore());
+				} else {
+					StdDraw.textLeft(0, 1, "P1 Lives: " + frogs[0].getLives() + "   P2 Lives: " + frogs[1].getLives());
+					StdDraw.textRight(1, 1, "P1 Score: " + frogs[0].getScore() + "   P2 Score: " + frogs[1].getScore());
+				}
+
+				//show everything
+				StdDraw.show(20);
+			}
+			//game over screen
+			StdDraw.setPenColor(Color.BLACK);
+			StdDraw.filledRectangle(.5, .5, 1, 1);
+			StdDraw.setPenColor(Color.WHITE);
+			StdDraw.text(.5, .5, "GAME OVER");
+			StdDraw.show();
+			StdDraw.pause(2100);
+			
+			//reset lives and scores for next game (automatic restart)
+			frogs[0].setLives(5);
+			frogs[0].setScore(0);
+			if (frogs.length == 2){
+				frogs[1].setLives(5);
+				frogs[1].setScore(0);
+			}
+		}
+	}
+
+	/**
+	 * gets game name
+	 * @return game name, Frogger
+	 */
+	@Override
+	public String getGameName() {
+		return "Frogger";
+	}
+
+	/**
+	 * gets team members
+	 * @return Steven Friedman, Vishal Vijay
+	 */
+	@Override
+	public String[] getTeamMembers() {
+		String[] members = { "Steven Friedman", "Vishal Vijay" };
+		return members;
+	}
+
+}

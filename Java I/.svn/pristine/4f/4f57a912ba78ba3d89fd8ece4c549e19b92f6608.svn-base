@@ -1,0 +1,7 @@
+package adt.money;
+
+public interface Valuable {
+	
+	public int getLiquidAssets();
+
+}

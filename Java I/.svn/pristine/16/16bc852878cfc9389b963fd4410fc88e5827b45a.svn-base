@@ -1,0 +1,54 @@
+package lab10;
+
+public class Frogger implements FroggerGame {
+	//instance variables
+	//constructor
+	
+	@Override
+	public void playGame() {
+		// TODO Auto-generated method stub
+		
+		//pseudo code(write out step by step in English):
+		//while(we still have lives) {
+		
+			//has the frog collided with a car?
+				//kill it
+				//move it back to start
+		
+			//has the frog collided with a goal?
+				//update score
+				//move it back to start
+				//is that a goal they haven't visited before?
+				//have they visited all goals?
+					//reset all goals?
+		
+			//is a key being pressed?
+				//move the frog
+		
+			//move the cars
+		
+			//draw stuff:
+			//clear()
+			//draw background
+			//draw cars
+			//draw goals
+			//draw frog
+			//draw score and lives
+			//StdDraw.show()
+		//}
+		//game over
+	}
+
+	@Override
+	public String getGameName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String[] getTeamMembers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,0 +1,73 @@
+package adt.money;
+
+//
+// Copied initially from the objects lecture package
+//   ... but modified to have some interfaces
+//
+public class BankAccount implements Valuable {
+
+	// an account has-a balance
+
+	private int balance;
+
+	public BankAccount() {
+		this.balance = 0;  // a new account w/o funds to start
+	}
+
+	/**
+	 * 
+	 * @param initialFunds initial money in this account, in dollars
+	 */
+	public BankAccount(int initialFunds) {
+		this.balance = initialFunds;
+	}
+
+	/**
+	 * Make a deposit
+	 * @param howMuch the amount of the deposit in dollars
+	 * @return the balance after the money is deposited
+	 */
+	public int deposit(int howMuch) {
+		this.balance += howMuch;  // add the funds to 
+		return this.balance;
+	}
+
+	/**
+	 * Withdraw some money
+	 * @param howMuch money to be withdraw, in dollars
+	 * @return the balance after the money is withdrawn
+	 */
+	public int withdraw(int howMuch) {
+		if (howMuch > this.balance) {
+			return this.balance;
+		}
+		else 
+			//
+			// delegate to deposit by passing the negative amount of money to be added
+			//
+			return deposit(-howMuch);
+	}
+	
+	/**
+	 * 
+	 * @return current balance of this account
+	 */
+	public int getBalance() {
+		// sleazy but it works
+		return withdraw(0);
+	}
+	
+	public String toString() {
+		if (this.balance == 1) {
+			return "Bank Account with " + this.balance+ " buck";
+		}
+		else return "Bank Account with " + this.balance+ " bucks";
+	}
+
+	@Override
+	public int getLiquidAssets() {
+		return this.getBalance();
+	}
+
+
+}

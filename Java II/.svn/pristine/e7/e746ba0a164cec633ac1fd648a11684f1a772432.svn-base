@@ -1,0 +1,42 @@
+package lecture7s1;
+
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.InetAddress;
+import java.net.Socket;
+
+public class Client {
+	
+	final private String host;
+	final private int port;
+	
+	public Client(String host, int port) {
+		this.host = host;
+		this.port = port;
+	}
+	
+	public void run() throws IOException {
+		InetAddress ia = InetAddress.getByName(host);
+		Socket s = new Socket(ia, port);
+		// read in 4 bytes from the server
+		InputStream is = s.getInputStream();
+		//
+		// for is, all we can do is read one byte at a time
+		//   we want  a 4-byte int
+		DataInputStream dis = new DataInputStream(is);
+		int saw = dis.readInt();
+		System.out.println("We saw " + saw);
+		
+	}
+
+	public static void main(String[] args) throws IOException {
+		// this was to connect to the time server
+		// Client client = new Client("time-c.nist.gov", 37);
+		// instead connect to our own machine
+		//    "localhost"  -- is a network name for my machine
+		//    it's like the "this" of networking
+		Client client = new Client("localhost", 3000);
+		client.run();
+	}
+}

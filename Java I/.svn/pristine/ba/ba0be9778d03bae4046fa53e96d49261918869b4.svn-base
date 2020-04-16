@@ -1,0 +1,5 @@
+<head><style>table, th, td { border: 1px solid black; }</style></head><table><tr><td>
+"Your Name</td><td>Your WUSTL Key</td><td>The number that shall not be named</td><td>Using StdIn (NOT Argsprocessor!), prompt the user to enter their name. Then, prompt the user to enter their age. If the user enters an age less than 0, continue prompting them for their age until they give an age greater than zero. Finally, print out a greeting to the user that includes their name and age (100 points).</td><td>TA</td><td>Grade</td><td>Comments"
+</td></tr><tr><td>
+"Steven Friedman</td><td>steven.friedman</td><td>431474</td><td>System.out.println(""What is your name?"");<br>String name = StdIn.readString();<br>System.out.println(""How old are you?"");<br>int age = StdIn.readInt();<br>while (age &lt; 0) {<br>	System.out.println(""Please enter your real age:"");<br>	age = StdIn.readInt();<br>}<br>System.out.println(""Hello, "" + age + ""-year-old "" + name + ""."");</td><td>casey sands</td><td>100</td><td>None"
+</td></tr></table>

@@ -1,0 +1,98 @@
+package oldmidterm;
+
+import java.util.Collection;
+
+import java.util.Iterator;
+import java.util.Set;
+
+/**
+ * An implementation of Set with everything unimplemented
+ * A call to any of these methods will throw an exception
+ * ColoredSet extends this and implements only what it needs.
+ * 
+ * @author roncytron
+ *
+ * @param <T>
+ */
+
+public class UnimplementedSet<T> implements Set<T> {
+
+	// @Override
+	public boolean add(T arg0) {
+		// FIXME Auto-generated method stub
+		throw new UnsupportedOperationException("not implemented yet");
+	}
+
+	// @Override
+	public boolean addAll(Collection<? extends T> arg0) {
+		// FIXME Auto-generated method stub
+		throw new UnsupportedOperationException("not implemented yet");
+	}
+
+	// @Override
+	public void clear() {
+		// FIXME Auto-generated method stub
+		throw new UnsupportedOperationException("not implemented yet");
+	}
+
+	// @Override
+	public boolean contains(Object arg0) {
+		// FIXME Auto-generated method stub
+		throw new UnsupportedOperationException("not implemented yet");
+	}
+
+	// @Override
+	public boolean containsAll(Collection<?> arg0) {
+		// FIXME Auto-generated method stub
+		throw new UnsupportedOperationException("not implemented yet");
+	}
+
+	// @Override
+	public boolean isEmpty() {
+		// FIXME Auto-generated method stub
+		throw new UnsupportedOperationException("not implemented yet");
+	}
+
+	// @Override
+	public Iterator<T> iterator() {
+		// FIXME Auto-generated method stub
+		throw new UnsupportedOperationException("not implemented yet");
+	}
+
+	// @Override
+	public boolean remove(Object arg0) {
+		// FIXME Auto-generated method stub
+		throw new UnsupportedOperationException("not implemented yet");
+	}
+
+	// @Override
+	public boolean removeAll(Collection<?> arg0) {
+		// FIXME Auto-generated method stub
+		throw new UnsupportedOperationException("not implemented yet");
+	}
+
+	// @Override
+	public boolean retainAll(Collection<?> arg0) {
+		// FIXME Auto-generated method stub
+		throw new UnsupportedOperationException("not implemented yet");
+	}
+
+	// @Override
+	public int size() {
+		// FIXME Auto-generated method stub
+		throw new UnsupportedOperationException("not implemented yet");
+	}
+
+	// @Override
+	public Object[] toArray() {
+		// FIXME Auto-generated method stub
+		throw new UnsupportedOperationException("not implemented yet");
+	}
+
+	// @Override
+	public <T> T[] toArray(T[] arg0) {
+		// FIXME Auto-generated method stub
+		throw new UnsupportedOperationException("not implemented yet");
+	}
+	
+}

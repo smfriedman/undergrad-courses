@@ -1,0 +1,9 @@
+Steven Friedman 431474
+Matthew Schiller 429346
+
+Entry point: http://ec2-52-89-23-219.us-west-2.compute.amazonaws.com:3456/
+
+Creative:
+	Chat
+	Styling site and game
+	Players can choose colors

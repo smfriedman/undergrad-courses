@@ -1,0 +1,49 @@
+package types;
+
+public class IntegerOperations {
+	
+	public static void main(String[] args) {
+		
+		System.out.println(2 + 2);
+		System.out.println(-5 * 8);
+		System.out.println("Division: ");
+		System.out.println(4 / 2);
+		System.out.println(4 / 3);
+		System.out.println(4 % 3);
+		System.out.println(8 % 3);
+		
+		//This is a comment explaining what comments are
+		
+		/*
+		 * This is a comment explaining that often times,
+		 * it is better to use variables to tell a story
+		 * with your code:
+		 */
+		
+		int burritosPerDay = 2;
+		int numberOfDays = 7;
+		int burritosPerWeek = burritosPerDay * numberOfDays;
+		System.out.print("Burritos eaten per week: ");
+		System.out.println(burritosPerWeek);
+		
+		numberOfDays = 30;
+		int burritosPerMonth = numberOfDays * burritosPerDay;
+		System.out.print("Burritos eaten per month: ");
+		System.out.println(burritosPerMonth);
+		
+		//There are limits to integers.....
+		int veryLarge = 2147483647;
+		System.out.println("Very large number: ");
+		System.out.println(veryLarge);
+		veryLarge = veryLarge + 1;
+		System.out.println("Very large number + 1: ");
+		System.out.println(veryLarge);
+		veryLarge = veryLarge + 1;
+		System.out.println("Very large number + 2: ");
+		System.out.println(veryLarge);
+		
+		//What will happen....
+		//System.out.println(10 / 0);
+	}
+
+}

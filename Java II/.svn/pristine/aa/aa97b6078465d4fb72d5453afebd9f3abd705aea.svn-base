@@ -1,0 +1,47 @@
+package lecture7s2;
+
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+public class Client {
+	
+	final private String host;
+	final private int port;
+	
+	public Client(String host, int port) {
+		this.host = host;
+		this.port = port;
+		
+	}
+	
+	public void run() throws IOException {
+		// connect to a server and read 4 bytes as an int
+		InetAddress ia = InetAddress.getByName(host);
+		Socket s = new Socket(ia, port);
+		InputStream is = s.getInputStream();
+		//  from is, I can only read one byte at a time
+		//  I'd like to read in 4 bytes as an int, so
+		//  I'll decorate the is with a datainputstream
+		DataInputStream dis = new DataInputStream(is);
+		int ans = dis.readInt();
+		
+		System.out.println("I saw " + ans);
+		
+	}
+	
+	public static void main(String[] args) throws IOException {
+		// Client c = new Client("time-c.nist.gov", 37);
+		// let's use my computer instead of time-c.nist.gov
+		// localhost is always my machine
+//		Client c = new Client("localhost", 3000);
+		// but I know that now my ip address happens to be
+		// 172.27.53.222
+		Client c = new Client("172.27.53.222", 3000);
+		c.run();
+	}
+
+}

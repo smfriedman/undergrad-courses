@@ -1,0 +1,17 @@
+package module2;
+
+public class Coinflip {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		double r = Math.random();
+		
+		if (r < 0.5) {
+			System.out.println("heads");
+		}
+		else {
+			System.out.println("tails");
+		}
+	}
+
+}

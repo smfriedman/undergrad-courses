@@ -1,0 +1,111 @@
+package julia;
+
+import java.awt.Color;
+
+import sedgewick.StdDraw;
+
+public class Julia {
+	private int width;
+	private int height;
+	private Complex ll;	//was empty
+	private Complex ur;
+	private int maxIters;
+	
+	/**
+	 * Remembers the width and height as instance variables, and establishes the default picture. See {@link reset() reset}
+	 * @param width
+	 * @param height
+	 */
+	public Julia(int width, int height) {
+		this.width = width;
+		this.height = height;
+		this.maxIters = 50;
+		this.ll = new Complex(0 - width/2.0, 0 - height/2.0);
+		this.ur = new Complex(ll.getReal() + width, ll.getImaginary() + height);
+	}
+	
+	/**
+	 * Establish the coordinates of the display to go from -2 - 2i at the lower-lefthand corner to 2 + 2i at the upper-right,
+	 * and set the maximum number of iterations to 50.
+	 */
+	public void reset() {
+		this.maxIters = 50;
+		this.ll = new Complex (-2, -2);
+		this.ur = new Complex (2, 2);
+	}
+	
+	/**
+	 * Reset the display so that the supplied complex coordinates frame the lower left and upper right of what is seen.
+	 * @param ll new lower-left coordinate for the displayed area
+	 * @param ur new upper-right coordinate for the displayed area.
+	 */
+	public void setCoordinates(Complex ll, Complex ur) {
+		this.ll = ll;
+		this.ur = ur;
+	}
+	
+	/**
+	 * Zoom in to the area framed by 1/4 of the current display.
+	 */
+	public void zoomIn() {
+		double realDist = ur.getReal() - ll.getReal(); //width but a double
+		double imagDist = ur.getImaginary() - ll.getImaginary(); //height but a double
+		this.ll = new Complex(this.ll.getReal() + realDist/4.0, this.ll.getImaginary() + imagDist/4.0);
+		this.ur = new Complex(this.ur.getReal() - realDist/4.0, this.ur.getImaginary() - imagDist/4.0);
+	}
+	
+	/**
+	 * Refresh the display by computing point by point the color value as described in the lab.
+	 * It may be helpful to call StdDraw.show(0) before and after you are done, so that the display need not be
+	 * update after each point is computed.
+	 * It may also be helpful to fill the display with a white rectangle before computing and establishing the points' colors.
+	 */
+		/**
+		 * calculates rigor
+		 * @param c
+		 * @return
+		 */
+		public int rigor(Complex c){
+			Complex z = new Complex(-0.7795, 0.134);
+			int iters = 0;
+			while (c.abs() < 2 && iters < maxIters){
+				c = (c.times(c)).plus(z);
+				iters++;
+			}
+			return iters;
+		}
+	
+	public void draw() {
+		for(double i = ll.getReal(); i < ur.getReal())
+		Color color = Color.black;
+		if (iters < maxIters)
+		   color = Color.getHSBColor((iters % 256)/255.0f, 1.0f, 1.0f);
+		image.setPixel(i, j, color);
+	}
+	
+	/**
+	 *  Inverse of {@link zoomIn() zoomIn}:  as if the currently viewed display becomes framed by 1/4 of the new display all around.
+	 */
+	public void zoomOut() {
+		double realDist = ur.getReal() - ll.getReal(); //width but a double
+		double imagDist = ur.getImaginary() - ll.getImaginary(); //height but a double
+		this.ll = new Complex(this.ll.getReal() - realDist/2.0, this.ll.getImaginary() - imagDist/2.0);
+		this.ur = new Complex(this.ur.getReal() + realDist/2.0, this.ur.getImaginary() + imagDist/2.0);
+	}
+
+	/**
+	 * Increase the maximum number of iterations per point by 50.
+	 */
+	public void bump() {
+		maxIters = maxIters + 50;
+	}
+
+	/**
+	 * Decrease the maximum number of iterations per point by 50, but make sure the result does not drop below 50.
+	 */
+	public void unbump() {
+		if (maxIters < 100) return;
+		else maxIters = maxIters - 50;
+	}
+
+}

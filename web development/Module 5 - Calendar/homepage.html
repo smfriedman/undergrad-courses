@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Calendario</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="http://classes.engineering.wustl.edu/cse330/content/calendar.min.js"></script>
+	<script type="text/javascript" src="ajax.js"></script>	
+	<script type="text/javascript" src="calendar.js"></script>		
+</head>
+<body>
+
+	<!--hide when logged in-->
+	<div class="wrapper">
+		<div id="login">
+			<h3>Log In</h3>
+			<form>
+				<input type="text" id="username" placeholder="Username" required/>
+				<input type="password" id="password" placeholder="Password" required/><br/>
+				<input type="radio" name="newOrExisting" value="existing"/>Existing User<br/>
+				<input type="radio" name="newOrExisting" value="new" checked/>New User<br/>
+				<input type="submit" name="login_btn" id="login_btn" value="Log In"/>
+			</form>
+		</div>
+	</div>
+	<div class="wrapper">
+		<!--hidden initially-->
+		<div id="logout" class="hidden">
+			<h3>Log Out</h3>
+			<form>
+				<button id="logout_btn">Log Out</button>
+			</form>
+		</div>
+	</div>
+
+	<div id="create_or_edit" class="hidden split_view">
+		<div id="create">
+			<h3>Create a new event</h3>
+			<form>
+				<label for="ev_name">Event Name: </label>
+				<input type="text" name="ev_name" id="ev_name"/>
+				<label for="ev_tag">Event Tag:</label>
+				<select name="ev_tag" id="ev_tag">
+				<option value="social">Social</option>
+				<option value="work">Work</option>
+				<option value="family">Family</option>
+				<option value="misc">Misc.</option>
+				</select>
+				<br/>
+				<label for="ev_date">Date (mm/dd/yyyy):</label>
+				<input type="text" class="datepicker" name="ev_date" id="ev_date" pattern="\d{2}\/\d{2}\/\d{4}"/>
+				<label for="ev_hour">Time:</label>
+				<input type="text" name="ev_hour" id="ev_hour" maxlength="2" size="2" pattern="\d{2}"/>
+				<label for="ev_min">:</label>
+				<input type="text" name="ev_min" id="ev_min" maxlength="2" size="2" pattern="\d{2}"/>
+				<br/>
+				<input type="submit" name="create_btn" id="create_btn" value="Create"/>
+			</form>
+		</div>
+		<div id="edit">
+			<h3>Select an event below to edit</h3>
+			<form id="edit_form" class="hidden">
+				<label for="new_name">Event Name: </label>
+				<input type="text" name="new_name" id="new_name"/><br/>
+				<label for="new_date">Date (mm/dd/yyyy):</label>
+				<input type="text" class="datepicker" name="new_date" id="new_date" pattern="\d{2}\/\d{2}\/\d{4}"/>
+				<label for="new_hour">Time:</label>
+				<input type="text" name="new_hour" id="new_hour" maxlength="2" size="2" pattern="\d{2}"/>
+				<label for="new_min">:</label>
+				<input type="text" name="new_min" id="new_min" maxlength="2" size="2" pattern="\d{2}"/>
+				<button id="major_edit_btn">Save</button>					
+			</form>
+		</div>
+	</div>
+
+	<div id="share_or_tag" class="hidden split_view">
+		<div id="select_view">
+			<h3>Filer by tag</h3>
+			<form>
+				<input type="radio" name="view_tag" id="all" value="all"/>All<br/>
+				<input type="radio" name="view_tag" id="social" value="social"/>Social<br/>
+				<input type="radio" name="view_tag" id="work" value="work"/>Work<br/>
+				<input type="radio" name="view_tag" id="family" value="family"/>Family<br/>
+				<input type="radio" name="view_tag" id="misc" value="misc"/>Misc.<br/>
+			</form>
+		</div>
+		<div id="share_div">
+			<h3>Share this month</h3>
+			<button id="share_btn">Generate URL</button>
+			<p id="share_link"></p>
+		</div>
+	</div>
+
+	<div id="calendar">
+		<div id="month_select">
+			<button id="prev">Previous Month</button>
+			<h3 id="thisMonth"></h3>
+			<button id="next">Next Month</button>
+		</div>
+		<table id="cal_table">
+			<tr id="r0">
+				<td id="r0d0" class="d0"></td>
+				<td id="r0d1" class="d1"></td>
+				<td id="r0d2" class="d2"></td>
+				<td id="r0d3" class="d3"></td>
+				<td id="r0d4" class="d4"></td>
+				<td id="r0d5" class="d5"></td>
+				<td id="r0d6" class="d6"></td>
+			</tr>
+			<tr id="r1">
+				<td id="r1d0" class="d0"></td>
+				<td id="r1d1" class="d1"></td>
+				<td id="r1d2" class="d2"></td>
+				<td id="r1d3" class="d3"></td>
+				<td id="r1d4" class="d4"></td>
+				<td id="r1d5" class="d5"></td>
+				<td id="r1d6" class="d6"></td>
+			</tr>
+			<tr id="r2">
+				<td id="r2d0" class="d0"></td>
+				<td id="r2d1" class="d1"></td>
+				<td id="r2d2" class="d2"></td>
+				<td id="r2d3" class="d3"></td>
+				<td id="r2d4" class="d4"></td>
+				<td id="r2d5" class="d5"></td>
+				<td id="r2d6" class="d6"></td>
+			</tr>
+			<tr id="r3">
+				<td id="r3d0" class="d0"></td>
+				<td id="r3d1" class="d1"></td>
+				<td id="r3d2" class="d2"></td>
+				<td id="r3d3" class="d3"></td>
+				<td id="r3d4" class="d4"></td>
+				<td id="r3d5" class="d5"></td>
+				<td id="r3d6" class="d6"></td>
+			</tr>
+			<tr id="r4">
+				<td id="r4d0" class="d0"></td>
+				<td id="r4d1" class="d1"></td>
+				<td id="r4d2" class="d2"></td>
+				<td id="r4d3" class="d3"></td>
+				<td id="r4d4" class="d4"></td>
+				<td id="r4d5" class="d5"></td>
+				<td id="r4d6" class="d6"></td>
+			</tr>
+			<tr id="r5">
+				<td id="r5d0" class="d0"></td>
+				<td id="r5d1" class="d1"></td>
+				<td id="r5d2" class="d2"></td>
+				<td id="r5d3" class="d3"></td>
+				<td id="r5d4" class="d4"></td>
+				<td id="r5d5" class="d5"></td>
+				<td id="r5d6" class="d6"></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

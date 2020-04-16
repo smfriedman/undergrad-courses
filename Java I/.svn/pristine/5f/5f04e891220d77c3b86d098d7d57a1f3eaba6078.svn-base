@@ -1,0 +1,49 @@
+package objects;
+
+public class Account {
+
+	// an account has-a balance
+
+	private int balance;
+
+	/**
+	 * 
+	 * @param initialFunds initial money in this account, in dollars
+	 */
+	public Account(int initialFunds) {
+		this.balance = initialFunds;
+	}
+
+	/**
+	 * Make a deposit
+	 * @param howMuch the amount of the deposit in dollars
+	 * @return the balance after the money is deposited
+	 */
+	public void deposit(int howMuch) {
+		this.balance += howMuch;  // add the funds to 
+	}
+	
+	/**
+	 * 
+	 * @return current balance of this account
+	 */
+	public double getBalance() {
+		return this.balance;
+	}
+	
+	public String toString() {
+		if (this.balance == 1) {
+			return "Account with " + this.balance+ " buck";
+		}
+		else return "Account with " + this.balance+ " bucks";
+	}
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		//Create some instances
+
+	}
+
+}

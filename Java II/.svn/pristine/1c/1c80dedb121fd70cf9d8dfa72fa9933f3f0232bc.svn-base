@@ -1,0 +1,133 @@
+package hawup.viz;
+
+import hawup.core.Node;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+
+import java.awt.GridLayout;
+
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.MatteBorder;
+
+import java.awt.Color;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.CompoundBorder;
+
+/**
+ * 
+ * @author steven friedman--steven.friedman
+ * @author anjan narain--naraina
+ *
+ */
+public class HaWUpViz extends JFrame {
+
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					HaWUpViz frame = new HaWUpViz();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	public HaWUpViz() {
+		this(genNodes(5),10);
+	}
+	
+	private static Node[] genNodes(int num) {
+		Node[] ans = new Node[num];
+		for (int i=0; i < num; ++i) {
+			ans[i] = new Node(i, 5);
+		}
+		return ans;
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public HaWUpViz(Node[] nodes, int maxQueueSize) {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 500, 500);
+		JPanel contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
+		setContentPane(contentPane);
+		contentPane.setLayout(new GridLayout(maxQueueSize + 1, nodes.length, 0, 0));
+
+		
+		for(int i = 0; i < nodes.length; i++){
+			JPanel panel = new JPanel();
+			panel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+			contentPane.add(panel);
+			
+			final int ii = i;
+
+			for(int j = 0; j < maxQueueSize + 1; j++){
+				JPanel panel2 = new JPanel();
+				panel2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+				panel.add(panel2);
+				
+				final int jj = j;
+
+				PropertyChangeSupport PCS = nodes[ii].getPCS();
+				PCS.addPropertyChangeListener(
+						new PropertyChangeListener(){
+
+				@Override
+				public void propertyChange(PropertyChangeEvent e) {
+						
+					
+					if(jj == 0){
+						if(nodes[ii].getNumWaiting() != 0){
+							panel2.removeAll();
+							panel2.setBackground(Color.RED);
+							JTextPane busy = new JTextPane();
+							busy.setBackground(Color.RED);
+							busy.setText("Busy");
+							panel.add(busy);
+						} else {
+							panel2.removeAll();
+							panel2.setBackground(Color.GREEN);
+							JTextPane idle = new JTextPane();
+							idle.setBackground(Color.GREEN);
+							idle.setText("Idle");
+							panel2.add(idle);
+						}
+					} else {
+						if(nodes[ii].getNumWaiting() >= jj){
+							panel2.setBackground(Color.CYAN);
+						} else {
+							panel2.setBackground(Color.GRAY);
+						}
+					}
+
+					
+				}
+				
+			});
+			}
+
+		}
+
+
+
+	}
+	
+}

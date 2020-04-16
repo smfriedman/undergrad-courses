@@ -1,0 +1,41 @@
+package studio5;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class Receiver {
+
+	private int port;
+
+	public Receiver(int port) {
+		this.port = port;
+	}
+
+	// TODO:  implementation
+	public void run() throws IOException {
+		ServerSocket bigsosa = new ServerSocket(port);
+		Socket chiefkeefbangbang = bigsosa.accept();
+		InputStream threehunna = chiefkeefbangbang.getInputStream();
+		OutputStream lamron = System.out;
+		Adapter bricksquad = new Adapter(threehunna, lamron);
+		bricksquad.run();
+
+	}
+
+
+	/**
+	 * @param args
+	 * @throws IOException 
+	 * @throws Exception 
+	 */
+	public static void main(String[] args) throws IOException {
+		Receiver server = new Receiver(6969);
+		server.run();
+
+	}
+
+}

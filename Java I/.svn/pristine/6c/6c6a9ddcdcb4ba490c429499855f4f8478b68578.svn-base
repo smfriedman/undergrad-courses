@@ -1,0 +1,73 @@
+package lab7;
+
+public class Student {
+	private String firstName;
+	private String lastName;
+	private int studentID;
+	private int credits;
+	private double gpa;
+	
+	public Student(String firstName, String lastName, int studentID) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.studentID = studentID;
+		this.credits = 0;				//credits and gpa initializaiton?
+		this.gpa = 0;
+	}
+	
+	public String toString(){
+		return "Name: " + firstName + " " + lastName + "    Student ID: " + studentID;
+	}
+			//do i need setters also? //do i need to make javadoc comments for all these methods?
+	public String getName(){
+		return firstName + " " + lastName;
+	}
+	
+	public int getStudentID(){
+		return studentID;
+	}
+	
+	public int getCredits(){
+		return credits;
+	}
+	
+	public double getGPA(){
+		return gpa;
+	}
+	
+	public String getClassStanding(){
+		if (credits >= 90) return "Senior";
+		else if (credits >= 60) return "Junior";
+		else if (credits >= 30) return "Sophomore";
+		return "Freshman";
+	}
+	
+	public boolean isGraduated(){
+		if (credits < 120) return false;
+		return true;
+	}
+	
+	public boolean hasHigherAverage(Student other){
+		if (this.gpa > other.gpa) return true;
+		return false;
+	}
+	
+	public void submitGrade(double courseGrade, int courseCredits){
+		this.credits = this.credits + courseCredits;
+		this.gpa = ((this.gpa * (this.credits - courseCredits)) + (courseGrade * courseCredits))/this.credits;
+		this.gpa = (10.0*(Math.round(this.gpa*1000)))/10000.0;
+	}
+	 
+	public double computeTuition(){
+		if (credits < 18) return 22850.0;
+		return Math.round(credits/18.0)*22850.0;
+	}
+	
+	public Student createBaby(Student other){
+		Student baby = new Student(this.firstName + " " + this.lastName, other.firstName + " " + other.lastName, (int)(Math.random()*900000.0) + 100000);
+		baby.gpa = (this.gpa + other.gpa)/2.0;
+		baby.credits = Math.max(this.credits, other.credits);
+		return baby;
+	}
+	
+}

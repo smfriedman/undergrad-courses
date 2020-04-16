@@ -1,0 +1,18 @@
+package module1;
+
+import cse131.ArgsProcessor;
+
+public class TimeElapsed {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		ArgsProcessor ap = new ArgsProcessor(args);
+		
+		int elapsed = ap.nextInt("How many seconds have elapsed?");
+		int mins = elapsed / 60;
+		int hours = mins / 60;
+		System.out.println(hours + " hours, " + mins + " minutes, and " + elapsed + " seconds have passed");
+	}
+
+}

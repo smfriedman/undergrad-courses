@@ -1,0 +1,56 @@
+package types;
+
+public class BooleanOperations {
+	
+	public static void main(String[] args) {
+		
+		//Relational operators
+		System.out.println("3 > 4: " + (3 > 4));
+		System.out.println("3.5 < 7: " + (3.5 < 7)); //The 7 gets converted (why?)
+		
+		System.out.println("3 == 3: " + (3 == 3));
+		//Why not this?
+		3 = 3;
+		
+		System.out.println("3 != 3: " + (3 != 3));
+		System.out.println("2 <= 1 + 1: " + (2 <= 1 + 1));
+		
+		//Logical operators:
+		boolean p = true;
+		boolean q = false;
+		
+		//Not:
+		System.out.println("Not true: " + !p);
+		System.out.println("Not false: " + !q);
+		
+		//And:
+		System.out.println("true && true: " + (p && p));
+		System.out.println("true && false: " + (p && q));
+		System.out.println("false && true: " + (q && p));
+		System.out.println("false && false: " + (q && q));
+		
+		//Or
+		System.out.println("true || true: " + (p || p));
+		System.out.println("true || false: " + (p || q));
+		System.out.println("false || true: " + (q || p));
+		System.out.println("false || false: " + (q || q));
+		
+		//Exercises: what is the output of the following?
+		
+		boolean a = p || !p;
+		boolean b = q || !q;
+		
+		boolean c = p && !p;
+		boolean d = q && !q;
+		
+		boolean e = !(!p || !q);
+		boolean f = !(!p || !p);
+		
+		boolean g = p && q == !(!p || !q);//Draw an expression tree!
+		
+		//How would I check to see if an integer is between 1 and 10?
+		//Think carefully, it may not be as obvious as it seems!
+		
+	}
+
+}

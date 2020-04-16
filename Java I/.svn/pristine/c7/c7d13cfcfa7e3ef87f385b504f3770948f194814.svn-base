@@ -1,0 +1,13 @@
+package methods;
+
+public class FunctionFun {
+
+    public static double f(double x) {
+        return 3 * x + 2;
+    }
+
+	public static void main(String[] args) {
+        System.out.println(" f(0) = " + f(0) );
+        System.out.println(" f(1) = " + f(1) );
+    }
+}

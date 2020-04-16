@@ -1,0 +1,108 @@
+package lab7;
+
+/**
+ * 
+ * @author Steven Friedman
+ * creates object Course with a name, credits, (open) seats, and a roster
+ */
+public class Course {
+	private String name;
+	private int credits;
+	private int seats;
+	private Student[] roster;
+	
+	/**
+	 * 
+	 * @param String name
+	 * @param int credits
+	 * @param int seats
+	 * also initializes roster
+	 */
+	public Course(String name, int credits, int seats){
+		this.name = name;
+		this.credits = credits;
+		this.seats = seats;
+		this.roster = new Student[seats];
+	}
+	
+	/**
+	 * 
+	 * @return remaining seats
+	 */
+	public int getRemainingSeats(){
+		return seats;
+	}
+	
+	/**
+	 * 
+	 * @return course name
+	 */
+	public String getName(){
+		return name;
+	}
+	
+	/**
+	 * 
+	 * @return name and credits in String form
+	 */
+	public String toString(){
+		return name + " for " + credits + " credits";
+	}
+	
+	/**
+	 * adds a student, applicant, to course if there is room (adds student to roster, subtracts 1 seat)
+	 * @param Student applicant
+	 * @return truth value of "this student is now registered for the course"
+	 */
+	public boolean addStudent(Student applicant){
+		if (seats > 0){
+			roster[roster.length - seats] = applicant;
+			seats = seats - 1;
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * 
+	 * prints roster
+	 */
+	public void printRoster(){
+		for (int i = 0; i < roster.length - seats; i++){
+			System.out.println("Name: " + roster[i].getName() + "    GPA: " + roster[i].getGPA());
+		}
+	}
+	
+	/**
+	 * 
+	 * @return average GPA of students in the course as a double
+	 */
+	public double averageGPA(){
+		double sumGPA = 0;
+		for (int i = 0; i < roster.length - seats; i++){
+			sumGPA = sumGPA + roster[i].getGPA();
+		}
+		return sumGPA/(roster.length - seats);
+	}
+	
+	/**
+	 * main method
+	 * generates a new course and three new students
+	 * adds the three students to the course
+	 * prints course roster
+	 * @param args
+	 */
+	public static void main(String[] args){
+		Course compSci = new Course("Computer Science", 3, 100);
+		Student student1 = new Student("A", "A", 111111);
+		Student student2 = new Student("B", "B", 222222);
+		Student student3 = new Student("C", "C", 333333);
+		compSci.addStudent(student1);
+		compSci.addStudent(student2);
+		compSci.addStudent(student3);
+		compSci.printRoster();
+	}
+	
+	
+	
+}

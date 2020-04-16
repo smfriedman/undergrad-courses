@@ -1,0 +1,25 @@
+package recursion;
+
+import sedgewick.StdDraw;
+import cse131.ArgsProcessor;
+
+public class Tree {
+
+	public static void main(String[] args) {
+		ArgsProcessor p = new ArgsProcessor(args);
+		int depth = p.nextInt("What depth?");
+		drawTree(0.5, 0.0, 0.3, Math.PI / 2, 1, depth);
+	}
+
+	private static void drawTree(double x0, double y0, double length,
+			double angle, int depth, int maxDepth) {
+		if (depth > maxDepth) {
+			return;
+		}
+		double x1 = x0 + length * Math.cos(angle);
+		double y1 = y0 + length * Math.sin(angle);
+		StdDraw.line(x0, y0, x1, y1);
+		drawTree(x1, y1, length * .75, angle + Math.PI / 6, depth + 1, maxDepth);
+		drawTree(x1, y1, length * .66, angle - Math.PI / 3, depth + 1, maxDepth);
+	}
+}

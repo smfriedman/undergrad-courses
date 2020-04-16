@@ -1,0 +1,69 @@
+package kwic;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeSupport;
+import java.io.File;
+import javax.swing.JList;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.MatteBorder;
+import java.awt.Color;
+import javax.swing.border.TitledBorder;
+
+public class GUIButterBar extends JFrame {
+
+	private JPanel contentPane;
+	private KWIC kwic;
+	private PropertyChangeSupport pcs;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					GUIButterBar frame = new GUIButterBar();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public GUIButterBar() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(6, 6, 141, 266);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JList list = new JList();
+		list.setBounds(0, 0, 141, 266);
+		panel.add(list);
+		list.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		JList list_1 = new JList();
+		list_1.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		list_1.setBounds(159, 6, 285, 266);
+		contentPane.add(list_1);
+	}
+}

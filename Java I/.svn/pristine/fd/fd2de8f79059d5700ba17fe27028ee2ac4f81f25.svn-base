@@ -1,0 +1,47 @@
+package maps;
+
+import java.util.HashMap;
+
+public class MapPractice {
+
+	public static void main(String[] args) {
+		
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		
+		//put stuff into a map:
+		map.put("apple", 200);
+		map.put("banana", 300);
+		map.put("pear", 200);
+		map.put("burrito",  500);
+		
+		//get stuff out of a map:
+		System.out.println(map.get("pear"));
+		int x = map.get("burrito");
+		System.out.println(x);
+		
+		//What if we try to get something that doesn't exist?
+		System.out.println(map.get("blueberry"));
+		
+		//I can check whether something exists beforehand
+		System.out.println(map.containsKey("blueberry"));
+		System.out.println(map.containsKey("apple"));
+		
+		//Maps are only one directional
+		//(and the types must match!)
+		
+		//String x = map.get(300);
+		
+		//Notice what happens if I use the same key
+		//more than once:
+		
+		map.put("waffles", 10);
+		System.out.println(map.get("waffles"));
+		map.put("waffles", 40);
+		System.out.println(map.get("waffles"));
+		
+		//What data type defines the group of keys?
+		
+		//The group of values?
+
+	}
+}

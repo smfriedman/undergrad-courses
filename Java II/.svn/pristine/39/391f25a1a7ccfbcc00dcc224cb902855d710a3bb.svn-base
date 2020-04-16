@@ -1,0 +1,47 @@
+package lecture7s2;
+
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+public class Client2 {
+	
+	final private String host;
+	final private int port;
+	
+	public Client2(String host, int port) {
+		this.host = host;
+		this.port = port;
+		
+	}
+	
+	public void run() throws IOException {
+		// connect to a server and read 4 bytes as an int
+		InetAddress ia = InetAddress.getByName(host);
+		Socket s = new Socket(ia, port);
+		InputStream is = s.getInputStream();
+		//  from is, I can only read one byte at a time
+		//  I'd like to read in 4 bytes as an int, so
+		//  I'll decorate the is with a datainputstream
+		DataInputStream dis = new DataInputStream(is);
+		// read the char
+		char what = dis.readChar();
+		int xloc  = dis.readShort();
+		int yloc  = dis.readShort();
+		
+		System.out.println("Saw char " + what);
+		System.out.println(" x " + xloc + " and y "  + yloc);
+		
+	}
+	
+	public static void main(String[] args) throws IOException {
+		// Client c = new Client("time-c.nist.gov", 37);
+		// let's use my computer instead of time-c.nist.gov
+		Client2 c = new Client2("localhost", 3000);
+		c.run();
+	}
+
+}

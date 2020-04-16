@@ -1,0 +1,64 @@
+package lecturens1;
+
+import java.util.Random;
+
+public class Conccatter {
+
+	private String string;
+
+	public Conccatter() {
+		this.string = "";
+	}
+
+	public synchronized void append(String s) {
+		//
+		// the thing you would usually write:
+		// string = string + s;
+		// expand the above into what it really does:
+		char[] sarray = s.toCharArray();
+		for (char c : sarray) {
+			String before = string;
+			snooze(200);
+			String after  = before + c;
+			string = after;
+		}
+	}
+
+	public String toString() {
+		return string;
+	}
+
+	public static void main(String[] args) {
+		final Conccatter c = new Conccatter();
+		final Random r = new Random();
+		// concurrently we do :
+		new Thread() {
+			public void run() {
+				//snooze(r.nextInt(200));
+				c.append("let's go ");
+			}
+		}.start();
+		// concurrent with:
+		//snooze(r.nextInt(200));
+		c.append("Blues");
+		//
+		// we snooze to wait for the spawned thread to finish
+		//   THIS IS NOT RELIABLE !!
+		// how long should we wait?  really we should do Thread.join
+		// The sleep of 1000 ms didn't work -- it wasn't long enough
+		// REALLY we should do Thread.join to make sure the other thread is done
+		snooze(2000);
+		System.out.println("We have " + c);
+
+	}
+	
+	public static void snooze(int ms) {
+		try {
+			Thread.sleep(ms);
+		} catch (InterruptedException e) {
+			// FIXME Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}

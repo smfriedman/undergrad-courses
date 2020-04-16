@@ -1,0 +1,104 @@
+package lab10;
+
+import java.awt.Color;
+
+import sedgewick.StdDraw;
+
+public class Frogger implements FroggerGame {
+	//instance variables
+	private int score;
+	private Frog frog;
+	private Car[] cars;
+	private Goal[] goals;
+	
+	//constructor necessary?
+	public Frogger(){
+		this.score = 0;
+		this.frog = new Frog(.5, .1);
+		this.cars = new Car[2]; //{new Car(0, 1, .2), new Car(0, 2, .4)};
+		this.goals = new Goal[5];
+	}
+	
+	@Override
+	public void playGame() {
+		// TODO Auto-generated method stub
+		
+		//pseudo code(write out step by step in English):
+		//while(we still have lives) {
+		while(frog.getLives() > 0){
+		
+			//has the frog collided with a car?
+			//kill it
+			//move it back to start
+			//and move the cars
+			for(int i = 0; i < cars.length; i++){
+				if(frog.collide(cars[i])){
+					frog.setPosX(0);
+					frog.setPosY(0);
+					frog.setLives(frog.getLives()-1);
+				}
+				cars[i].move();
+			}
+			
+			//has the frog collided with a goal?
+				//update score
+				//move it back to start
+				//is that a goal they haven't visited before?
+			for(int i =0; i < goals.length; i++){
+				if(frog.collide(goals[i]) && goals[i].getActive()){
+					frog.setPosX(0);
+					frog.setPosY(0);
+					score = score + goals[i].getValue();
+					goals[i].setActive(false);
+					goals[i].setColor(Color.BLACK);
+				}
+			}
+			
+			//have they visited all goals?
+				//reset all goals?
+			
+//			//is a key pressed?
+//				//move the frog
+//			//maybe change to for loops
+//			//maybe just write frog.move() b/c it figures out if keys pressed or not
+//			if(ArcadeKeys.isKeyPressed(0, 0) || ArcadeKeys.isKeyPressed(0, 1)
+//					|| ArcadeKeys.isKeyPressed(0, 2) || ArcadeKeys.isKeyPressed(0, 3)){
+//				frog.move();
+//			}
+			frog.move();
+		
+			//draw stuff:
+			//clear()
+			StdDraw.clear();
+			
+			//draw background
+			StdDraw.setCanvasSize(100, 300);
+			StdDraw.setXscale(0, 1);
+			StdDraw.setYscale(0, 3);
+			StdDraw.setPenColor(Color.darkGray);
+			StdDraw.filledRectangle(50, 150, 50, 150);
+			
+			//draw cars
+			//draw goals
+			//draw frog
+			//draw score and lives
+			
+			//StdDraw.show()
+			StdDraw.show();
+		}
+		//game over
+	}
+
+	@Override
+	public String getGameName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String[] getTeamMembers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

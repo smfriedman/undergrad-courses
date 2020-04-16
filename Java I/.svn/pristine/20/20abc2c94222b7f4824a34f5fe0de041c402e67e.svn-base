@@ -1,0 +1,13 @@
+package lab10;
+
+public interface Drawable {
+	public void draw();
+	
+	public double getHalfHeight();
+
+	public double getPosY();
+
+	public double getHalfWidth();
+
+	public double getPosX();
+}

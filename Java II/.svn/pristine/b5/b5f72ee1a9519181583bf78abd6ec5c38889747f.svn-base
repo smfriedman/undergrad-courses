@@ -1,0 +1,57 @@
+package lecture7s1;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.InetAddress;
+import java.net.Socket;
+
+import javax.swing.JOptionPane;
+
+public class Client4 {
+	
+	final private String host;
+	final private int port;
+	
+	public Client4(String host, int port) {
+		this.host = host;
+		this.port = port;
+	}
+	
+	public void run() throws IOException {
+		InetAddress ia = InetAddress.getByName(host);
+		Socket s = new Socket(ia, port);
+		// read in 4 bytes from the server
+		InputStream is = s.getInputStream();
+		OutputStream os = s.getOutputStream();
+		//
+		// for is, all we can do is read one byte at a time
+		//   we want  a 4-byte int
+		DataInputStream dis = new DataInputStream(is);
+		DataOutputStream dos = new DataOutputStream(os);
+		char c = dis.readChar();
+		System.out.println("Saw char " + c);
+		// prompt the user for an integer to send to the
+		// server
+		String str = JOptionPane.showInputDialog("Enter an int");
+		int got = Integer.parseInt(str);
+		// send to server
+		//
+		dos.writeInt(got);
+		int saw = dis.readInt();
+		System.out.println("We saw " + saw);
+		
+	}
+
+	public static void main(String[] args) throws IOException {
+		// this was to connect to the time server
+		// Client client = new Client("time-c.nist.gov", 37);
+		// instead connect to our own machine
+		//    "localhost"  -- is a network name for my machine
+		//    it's like the "this" of networking
+		Client4 client = new Client4("localhost", 3000);
+		client.run();
+	}
+}

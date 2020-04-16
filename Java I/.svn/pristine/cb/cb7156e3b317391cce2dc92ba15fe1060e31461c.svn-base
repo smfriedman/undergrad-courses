@@ -1,0 +1,23 @@
+package ChoiceAndIteration;
+
+public class CountHeads {
+
+	public static void main(String[] args) {
+
+		int heads = 0;
+		int flips = 0;
+		
+		while (heads < 10) {
+			double r = Math.random();
+			// r has a value 0 <= r < 1
+			flips = flips + 1;
+			
+			if (r < 0.5) {
+				heads = heads + 1;
+			}
+		}
+		
+		System.out.println("Flips: " + flips);
+	}
+
+}

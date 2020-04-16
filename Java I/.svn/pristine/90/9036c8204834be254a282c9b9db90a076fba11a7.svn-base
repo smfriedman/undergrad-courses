@@ -1,0 +1,57 @@
+package types;
+
+public class StringOperations {
+
+	public static void main(String[] args) {
+		
+		//Strings can be variables too:
+		String hello = "Hello,";
+		String world = " world!";
+		
+		System.out.print(hello);
+		System.out.println(world);
+		
+		//The only string operator is +, which allows us
+		//to perform string concatenation:
+		
+		String helloworld = hello + world;
+		System.out.println(helloworld);
+		
+		//What will happen here?
+		System.out.println("");
+		
+		//We can also do things like:
+		int area = 7;
+		double size = 8.4;
+		System.out.println("The area is: " + area);
+		System.out.println("The size is: " + size);
+		System.out.println("The area is: " + area + " and the size is: " + size);
+		
+		//Conversion to String is a little different. Consider:
+		String b = "" + "burrito"; //what is the result?
+		System.out.println(b);
+		
+		String five = "" + 5; //what is the result?
+		System.out.println(five);
+		String mysteryString = five + 7; //what about now?
+		
+		System.out.print("mysteryString: " + mysteryString);
+		
+		//It can also be convenient to know the length of a string:
+		int burritoLength = b.length();
+		System.out.println("Length of a burrito: " + burritoLength);
+		
+		//Exercises:
+		
+		//What will happen with the following?
+		
+		System.out.println(2 + "bc");
+		System.out.println(2 + 3 + "bc");
+		System.out.println((2 + 3) + "bc");
+		System.out.println("bc" + (2 + 3));
+		System.out.println("bc" + 2 + 3);
+		
+		
+	}
+
+}

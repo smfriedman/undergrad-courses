@@ -1,0 +1,28 @@
+package adt.books;
+
+public class AudioBook {
+
+	private String title;
+	private String author;
+	private String reader;
+
+	public AudioBook(String title, String author, String reader) {
+		this.title = title;
+		this.author = author;
+		this.reader = reader;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public String getReader() {
+		return reader;
+	}
+
+
+}

@@ -1,0 +1,57 @@
+########################################################################
+# CSE 241 LAB 1 GRADING RUBRIC
+
+Repo Name (WUSTL key): steven.friedman
+
+Language used: Java
+
+Grader: TL
+
+OVERALL GRADE: 100 :)
+
+///////////////////////////////////////////////////////////////////////
+
+Lateness penalty (if any):
+
+///////////////////////////////////////////////////////////////////////
+
+###### PART 1 (75%)
+
+# CORRECTNESS OF CODE (40%)
+	Naive: 5/5
+	Divide: 10/10
+	Conquer: 5/5
+	Combine: 10/10
+	Misc: 10/10
+	
+	40/40
+
+# EFFICIENCY OF CODE (20%)
+ 	20/20
+
+# TEST CASES (8%)
+	8/8
+# correctness of autograder results
+
+# WRITEUP (3%)
+	3/3
+
+# CODING STYLE (4%)
+	4/4
+	#excellent style
+
+######################################################################
+
+###### PART 2 (20%)
+
+# RUNNING TIME PLOT (15%)
+	15/15
+
+# RUNNING TIME MIN, MAX, AVG (5%)
+	5/5
+
+######################################################################
+
+
+###### PART 3 (5%)
+	5/5

@@ -1,0 +1,205 @@
+package lab8;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.ListIterator;
+
+/*
+ * TA: GRADE 100
+ */
+/**
+ * 
+ * @author Steven Friedman
+ * Creates data type Polynomial,
+ * a linked list which describes a polynomial function.
+ * The first term is the coefficient of x^0, the second is
+ * that of x^1, x^2, x^3...
+ *
+ */
+public class Polynomial {
+
+	final private LinkedList<Double> list;
+
+	/**
+	 * Constructs a Polynomial with no terms yet.
+	 */
+	public Polynomial() {
+		//
+		// Set the instance variable (list) to be a new linked list of Double type
+		//
+		this.list = new LinkedList<Double>();   // FIXME was list = null
+	}
+
+	/**
+	 * gets coefficient at a certain index
+	 * @param int index, the index of the term you wish to find
+	 * @return the coefficient at that index
+	 */
+	public double getTerm(int index){
+		return list.get(index);
+	}
+	
+	/**
+	 * sets coefficient at desired index to desired coefficient
+	 * @param int index, index you want to change
+	 * @param double newCoeff, new coefficient you want to replace it with
+	 */
+	public void setTerm(int index, double newCoeff){
+		list.set(index, newCoeff);
+	}
+	
+	/**
+	 * gets the degree of the Polynomial, i.e. the value of the highest exponent
+	 * @return degree of Polynomial (==size of the list - 1)
+	 */
+	public int getDegree(){
+		return list.size() - 1;
+	}
+	
+	/**
+	 * puts the Polynomial in string form
+	 * prints "empty" if there are no terms
+	 * omits coefficients of 0, e.g. 1 + 0x + 2x^2 would be "1 + 2x^2"
+	 */
+	public String toString() {
+		String polyString = null;
+		if (list.size() == 0) polyString = "empty";														//no terms
+		if (list.size() > 0 && list.get(0) != 0) polyString = polyString + list.get(0);					//omits x^0 and 0 as a coefficient
+		if (list.size() > 1 && list.get(1) != 0) polyString = polyString + " + " + list.get(1) + "x";	//omits ^1 and 0 as a coefficient
+		for (int i = 2; i < list.size(); i++){
+			if (list.get(i) != 0){																		//omits 0 as a coefficient
+				polyString = polyString + " + " + list.get(i) + "x^" + list.get(i);
+			}			
+		}
+		return polyString;
+	}
+
+	/**
+	 * adds a term to the end of the list.  new coefficient has highest degree in list.
+	 * @param double coeff, the coefficient you want to add
+	 * @return the same Polynomial but with the new term added
+	 */
+	public Polynomial addTerm(double coeff) {
+		list.add(coeff);
+		return this;
+	}
+
+	/**
+	 * recursive helper method to "evaluate" method
+	 * uses Horner's Method to solve the Polynomial at x
+	 * @param double x, the value of x at which you want to find the value of the Polynomial
+	 * @param Iterator<Double> listIt, an iterator that iterates through the Polynomial
+	 * @return recursive solution utilizing Horner's Method
+	 */
+	public double helper(double x, Iterator<Double> listIt){
+		if (!listIt.hasNext()) return 0;				//base case returns 0 because last term is already included in recursive step, 0*x=)
+		return listIt.next()+ x*(helper(x, listIt)); 	//returns [0] + x*([1] + x*(...([last term] +x*(0))) 
+	}
+	
+	/**
+	 * creates and iterator and calls the "helper" method to solve the Polynomial at x
+	 * @param double x, the value of x at which you want to find the value of the Polynomial
+	 * @return solution using Horner's method
+	 */
+	public double evaluate(double x) {
+		Iterator<Double> listIt = list.iterator();		//if the recursion were in this method, it would generate a new iterator every time
+		return helper(x, listIt);
+	}
+	
+	/**
+	 * finds the derivative of the Polynomial by applying the rule nx^(n-1) to each term
+	 * @return a new Polynomial, derivative, the derivative of the Polynomial
+	 */
+	public Polynomial derivative() {
+		Polynomial derivative = new Polynomial();
+		for (int i = 1; i < list.size(); i++){		//start at 1 instead of 0 to make every exponent (n-1)
+			derivative.addTerm(list.get(i)*i);		//multiply every coefficient by original exponent n  --> nx^(n-1)
+		}
+		return derivative;
+	}
+	
+	/**
+	 * adds this Polynomial and another one
+	 * @param Polynomial another, the Polynomial you want to add to this one
+	 * @return a new Polynomial, sum, which is the two Polynomials added together
+	 */
+	public Polynomial sum(Polynomial another) {
+		//create a new empty Polynomial
+		Polynomial sum = new Polynomial();
+		
+		//add (insert) every element in this Polynomial to sum
+		for (int i = 0; i < list.size(); i++){
+			sum.addTerm(list.get(i));
+		}
+		
+		//when another is longer than this Polynomial (or the same length)...
+		if (another.getDegree() >= this.getDegree()){
+			//...add (insert) the terms at indexes beyond this Polynomial's degree to sum
+			for (int i = list.size(); i <= another.getDegree(); i++){
+				sum.addTerm(another.getTerm(i));
+			}
+			//...add (+) the terms at indexes in Polynomial's degree to the terms already in sum
+			for (int i = 0; i <= this.getDegree(); i++){
+				sum.setTerm(i, sum.getTerm(i) + another.getTerm(i));
+			}
+		//when another is shorter than this Polynomial, add (+) the terms to the terms and the same indexes in sum
+		}else{
+			for (int i = 0; i <= another.getDegree(); i++){
+				sum.setTerm(i, sum.getTerm(i) + another.getTerm(i));
+			}
+		}
+		
+		return sum;
+	}
+
+	/**
+	 * This is the "equals" method that is called by
+	 *    assertEquals(...) from your JUnit test code.
+	 *    It must be prepared to compare this Polynomial
+	 *    with any other kind of Object (obj).  Eclipse
+	 *    automatically generated the code for this method,
+	 *    after I told it to use the contained list as the basis
+	 *    of equality testing.  I have annotated the code to show
+	 *    what is going on.
+	 */
+
+	public boolean equals(Object obj) {
+		// If the two objects are exactly the same object,
+		//    we are required to return true.  The == operator
+		//    tests whether they are exactly the same object.
+		if (this == obj)
+			return true;
+		// "this" object cannot be null (or we would have
+		//    experienced a null-pointer exception by now), but
+		//    obj can be null.  We are required to say the two
+		//    objects are not the same if obj is null.
+		if (obj == null)
+			return false;
+
+		//  The two objects must be Polynomials (or better) to
+		//     allow meaningful comparison.
+		if (!(obj instanceof Polynomial))
+			return false;
+
+		// View the obj reference now as the Polynomial we know
+		//   it to be.  This works even if obj is a BetterPolynomial.
+		Polynomial other = (Polynomial) obj;
+
+		//
+		// If we get here, we have two Polynomial objects,
+		//   this and other,
+		//   and neither is null.  Eclipse generated code
+		//   to make sure that the Polynomial's list references
+		//   are non-null, but we can prove they are not null
+		//   because the constructor sets them to some object.
+		//   I cleaned up that code to make this read better.
+
+
+		// A LinkedList object is programmed to compare itself
+		//   against any other LinkedList object by checking
+		//   that the elements in each list agree.
+
+		return this.list.equals(other.list);
+	}
+
+}

@@ -1,0 +1,17 @@
+package ChoiceAndIteration;
+
+public class WhileExercises {
+	
+	public static void main(String[] args) {
+		//Average of 100 random values
+		int i = 0;
+		double sum = 0;
+		while(i < 100) {
+			sum = sum + Math.random();
+			i = i + 1;
+		}
+		System.out.println("Average: " + sum / 100);
+		
+		
+	}
+}

@@ -1,0 +1,106 @@
+package kwic_2a_graded;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.StringTokenizer;
+
+/**
+ * Represent a phrase.
+ *	@author steven.friedman
+ */
+public class Phrase {
+
+	final protected String phrase;
+
+	/**
+	 * constructs phrase from string
+	 * @param s
+	 */
+	public Phrase(String s){
+		phrase = s;
+	}
+
+	/** 
+	 * Provide the words of a phrase.  
+	 * Each word may have to be cleaned up:  
+	 * punctuation removed, put into lower case
+	 */
+
+	public Set<Word> getWords() {
+		StringTokenizer st = new StringTokenizer(phrase, " ");
+		HashSet<Word> words = new HashSet<Word>();
+		while(st.hasMoreTokens()){
+			Word w = new Word(st.nextToken());
+			words.add(w);
+		}
+		return words;
+	}
+
+	/**
+	 * tests equality based on cleaned up version of phrases
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Phrase other = (Phrase) obj;
+		if (cleanUp(phrase) == null) {
+			if (cleanUp(other.phrase) != null)
+				return false;
+		} else if (!cleanUp(phrase).equals(cleanUp(other.phrase)))
+			return false;
+		return true;
+	}
+
+	/**
+	 * generates hash code based on the cleaned up version of the phrase
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cleanUp(phrase) == null) ? 0 : cleanUp(phrase).hashCode());
+		return result;
+	}
+
+
+	/** Filter the supplied {@link String} (which is the String of
+      a {@link Phrase} presumably) into a canonical form
+      for subsequent matching.
+      The actual filtering depends on what you consider to be
+      insignificant in terms of matching.  
+      <UL> <LI> If punctuation is
+      irrelevant, remove puncutation.
+           <LI> If case does not matter, than convert to lower (or upper)
+	        case.
+      </UL>
+	 */
+	protected static String cleanUp(String s){
+		String temp = s.toLowerCase();
+		while(temp.contains(".") || temp.contains(",") || temp.contains("!")){
+			if (temp.startsWith(".") || temp.startsWith(",") || temp.startsWith("!")){
+				temp = temp.substring(1, temp.length() - 1);
+			} else if (temp.endsWith(".") || temp.endsWith(",") || temp.endsWith("!")){
+				temp = temp.substring(0, temp.length() - 2);
+			} else if (temp.contains(".")){
+				temp = temp.substring(0, temp.indexOf(".") - 1) + temp.substring(temp.indexOf(".") + 1, temp.length() - 1);
+			} else if (temp.contains(",")){
+				temp = temp.substring(0, temp.indexOf(",") - 1) + temp.substring(temp.indexOf(",") + 1, temp.length() - 1);
+			} else if (temp.contains("!")){
+				temp = temp.substring(0, temp.indexOf("!") - 1) + temp.substring(temp.indexOf("!") + 1, temp.length() - 1);
+			}
+		}
+		return temp;
+	}
+
+	/**
+	 * converts to string
+	 */
+	public String toString(){
+		return phrase;
+	}
+
+}

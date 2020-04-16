@@ -1,0 +1,27 @@
+package adt.money;
+
+import java.util.LinkedList;
+
+public class Money {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		BankAccount ba1 = new BankAccount(100);
+		StockHolding sh1 = new StockHolding(5,10);
+		System.out.println(ba1);
+		System.out.println(sh1);
+		LinkedList<Valuable> assets = new LinkedList<Valuable>();
+		assets.add(ba1);
+		assets.add(sh1);
+		int worth = 0;
+		for (Valuable asset : assets) {
+			worth = worth + asset.getLiquidAssets();
+		}
+		System.out.println("here are your assets: " + assets);
+		System.out.println("You are worth " + worth);
+
+	}
+
+}

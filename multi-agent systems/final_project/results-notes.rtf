@@ -1,0 +1,210 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1348\cocoasubrtf170
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Monaco;}
+{\colortbl;\red255\green255\blue255;\red255\green255\blue51;\red70\green77\blue86;\red255\green255\blue255;
+}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 clockwise:\
+50/50 info/mkt - drops profit\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 2 periods for mkt avg  and personal history\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f1\fs20 \cf0 \CocoaLigature0     my_bot profit: 1490.73 (-5748.76 min, 8482.44 max, 2249.99 std, 1000 samples)\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 \CocoaLigature1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+change pos from 20, 50, 50, to 40, 80, 80 -> bring up mean and std dev 
+\f1\fs20 \CocoaLigature0     my_bot profit: 4744.38 (-3924.74 min, 15951.09 max, 3239.55 std, 1000 samples)\cb2 \
+\cb1 \
+\cb2 ***same but with memory = 5 
+\f0\fs24 \CocoaLigature1 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f1\fs20 \cf0 \cb2 \CocoaLigature0     my_bot profit: 5392.71 (-6060.29 min, 13529.17 max, 3087.61 std, 1000 samples)\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 \cb2 \CocoaLigature1 \
+same but with memory = 3\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f1\fs20 \cf0 \cb2 \CocoaLigature0     my_bot profit: 5328.20 (-5850.98 min, 13209.76 max, 2857.58 std, 1000 samples)\cb1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 \CocoaLigature1 same but with memory - 4\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f1\fs20 \cf0 \CocoaLigature0     my_bot profit: 5387.45 (-6113.18 min, 12987.77 max, 2968.30 std, 1000 samples)\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 \CocoaLigature1 memory = 8\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f1\fs20 \cf0 \CocoaLigature0     my_bot profit: 4650.49 (-5447.45 min, 14226.99 max, 3264.76 std, 1000 samples)\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 \CocoaLigature1 memory = 20\
+	
+\f1\fs20 \CocoaLigature0 my_bot profit: 3940.96 (-5448.09 min, 12490.95 max, 2890.77 std, 1000 samples)\
+
+\f0\fs24 \CocoaLigature1 \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 diff = 0.75 _> bring up mean and std dev -> 
+\f1\fs20 \CocoaLigature0     my_bot profit: 3121.64 (-3070.31 min, 8283.00 max, 2097.88 std, 1000 samples)
+\f0\fs24 \CocoaLigature1 \
+diff =1 ->
+\f1\fs20 \CocoaLigature0     my_bot profit: 2984.26 (-4298.32 min, 8478.28 max, 2101.99 std, 1000 samples)\
+
+\f0\fs24 \CocoaLigature1 returns diminish\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 > 1  instead of > 0 -> just brings up std dev, modest effect on mean\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 10%90% -> 
+\f1\fs20 \CocoaLigature0   
+\f0\fs24 \CocoaLigature1 bring up mean and std dev
+\f1\fs20 \CocoaLigature0   my_bot profit: 3057.44 (-2287.30 min, 8280.66 max, 2002.51 std, 1000 samples)\
+
+\f0\fs24 \CocoaLigature1 \
+10/90, .75 diff, 40/80/80 pos, memory = 10\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f1\fs20 \cf0 \CocoaLigature0     my_bot profit: 4342.80 (-4528.90 min, 12952.91 max, 3197.75 std, 1000 samples)\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 \CocoaLigature1 \
+10/90, .75 diff, 40/80/80 pos, memory = 5 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f1\fs20 \cf0 \CocoaLigature0     my_bot profit: 4678.92 (-4936.67 min, 13166.29 max, 3342.87 std, 1000 samples)
+\f0\fs24 \CocoaLigature1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+\
+\
+        self.max_position = 80\
+        self.min_position = -80\
+        self.max_trade = 40\
+\
+        self.memory = 5\
+        self.pct_bridge = 0.5\
+        self.pct_info = .10\
+        self.pct_mkt = .90\
+        self.min_gap_to_trade = 0\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f1\fs20 \cf0 \CocoaLigature0     my_bot profit: 4908.66 (-5662.85 min, 15148.56 max, 3415.24 std, 1000 samples)\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 \CocoaLigature1 \
+\
+\
+        self.max_position = 80\
+        self.min_position = -80\
+        self.max_trade = 40\
+\
+        self.memory = 8\
+        self.use_full_info_history = True\
+        self.pct_bridge = 0.75\
+        self.pct_info = .20\
+        self.pct_mkt = .80\
+        self.min_gap_to_trade = 0\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f1\fs20 \cf0 \CocoaLigature0     my_bot profit: 4831.39 (-5739.51 min, 13991.05 max, 3314.49 std, 1500 samples)\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 \CocoaLigature1 \
+\
+        self.max_position = 80\
+        self.min_position = -80\
+        self.max_trade = 40\
+\
+        self.memory = 2\
+        self.use_full_info_history = True\
+        self.pct_bridge = 0.5\
+        self.pct_info = .20\
+        self.pct_mkt = .80\
+        self.min_gap_to_trade = 0\
+	\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f1\fs20 \cf0 \CocoaLigature0     my_bot profit: 4785.19 (-4017.50 min, 14713.93 max, 2563.48 std, 1000 samples)\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 \CocoaLigature1 \
+\
+standard: 20/80 mix; 20, 40, 40 pos, diff = 0.6, >0, memory=10:\
+\pard\pardeftab720
+
+\fs32 \cf3 \cb4 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec3 my_bot profit: 2944.63 (-1794.54 min, 8930.96 max, 1842.65 std, 1000 samples)\
+\
+\
+
+\fs24 ***if include *=0.5 on qty if move wrong way (if price drop, less apt to sell)
+\fs32 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+
+\f1\fs20 \cf0 \cb1 \kerning1\expnd0\expndtw0 \CocoaLigature0 \outl0\strokewidth0     my_bot profit: 5371.50 (-3570.63 min, 14561.18 max, 2933.91 std, 1000 samples)\
+if include *= 0.0\
+  my_bot profit: 5010.87 (-5011.92 min, 13565.37 max, 3136.03 std, 1000 samples)\
+if *= 0.75\
+    my_bot profit: 4515.66 (-5712.28 min, 11424.57 max, 2775.13 std, 1000 samples)\
+\
+other way around (if price drop, less apt to buy):\
+    my_bot profit: 3608.77 (-3861.70 min, 9537.72 max, 2256.99 std, 1000 samples)\
+\
+\
+if include *=1.5, if price drops, more willing to buy\
+    my_bot profit: 5284.44 (-6474.34 min, 15378.12 max, 3410.09 std, 1000 samples)\
+if *= 3\
+	\
+\
+normal, with higher bridging of price gap if moved opposite direction (0.5, 0.75)\
+    my_bot profit: 5049.86 (-5355.55 min, 13845.47 max, 3174.98 std, 1000 samples)\
+\
+(0.25, 0.75) \
+    my_bot profit: 5219.54 (-4328.22 min, 15539.20 max, 3056.48 std, 1000 samples)\
+(0.25, 1)\
+    my_bot profit: 5201.03 (-4287.19 min, 15660.27 max, 3142.82 std, 1000 samples)\
+(0.5, 0.75)\
+    my_bot profit: 5047.45 (-3694.33 min, 12780.73 max, 3163.64 std, 1000 samples)\
+(0.25, 0.5)\
+	my_bot profit: 5146.25 (-4981.41 min, 13990.17 max, 3040.61 std, 1000 samples)\
+(0.15, 0.8)\
+    my_bot profit: 5132.37 (-5679.18 min, 15065.30 max, 3159.34 std, 1000 samples)\
+\
+\
+\
+(0.15, 0.8) with 60/100/100\
+    my_bot profit: 5647.69 (-6618.73 min, 17890.18 max, 3743.97 std, 1000 samples)\
+(0.5, 0.5) with 60/100/100\
+    my_bot profit: 5787.42 (-7231.90 min, 15608.83 max, 3625.14 std, 1000 samples)\
+\
+^^before fixing min/max position\
+\
+after\
+(0.5,0.5) with 60/200/200\
+    my_bot profit: 6119.48 (-11333.51 min, 17983.69 max, 4757.95 std, 1000 samples)\
+0.5,0.5 with 60/2000/2000\
+	my_bot profit: 8413.53 (-133689.71 min, 111222.13 max, 15880.69 std, 1000 samples)\
+0.4, 0.6 with 40/120/120\
+    my_bot profit: 5369.48 (-5981.58 min, 14533.07 max, 3415.48 std, 1000 samples)\
+0.5,0.5 with 160/160/160\
+    my_bot profit: 2719.28 (-9198.82 min, 16512.25 max, 3694.97 std, 1000 samples)\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 \cb2 0.5,0.5 with 40/250/250\
+    my_bot profit: 5790.93 (-12315.19 min, 19213.75 max, 4863.32 std, 1000 samples)\cb1 \
+\
+\
+Andrews:\
+\cb2     my_bot profit: 5255.98 (-4718.49 min, 13574.73 max, 2872.78 std, 1000 samples)\
+}

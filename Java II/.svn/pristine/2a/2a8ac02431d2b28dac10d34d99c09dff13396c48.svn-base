@@ -1,0 +1,33 @@
+package studio5;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+public class Adapter {
+	private InputStream is;
+	private OutputStream os;
+	private Crypto RyanSmith;
+	
+	public Adapter(InputStream is, OutputStream os){
+		this.is = is;
+		this.os = os;
+		RyanSmith = new Crypto(17);
+	}
+	
+	public void run() throws IOException{
+		int b;
+		while((b = is.read()) != -1){
+			char c = RyanSmith.decrypt((char)b);
+			os.write(c);
+		}
+		os.flush();
+		is.close();
+		os.close();
+	}
+	
+//	public static void main(String args[]) throws IOException{
+//		Adapter io = new Adapter(new Preamble().getInputStream(20), System.out);
+//		io.run();
+//	}
+}

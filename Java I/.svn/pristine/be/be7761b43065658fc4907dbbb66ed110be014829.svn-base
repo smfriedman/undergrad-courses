@@ -1,0 +1,58 @@
+package object;
+
+public class Team {
+
+	private String pitcher;
+	private String name;
+	private String coach;
+	private String stadium;
+	private int gamesPlayed;
+	private int wins;
+	public Team(String pitcher, String name, String coach, String stadium) {
+		this.pitcher = pitcher;
+		this.name = name;
+		this.coach = coach;
+		this.stadium = stadium;
+		this.gamesPlayed = 0;
+		this.wins = 0;
+	}
+
+	public String getPitcher() {
+		return pitcher;
+	}
+
+	public void setPitcher(String pitcher) {
+		this.pitcher = pitcher;
+	}
+
+
+	public void recordOutcome(boolean didWin) {
+		this.gamesPlayed += 1;
+		if (didWin) {
+			this.wins = this.wins + 1;
+		}
+	}
+	
+	/**
+	 * return the fraction of games won out of games played
+	 * @return
+	 */
+	public double getRecord() {
+		return 1.0 * this.wins / this.gamesPlayed;
+	}
+	
+	/**
+	 * return true if this team has a better record than the other team
+	 * @param other
+	 * @return
+	 */
+	public boolean isBetterThan(Team other) {
+		if (this.getRecord() > other.getRecord()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+}

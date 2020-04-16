@@ -1,0 +1,25 @@
+package oldmidterm;
+
+/**
+ * midterm claim:  This class is always thread-safe....why?
+ * @author roncytron
+ *
+ * @param <T>
+ */
+
+//
+// A helper class for ColorSet
+//    Instances of this class represent elements of a set
+//
+
+public class SetEntry<T> {
+	
+	final T entry;
+	final SetEntry<T> next;
+	
+	SetEntry(T entry, SetEntry<T> next) {
+		this.entry = entry;
+		this.next  = next;
+	}
+
+}

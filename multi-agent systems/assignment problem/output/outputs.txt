@@ -1,0 +1,87 @@
+B.
+Starting n = 2: Mon Feb 13 21:06:48 CST 2017
+Avg. total value = 60.419
+Finished n = 2: Mon Feb 13 21:06:48 CST 2017
+Starting n = 4: Mon Feb 13 21:06:48 CST 2017
+Avg. total value = 73.64025
+Finished n = 4: Mon Feb 13 21:06:48 CST 2017
+Starting n = 8: Mon Feb 13 21:06:48 CST 2017
+Avg. total value = 83.28275
+Finished n = 8: Mon Feb 13 21:06:48 CST 2017
+Starting n = 16: Mon Feb 13 21:06:48 CST 2017
+Avg. total value = 90.4798125
+Finished n = 16: Mon Feb 13 21:06:48 CST 2017
+Starting n = 32: Mon Feb 13 21:06:48 CST 2017
+Avg. total value = 94.6895625
+Finished n = 32: Mon Feb 13 21:06:48 CST 2017
+Starting n = 64: Mon Feb 13 21:06:48 CST 2017
+Avg. total value = 97.004265625
+Finished n = 64: Mon Feb 13 21:06:54 CST 2017
+Starting n = 128: Mon Feb 13 21:06:54 CST 2017
+Avg. total value = 98.2055234375
+Finished n = 128: Mon Feb 13 21:07:48 CST 2017
+Starting n = 256: Mon Feb 13 21:07:48 CST 2017
+Avg. total value = 98.7987109375
+Finished n = 256: Mon Feb 13 21:15:25 CST 2017
+
+C. 
+Java:
+Starting M = 10: Wed Feb 15 16:53:35 CST 2017
+Time elapsed for M = 10: 703 ms
+Average run time for M = 10: 2 ms
+Starting M = 100: Wed Feb 15 16:53:35 CST 2017
+Time elapsed for M = 100: 78165 ms
+Average run time for M = 100: 305 ms
+Starting M = 1000: Wed Feb 15 16:54:53 CST 2017
+Time elapsed for M = 1000: 11753 ms
+Average run time for M = 1000: 45 ms
+Starting M = 10000: Wed Feb 15 16:55:05 CST 2017
+Time elapsed for M = 10000: 1729 ms
+Average run time for M = 10000: 6 ms
+Starting M = 100000: Wed Feb 15 16:55:07 CST 2017
+Time elapsed for M = 100000: 1704 ms
+Average run time for M = 100000: 6 ms
+Starting M = 1000000: Wed Feb 15 16:55:09 CST 2017
+Time elapsed for M = 1000000: 1801 ms
+Average run time for M = 1000000: 7 ms
+Starting M = 10000000: Wed Feb 15 16:55:10 CST 2017
+Time elapsed for M = 10000000: 2033 ms
+Average run time for M = 10000000: 7 ms
+
+GLPK:
+Starting 10. Total time elapsed: 
+
+real	2m26.723s
+user	2m14.296s
+sys	0m6.638s
+Starting 100. Total time elapsed: 
+
+real	3m19.619s
+user	3m3.451s
+sys	0m7.151s
+Starting 1000. Total time elapsed: 
+
+real	3m24.203s
+user	3m5.706s
+sys	0m7.429s
+Starting 10000. Total time elapsed: 
+
+real	3m13.640s
+user	3m0.673s
+sys	0m6.851s
+Starting 100000. Total time elapsed: 
+
+real	3m16.279s
+user	3m0.701s
+sys	0m6.712s
+Starting 1000000. Total time elapsed: 
+
+real	3m11.913s
+user	2m56.904s
+sys	0m6.097s
+Starting 10000000. Total time elapsed: 
+
+real	3m12.851s
+user	2m59.250s
+sys	0m6.517s
+

@@ -1,0 +1,22 @@
+package ChoiceAndIteration;
+
+public class WhileExample {
+
+	public static void main(String[] args) {
+		
+		//Set up the loop variable
+		int i = 4;
+		
+		//Write a predicate that we know will be false eventually
+		while ( i < 20) {
+			
+			//Loop body
+			System.out.println(i);
+			i = i + 2;
+		
+		}
+		System.out.println("Loop Over");
+		//What must be true after the loop is finished?
+	}
+
+}

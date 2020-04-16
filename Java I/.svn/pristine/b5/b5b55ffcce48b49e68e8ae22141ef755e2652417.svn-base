@@ -1,0 +1,22 @@
+package adt.books;
+
+public class SameBook {
+	public static void main(String[] args) {
+		AudioBook ab1 = new AudioBook("Harry Potter and the Deathly Hallows",
+				"JK Rowling", "Stephen Fry");
+		AudioBook ab2 = new AudioBook("Harry Potter and the Deathly Hallows",
+				"JK Rowling", "Jim Dale");
+		
+		AudioBook ab3 = ab1;
+
+		System.out.println(ab1==ab1);
+		System.out.println(ab1==ab2);
+		System.out.println(ab1==ab3);
+		System.out.println();
+		System.out.println(ab1.equals(ab1));
+		System.out.println(ab1.equals(ab2));
+		System.out.println(ab1.equals(ab3));
+		System.out.println();
+		
+	}
+}

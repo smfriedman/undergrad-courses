@@ -1,0 +1,20 @@
+
+public class Node {
+
+	Pillar pillar;
+	Node next;
+//	Node prev;
+	
+//	public Node(Pillar pillar, Node next, Node prev){
+//		this.pillar = pillar;
+//		this.next = next;
+//		this.prev = prev;
+//	}
+	
+	public Node(Pillar pillar, Node next){
+		this.pillar = pillar;
+		this.next = next;
+	}
+	
+	
+}

@@ -1,0 +1,91 @@
+package lab3_graded;
+
+import java.util.Set;
+
+import hawup.core.Node;
+import hawup.core.Task;
+import hawup.util.Wrappers;
+
+/**
+ * 
+ * @author steven.friedman Steven Friedman
+ * This class assigns tasks from busy nodes to idle ones.  run() iterates
+ * through all nodes in the cluster and compares them to the one trying
+ * to steal work.  It implements Havendar's algorithm, comparing hash codes
+ * to avoid deadlock.  A lock is acquired on the node with the lower hash code
+ * and if the node trying to steal isn't busy and the other one is, it will 
+ * steal work
+ *
+ */
+//TA WorkStealer: 40/40
+public class WorkStealer implements Runnable {
+
+	final private Node node;
+	final private Set<Node> cluster;
+	final int     period;
+	
+	/**
+	 * 
+	 * @param node The node that will try to steal work
+	 * @param cluster The set of all nodes
+	 * @param period number of milliseconds between stealing attempts
+	 */
+	public WorkStealer(Node node, Set<Node> cluster, int period) {
+		this.node = node;
+		this.cluster = cluster;
+		this.period = period;
+	}
+
+	/**
+	 * Continually try to steal work, sleeping for this.period
+	 *    milliseconds between attempts
+	 */
+	@Override
+	public void run() {
+		while (true) {
+			//iterate through nodes
+			for(Node n: cluster){
+				//compare hash codes
+				if(System.identityHashCode(n) < System.identityHashCode(node)){
+					//acquire lock on lower hashed node
+					synchronized(n){
+						//acquire lock on higher hashed node
+						synchronized(node){
+							//when node is busy and n has tasks waiting, steal tasks
+							if(!node.isBusy() && n.getNumWaiting()>0){
+								Task<?> t = n.findAndRemoveTask();
+								node.addTask(t);
+								node.publish("thief", t);
+								n.publish("victim", t);		
+							}
+						}
+					}
+				//repeat above process
+				} else {
+					synchronized(node){
+						synchronized(n){
+							if(!node.isBusy() && n.getNumWaiting()>0){
+								System.out.println("2");
+								Task<?> t = n.findAndRemoveTask();
+								node.addTask(t);
+								node.publish("thief", t);
+								n.publish("victim", t);		
+							}
+						}	
+					}
+				}
+			}
+			
+			//
+			//  Now sleep so we don't spin out of control trying to steal work
+			//
+			Wrappers.sleep(period);
+		}
+
+	}
+
+	public String toString() {
+		return "Work stealer for " + node;
+	}
+
+}

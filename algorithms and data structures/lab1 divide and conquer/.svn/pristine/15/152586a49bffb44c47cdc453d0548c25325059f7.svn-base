@@ -1,0 +1,10 @@
+Steven Friedman
+Lab 1
+
+ClosestPair DC implements the divide and conquer algorithm as discussed.  I decided 
+to store the two points and the minimum distance as static instance variables so they 
+wouldn't get lost in each level of recursion.  findClosestPair(pointsByX, pointsByY) 
+calls a recursive helper method that does all the work, and then findClosestPair puts 
+the points in the right order if they're out of order.  helper(pointsByX, pointsByY)
+carries out the recursive divide and conquer step and the compare (yStrip) step and
+returns the minimum distance.

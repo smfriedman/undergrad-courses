@@ -1,0 +1,24 @@
+package frogger;
+
+import java.awt.Color;
+
+import sedgewick.StdDraw;
+
+public class CountKeyPressesBadly {
+
+	public static void main(String[] args) {
+		int i = 0;
+		while (true) {
+			if (ArcadeKeys.isKeyPressed(1, ArcadeKeys.KEY_UP)) {
+				i++;
+				StdDraw.setPenColor(Color.WHITE);
+				StdDraw.filledRectangle(.5, .5, .1, .1);
+				StdDraw.setPenColor(Color.BLACK);
+				StdDraw.text(.5, .5, "i=" + i);
+			}
+			StdDraw.show(100);
+		}
+
+	}
+
+}

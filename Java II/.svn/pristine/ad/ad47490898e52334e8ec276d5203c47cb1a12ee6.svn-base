@@ -1,0 +1,176 @@
+package battleship.game;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class Server {
+
+	private int port;
+	private String name;
+	private String password;
+	private int numPlayers;
+	private byte turn;
+	private byte[] shipLength;
+	private short rows;
+	private short cols;
+	private Board[] boards;
+
+	public Server(int port){
+		this.port = port;
+		this.name = "Stevo";
+		this.password = "xyzzy";
+		this.numPlayers = 0;
+		this.turn = 1;
+		this.shipLength = new byte[] {3, 3, 4, 4, 5};
+		this.rows = 15;
+		this.cols = 15;
+		this.boards = new Board[] {new Board(rows, cols), new Board(rows, cols)};
+	}
+
+	public void run() throws IOException{
+		ServerSocket ss = new ServerSocket(port);
+		while(true){
+			Socket s = ss.accept();
+			
+			DataOutputStream dos = new DataOutputStream(s.getOutputStream());
+			DataInputStream dis = new DataInputStream(s.getInputStream());
+
+			String clientName = dis.readUTF();
+			String clientPassword = dis.readUTF();
+			byte clientFunction = dis.readByte();
+
+			Thread t1 = new Thread(){
+				public void run(){
+					try {
+						dos.writeUTF(name);
+						dos.writeByte(numPlayers + 1);
+						
+						//now write to all
+						dos.writeUTF("config");
+						dos.writeShort(rows); //num rows
+						dos.writeShort(cols); //num cols
+						dos.writeByte(shipLength.length); //num ships
+						//for each ship s, length is:
+						for(int i = 0; i < shipLength.length; i++){
+							dos.writeByte(shipLength[i]);
+						}
+
+						for(int i = 0; i < shipLength.length; i++){
+							Byte b = dis.readByte();
+							if(b == 0){
+								Ship ship1 = Ship.genHorizontalShip(new Coordinate(dis.readShort(), dis.readShort()), shipLength[i]);
+								if(boards[numPlayers].placeShip(ship1)) dos.writeUTF("ok");
+								else dos.writeUTF("bye");
+							} else if(b == 1){
+								Ship ship1 = Ship.genVerticalShip(new Coordinate(dis.readShort(), dis.readShort()), shipLength[i]);
+								if(boards[numPlayers].placeShip(ship1)) dos.writeUTF("ok");
+								else dos.writeUTF("bye");
+							} else{
+								dos.writeUTF("bye");
+							}
+						}
+						
+						byte[] shipOrientation = new byte[shipLength.length];
+						Coordinate[] shipCoords = new Coordinate[shipLength.length];
+
+						//read ship placement, if incorrect say bye, if correct say ok
+//						for(int i = 0; i < shipLength.length; i++){
+//							shipOrientation[i] = dis.readByte();
+//							shipCoords[i] = new Coordinate(dis.readShort(), dis.readShort());
+//							if(shipOrientation[i] == 0){
+//								if((shipCoords[i].row < 0 || shipCoords[i].row > rows - 1) ||
+//										(shipCoords[i].col < 0 || shipCoords[i].col > cols - 1 - shipLength[i])){
+//									dos.writeUTF("bye");
+//								}else{
+//									dos.writeUTF("ok");
+//									if(numPlayers == 2) gameOn = true;
+//								}
+//							} else if(shipOrientation[i] == 1){
+//								if((shipCoords[i].row < 0 || shipCoords[i].row > rows - 1 - shipLength[i]) ||
+//										(shipCoords[i].col < 0 || shipCoords[i].col > cols - 1)){
+//									dos.writeUTF("bye");
+//								}else{
+//									dos.writeUTF("ok");
+//									if(numPlayers == 2) gameOn = true;
+//								}
+//
+//							} else{
+//								dos.writeUTF("bye");
+//							}
+//						}
+
+
+						
+					} catch (IOException e) {
+						// FIXME Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			};
+			
+			Thread t2 = new Thread(){
+				public void run(){
+					try {
+						dos.writeUTF("PlayerTurn");
+						dos.writeByte(turn);
+						
+						String move = dis.readUTF();
+						short fireRow = dis.readShort();
+						short fireCol = dis.readShort();
+						
+						dos.writeUTF("PlayerFires");
+						dos.writeByte(turn);
+						dos.writeShort(fireRow);
+						dos.writeShort(fireCol);
+						
+						
+						
+//						The string PlayerFires
+//						The id of the player (1 or 2) as a one-byte integer
+//						The row of the fire as a two-byte integer
+//						The column of the fire as a two-byte integer
+//						The string hit or miss
+//						The string sunk or notsunk
+//						The string win or nowin
+					} catch (IOException e) {
+						// FIXME Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			};
+
+//			Thread t2 = new Thread(){
+//				public void run(){
+//					try {
+//						dos.writeUTF(name);
+//						dos.writeByte(0);
+//					} catch (IOException e) {
+//						// FIXME Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//				}
+//			};
+//
+			if(clientFunction == 1 && numPlayers < 2){
+				t1.run();
+			}
+			
+			if(numPlayers == 2){
+				t2.run();
+			}
+//			} else{
+//				t2.run();
+//			}
+			
+			
+		}
+	}
+	
+	public static void main(String[] args) throws IOException{
+		Server service = new Server(3001);
+		service.run();
+	}
+}

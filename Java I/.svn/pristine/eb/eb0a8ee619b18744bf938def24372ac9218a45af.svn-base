@@ -1,0 +1,22 @@
+package module2;
+
+import cse131.ArgsProcessor;
+
+public class number {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		ArgsProcessor ap = new ArgsProcessor (args);
+		
+		int x = ap.nextInt("Value of x");
+		int y = ap.nextInt("Value of y");
+		
+		if (y > x) {
+			int temp = x;
+			x = y;
+			y = temp;
+		}	
+		}
+}
+

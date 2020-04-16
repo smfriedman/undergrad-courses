@@ -1,0 +1,96 @@
+package oldmidterm;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+
+public class ColorSetTest {
+	
+	private ColorSet<Integer> gen(int start, int end) {
+		ColorSet<Integer> ans = new ColorSet<Integer>();
+		for (int i=start; i <= end; ++i) {
+			ans.add(new Integer(i));
+		}
+		return ans;
+	}
+	
+	@Test
+	public void test() {
+		int num=5;
+		ColorSet<Integer> cs1 = gen(0,num);
+		ColorSet<Integer> cs2 = gen(1,num);
+		cs2.add(new Integer(0));
+		
+		for (Integer i : cs1) {
+			assertTrue(cs2.contains(i));
+		}
+		for (Integer i : cs2) {
+			assertTrue(cs1.contains(i));
+		}
+		
+	}
+	
+	@Test
+	public void testMerge() {
+		int num=10;
+		ColorSet<Integer> cs1 = gen(0,num);
+		ColorSet<Integer> cs2 = gen(num,2*num);
+		ColorSet<Integer> cs3 = cs1.coloredMerge(cs2);
+		assertTrue(cs3.size()==cs1.size()+cs2.size()-1);
+		assertTrue(cs3.getColor().equals(cs1.getColor()));		
+	}
+	
+	@Test
+	public void testMThreads() {
+		final int num=10;
+		final ColorSet<Integer> cs1 = new ColorSet<Integer>();
+		//
+		// Add num integers to the set
+		//
+		Thread t1 = new Thread() {
+			public void run() {
+				for (int i=0; i < num; ++i) {
+					cs1.add(new Integer(i));
+				}
+				
+			}
+		};
+		//
+		// Add another num other integers to the set
+		//
+		Thread t2 = new Thread() {
+			public void run() {
+				for (int i=1000; i < 1000+num; ++i) {
+					cs1.add(new Integer(i));
+				}
+			}
+		};
+		//
+		//  repeatedly call for an array copy of the set
+		//
+		Thread t3 = new Thread() {
+			public void run() {
+				for (int i=0; i < num; ++i) {
+					cs1.toArray();
+				}
+				
+			}
+		};
+		
+		t1.start();
+		t2.start();
+		t3.start();
+		
+		try {
+			t1.join();
+			t2.join();
+			t3.join();
+		} catch (InterruptedException e) {
+			throw new Error("Bad join");
+		}
+		assertEquals(2*num,cs1.size());
+		
+	}
+
+}

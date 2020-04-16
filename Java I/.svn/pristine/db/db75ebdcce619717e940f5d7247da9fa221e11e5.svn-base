@@ -1,0 +1,42 @@
+package frogger;
+
+public class DebugProgram {
+
+	public static double square(int v) {
+		return v * v;
+	}
+
+	public static int factorial(int i) {
+
+		if (i <= 1) {
+			return 1;
+		} else {
+			int r = factorial(i - 1);
+			return i * r;
+		}
+	}
+
+	public static void main(String[] args) {
+		for (int i = 0; i < 50; i++) {
+			System.out.print("*");
+		}
+		System.out.println();
+		for (int i = 0; i < 10; i++) {
+			double sq = square(i);
+			System.out.println(i + "*" + i + " = " + sq);
+		}
+
+		System.out.println();
+
+		for (int i = 0; i < 50; i++) {
+			System.out.print("*");
+		}
+		System.out.println();
+
+		for (int i = 0; i < 10; i++) {
+			int f = factorial(i);
+			System.out.println(i + "! = " + f);
+		}
+	}
+
+}

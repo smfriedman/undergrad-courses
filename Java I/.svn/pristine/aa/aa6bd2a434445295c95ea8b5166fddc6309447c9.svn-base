@@ -1,0 +1,37 @@
+package arrays;
+
+public class Crossword {
+
+	public static void main(String[] args) {
+		// Two Dimensional Array of Strings
+		String[][] crossword = {{"S", "T", "A", "B", "S", " ", "P", " ", "A"},
+		                        {" ", "A", " ", "L", "O", "S", "S", "E", "S"},
+		                        {"?", "I", "B", "E", "R", "T", "Y", " ", "K"},
+		                        {" ", "W", "I", "S", "E", "A", "C", "R", "E"},
+		                        {"B", "A", "T", "S", " ", "C", "H", "O", "W"},
+		                        {"A", "N", "T", "I", "S", "K", "I", "D", " "},
+		                        {"N", " ", "E", "N", "T", "I", "C", "E", "D"},
+		                        {"J", "A", "R", "G", "O", "N", " ", "N", " "},
+		                        {"O", " ", "N", " ", "A", "G", "A", "T", "E"}};
+		
+		// Could also use String[][] crossword = new String[20][20];
+
+        for(int y=0; y<crossword.length; y++){
+            for(int x=0; x<crossword[y].length; x++){
+                System.out.print( crossword[y][x] );
+            }
+            System.out.println();
+        }
+        
+        crossword[2][0] = "L";
+        System.out.println(" crossword[2][0] = " + crossword[2][0]);
+        
+        for(int y=0; y<crossword.length; y++){
+            for(int x=0; x<crossword[y].length; x++){
+                System.out.print( crossword[y][x] );
+            }
+            System.out.println();
+        }
+	}
+
+}

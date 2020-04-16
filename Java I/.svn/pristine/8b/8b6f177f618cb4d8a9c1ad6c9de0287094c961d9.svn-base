@@ -1,0 +1,18 @@
+package arrays;
+
+public class Temperature2 {
+	public static void main(String[] args) {
+		double[] t = {50.3, 34.4, 39.0, 46.7, 50.9, 60.5};		
+		
+		double sum = 0.0;
+		for(int i=0;i<t.length;i++){
+			sum = sum + t[i];
+		}
+		System.out.println("Sum is " + sum);
+		System.out.println("Length is " + t.length);
+            
+        double avg = sum / t.length;
+        System.out.println("Average is " + avg);
+	}
+
+}

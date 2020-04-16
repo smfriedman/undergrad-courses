@@ -1,0 +1,34 @@
+Steven Friedman
+Lab 1
+
+
+ClosestPair DC implements the divide and conquer algorithm as discussed.  I decided 
+to store the two points and the minimum distance as static instance variables so they 
+wouldn't get lost in each level of recursion.  findClosestPair(pointsByX, pointsByY) 
+calls a recursive helper method that does all the work, and then findClosestPair puts 
+the points in the right order if they're out of order and prints them. helper(pointsByX, 
+pointsByY) carries out the recursive divide and conquer step and the compare (yStrip)
+step and returns the minimum distance.
+
+
+The graph from "study 1" (6 different input sizes compared between DC and Naive) is in the
+file "graph.xlsx" in my lab1 java project.
+
+
+The data for "study 2" is as follows:
+
+100 different inputs (using cases 101-200):
+	average: 29.65 ms
+	min: 28.0 ms
+	max: 45.0 ms
+100 trials of the same input (using cases 101-200)
+	average: 29.01 ms
+	min: 28.0 ms
+	max: 32.0 ms
+
+There's some variation in run time for both tests, although the data is right skewed, so on
+average, run times are closer to the minimum of the range than the maximum.  Minimums and
+averages are about equal between tests, but there's a much higher upper bound on the first test.
+
+
+

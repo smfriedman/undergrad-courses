@@ -1,0 +1,5 @@
+<head><style>table, th, td { border: 1px solid black; }</style></head><table><tr><td>
+"Your Name</td><td>Your WUSTL Key</td><td>The number that shall not be named</td><td>Write a loop that prints out the first 8 multiples of 4 (not including zero, 50 points)</td><td>Complete the following code so that it prints out "" Two Match"" if _exactly_ two out of the three given values are equal and ""No match"" otherwise. (50 points)</td><td>Grader</td><td>Q1 Grade (50pts)</td><td>Q1 Comments</td><td>Q2 Grade (50pts)</td><td>Q2 Comments</td><td>Total"
+</td></tr><tr><td>
+"Steven Friedman</td><td>steven.friedman</td><td>431474</td><td>int m = 0;<br>int n = 0;<br>while (n < 8) {<br>m++;<br>if (m % 4 == 0) {<br>System.out.println(m);<br>n++;<br>}<br>}</td><td>if (x == y && y == z) System.out.print(""No match"");<br>else if (x == y || y == z || x ==z) System.out.print(""Two Match"");<br>else System.out.print (""No match"");</td><td>HopeJ</td><td>40</td><td>This will only print out ""4"", not the first 8 multiples of 4</td><td>50</td><td>None</td><td>90"
+</td></tr></table>

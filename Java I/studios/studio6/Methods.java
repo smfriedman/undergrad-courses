@@ -1,0 +1,83 @@
+package studio6;
+
+public class Methods {
+
+	// Your methods go below this line
+	/**
+	 * 
+	 * @param positive integer n
+	 * @return n!
+	 */
+	public static int fact(int n){
+		if (n <= 0) return 1;
+		return n*fact(n-1);
+	}
+	
+	/**
+	 * 
+	 * @param positive integer n
+	 * @return the nth fibonacci number
+	 */
+	public static int fib(int n){
+		if (n<=1) return n;
+		return fib(n-1) + fib(n-2);
+	}
+	
+	/**
+	 * 
+	 * @param positive integer n
+	 * @return truth value of n being false
+	 */
+	public static boolean isOdd(int n){
+		if (n<=0) return false;
+		return !isOdd(n-1);
+	}
+	
+	/**
+	 * 
+	 * @param positive integer a
+	 * @param positive integer b
+	 * @return sum of a and b
+	 */
+	public static int sum(int a, int b){
+		if (b<=0) return a;
+		return sum(a+1, b-1);
+	}
+	
+	/**
+	 * 
+	 * @param positive int n
+	 * @return sum of n+(n-2)+(n-4)+...+0 or +1
+	 */
+	public static int sumDownBy2(int n){
+		if (n<=1) return n;
+		return n + sumDownBy2(n-2);
+	}
+	
+	/**
+	 * 
+	 * @param positive integer n
+	 * @return harmonic sum 1 + 1/2 + 1/3 +...+ 1/n
+	 */
+	public static double harmonicSum(int n){
+		if (n == 1) return 1;
+		return 1.0/n + harmonicSum(n-1);
+	}
+	
+	/**
+	 * 
+	 * @param positive integer a
+	 * @param positive integer b
+	 * @return product of a and b
+	 */
+	public static int mult(int a, int b){
+		if (b == 0) return 0;
+		return a + mult(a, b-1);
+	}
+	
+	public static void main(String[] args){
+		if (mult(4,5) == 4*5) System.out.print(true);
+		else System.out.print(false);
+	}
+
+}

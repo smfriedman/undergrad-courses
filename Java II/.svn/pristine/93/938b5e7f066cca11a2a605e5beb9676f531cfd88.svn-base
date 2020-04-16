@@ -1,0 +1,161 @@
+package kwic_2a_graded;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.beans.PropertyChangeSupport;
+import java.io.*;
+
+//TA grade: 100
+
+/*
+ * Lab 2a
+ * TA: Andrew B
+ * Grade: 100
+ * 
+ * Word				35/35
+ * Phrase			20/20
+ * KWIC				35/35
+ * Set Iteration	10/10
+ * 
+ * NOTES:
+ * 		You are using Java 8 to write your code. Please keep in mind that all of the lab machines are 
+ * 			using Java 7. So please test that your code works ont the lab machines before committing.
+ * 			Your map.remove(k,v) method doesn't exist in java 7 and we had to run it on a different
+ * 			machine.
+ */
+
+/** 
+ * Key Word in Context
+ * @author steven.friedman
+ */
+
+public class KWIC {
+	private HashMap<Word, Set<Phrase>> map = new HashMap();
+	protected PropertyChangeSupport pcs;
+
+	/**
+	 * constructs KWIC
+	 */
+	public KWIC() { 
+		pcs = (new PropertyChangeSupport(this)); 
+	}
+
+	/** 
+	 * Required for part (b) of this lab.
+	 * Accessor for the {@link PropertyChangeSuppport} 
+	 */
+
+	public PropertyChangeSupport getPCS() { return pcs; }
+
+	/** 
+	 * Convenient interface, accepts a standrd Java {@link String}
+	 * @param s String to be added
+	 */
+	public void addPhrase(String s) {
+		addPhrase(new Phrase(s));
+	}
+	
+	/**
+	 * Add each line in the file as a phrase.
+	 * For each line in the file, call {@link addPhrase(String)} to
+	 *   add the line as a phrase.
+	 * @param file the file whose lines should be loaded as phrases
+	 */
+	public void addPhrases(File file) {
+		FileInputStream fis;
+		try {
+			fis = new FileInputStream(file);
+			BufferedReader d = new BufferedReader(new InputStreamReader(fis));
+			String st = d.readLine();
+			while(st != null){
+				Phrase p = new Phrase(st);
+				addPhrase(p);
+				st = d.readLine();
+			}
+			d.close();
+		} catch (IOException e) {
+			// FIXME Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	/** 
+	 * For each {@link Word} in the {@link Phrase}, 
+	 * add the {@link Word}
+	 * to the association.
+	 * Use reduction to {@link #forceAssoc(Word, Phrase)}.
+	 * @param p Phrase to be added
+	 */
+	public void addPhrase(Phrase p) {
+		for (Word w : p.getWords()) {
+			forceAssoc(w, p);			
+		}
+		pcs.firePropertyChange("Phrase Added",false, true);
+	}
+
+
+	/** For each word in the {@link Phrase}, delete the association between
+      the word and the phrase.
+      Use reduction to {@link #dropAssoc(Word, Phrase)}.
+	 */
+	public void deletePhrase(Phrase p) {
+		for (Word w : p.getWords()) {
+			dropAssoc(w,p);
+		}
+		pcs.firePropertyChange("Phrase Deleted",false,true);
+	}
+
+	/** Force a mapping between the speicified {@link Word} and {@link Phrase} */
+	public void forceAssoc(Word w, Phrase p) {
+		Set<Phrase> s = map.get(w);
+		if(s != null){
+			//TA:  careful, this method doesn't exist in Java 7 (which you should be using)
+			map.remove(w, s);
+			s.add(p);
+			map.put(w, s);
+		} else {
+			HashSet<Phrase> s2 = new HashSet<Phrase>();
+			s2.add(p);
+			map.put(w, s2);
+		}
+		pcs.firePropertyChange("Phrase Added",false,true);
+	}
+
+
+	/** 
+	 * Drop the association between the 
+	 * specified {@link Word} and {@link Phrase}, if any
+	 */
+	public void dropAssoc(Word w, Phrase p) {
+		map.get(w).remove(p);
+		pcs.firePropertyChange("Phrase Deleted",false,true);
+	}
+
+
+	/** Return a Set that provides each {@link Phrase} associated with
+    the specified {@link Word}.
+	 */
+	public Set<Phrase> getPhrases(Word w) {
+		Set<Phrase> s = map.get(w);
+		return s;
+	}
+	
+	/** 
+	 * Drop a word completely from the KWIC 
+	 * 
+	 * @param w Word to be dropped
+	 */
+	public void deleteWord(Word w) {
+		Set<Phrase> s = map.get(w);
+		s.clear();
+		pcs.firePropertyChange("Word Deleted",false,true);
+	}
+
+	/** Rerturn a Set of all words */
+	public Set<Word> getWords() {
+		Set<Word> s = map.keySet();
+		return s;
+	}
+}

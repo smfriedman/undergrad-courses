@@ -1,0 +1,31 @@
+package adt.money;
+
+public class StockHolding implements Valuable {
+	
+	private int numShares, pricePerShare;
+
+	public StockHolding(int numShares, int initialPricePerShare) {
+		this.numShares = numShares;
+		this.pricePerShare = initialPricePerShare;
+		
+	}
+	
+	public void setPricePerShare(int newPrice) {
+		this.pricePerShare = newPrice;
+	}
+	
+
+	public int getCurrentValue() {
+		return this.numShares * this.pricePerShare;
+	}
+	
+	public String toString() {
+		return "Stock Account with " + this.numShares + " shares at " + this.pricePerShare + " dollars per share";
+	}
+
+	@Override
+	public int getLiquidAssets() {
+		return this.getCurrentValue();
+	}
+
+}

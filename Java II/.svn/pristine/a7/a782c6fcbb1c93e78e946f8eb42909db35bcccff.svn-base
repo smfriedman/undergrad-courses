@@ -1,0 +1,78 @@
+package lecture5s1;
+import hawup.util.Wrappers;
+
+
+public class SimpleWaitNotify {
+
+
+	//  the value of i can change beyond view
+	private volatile int i;
+	
+	public SimpleWaitNotify() {
+		this.i = 0;
+	}
+
+	// when you want a guarded block you ALWAYS do the following:
+	//   suppose you want some condition p to be true
+	//  you say:
+	//   while (!p) {
+	//      this.wait();   // suspends this Thread until notified
+	//   }
+	//  and that's 1/2 of what you have to do
+	//
+	//  anywhere p could be come true
+	//  say:  this.notifyAll();   wake up sleeping Threads
+	//
+	public synchronized void w() {
+		System.out.println("W has started");
+		
+		// hold up here until this.i == 1
+		
+		while (this.i != 1) {
+			try {
+				this.wait(); // you must be holding a lock on this
+				// we suspend execution
+				// and give up our lock on "this"
+			} catch (InterruptedException e) {
+				// FIXME Auto-generated catch block
+				e.printStackTrace();
+			}
+			// here, we hold the lock on "this" again
+		}
+		System.out.println("W saw i == 1");
+		
+		System.out.println("W has ended");
+		
+	}
+
+	public synchronized void n() {
+		this.notifyAll();   // extra, but doesn't hurt
+		System.out.println("N has started");
+		
+		this.i = 12;
+		this.notifyAll(); // because some Thread may care
+		
+		
+		Wrappers.sleep(1000);
+		this.i = 1;
+		this.notifyAll();  // because some Thread may care
+		
+		System.out.println("N has ended");
+		
+	}
+
+	public static void main(String[] args) {
+		SimpleWaitNotify swn = new SimpleWaitNotify();
+
+		new Thread() {
+			public void run() {
+				swn.w();
+			}
+		}.start();
+		
+		Wrappers.sleep(1000);
+		swn.n();
+		System.out.println("Ended");
+	}
+
+}

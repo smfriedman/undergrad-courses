@@ -1,0 +1,117 @@
+package oldmidterm;
+
+//
+// Based on the solution from Kevin Kieselbach and Nathan Duke
+//    Very small addition by RKC
+// You do not need to change this class for the midterm
+//
+public class RWLock {
+
+	Thread writingThread;
+	int numWriterEntries;
+	int numReaders;
+
+	public RWLock() {
+		writingThread = null;
+		numWriterEntries = 0;
+		numReaders = 0;
+	}
+
+	/**
+	 * First half of a read-only lock.  Should this be synchronized?
+	 */
+	public synchronized void acquireReadOnly() {
+		//
+		// RKC:  If a thread already has a write lock, then treat its
+		//    re-entrant request for a read lock like a 
+		//    re-entrant request for a write lock
+		//
+		if (writingThread == Thread.currentThread()) {
+			//
+			// call below will release lock on "this" while waiting
+			//
+			acquireReadWrite();
+			return;
+		}
+		//
+		//  RKC end of change
+		//
+		while (writingThread != null){
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				// FIXME Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		numReaders++;
+	}
+
+	/**
+	 * First half of a read-or-write lock.  Should this be synchronized?
+	 */
+	public synchronized void acquireReadWrite() {
+		while ( ( writingThread != null && writingThread != Thread.currentThread() ) || ( numReaders > 0 ) ){
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				// FIXME Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		writingThread = Thread.currentThread();
+		numWriterEntries++;
+	}
+
+	/**
+	 * Second half of either lock.  Should this be synchronized?
+	 * Release whichever of the two locks the current thread holds.
+	 * Make sure a Thread doesn't invoke this method without having one of the two locks!
+	 */
+	public synchronized void release() {
+		if (writingThread != null) {
+			numWriterEntries--;
+			if (numWriterEntries == 0)
+				writingThread = null;
+		}
+		else if (numReaders > 0)
+			numReaders--;
+		else throw new Error("cannot happen");
+		notifyAll();
+	}
+
+	/**
+	 * For convenience, acquire the read-only lock, run, release
+	 * Should this be synchronized?
+	 * @param r Run r after acquiring a read-only lock
+	 */
+	public void acquireReadOnly(Runnable r) {
+		// TA Do not modify this method!
+		try {
+			acquireReadOnly();
+			r.run();
+		}
+		finally {
+			release();
+		}
+
+	}
+
+	/**
+	 * For convenience, acquire the read-write lock, run, release
+	 * Should this be synchronized?
+	 * @param r Run r after acquiring a read-write lock
+	 */
+	public void acquireReadWrite(Runnable r) {
+		// TA Do not modify this method!
+		try {
+			acquireReadWrite();
+			r.run();
+		}
+		finally {
+			release();
+		}
+
+	}
+
+}

@@ -1,0 +1,30 @@
+package maps;
+
+import java.util.HashMap;
+
+public class CaesarCipher {
+	
+	public static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+	
+	public static String encode(String s, int shift) {
+		//FIXME
+		return "";
+	}
+	
+	public static String decode(String s, int shift) {
+		//FIXME
+		return "";
+	}
+	
+	public static void bruteForce(String s) {
+		//FIXME
+	}
+	
+	
+	public static void main(String[] args) {
+		System.out.println(encode("helloworld", 1));
+		System.out.println(decode("ifmmpxpsme", 1));
+		bruteForce("ifmmpxpsme");
+	}
+	
+}

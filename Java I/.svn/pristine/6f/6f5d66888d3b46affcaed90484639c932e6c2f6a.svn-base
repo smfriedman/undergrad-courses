@@ -1,0 +1,40 @@
+package frogger;
+
+import java.awt.Color;
+
+import lab10.ArcadeKeys;
+import sedgewick.StdDraw;
+
+public class CountKeyPresses {
+
+	public static void main(String[] args) {
+		int i = 0;
+		boolean on = false;
+		String s = "No key";
+
+		while (true) {
+			if (ArcadeKeys.isKeyPressed(1, ArcadeKeys.KEY_UP)) {
+
+				if (!on) {
+					i += 1;
+					s = "UP";
+				}
+				on = true;
+			} else {
+				if (on) {
+					s = "No key";
+				}
+				on = false;
+			}
+
+			StdDraw.setPenColor(Color.WHITE);
+			StdDraw.filledRectangle(.5, .5, .1, .1);
+			StdDraw.setPenColor(Color.BLACK);
+			StdDraw.text(.5, .5, s + " " + i);
+
+			StdDraw.show(100);
+		}
+
+	}
+
+}

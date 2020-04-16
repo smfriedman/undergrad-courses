@@ -1,0 +1,23 @@
+package recursion;
+
+public class ComplexFunctions {
+
+	public static void main(String[] args) {
+		int x = 5;
+		int y = f(x);
+		System.out.println( "f(" + x + ") = " + y);
+		x = 10;
+		y = f(x);
+		System.out.println( "f(" + x + ") = " + y);
+	}
+	
+	public static int f(int x){
+		int z = 2 * g(x) + 3;
+		return z;
+	}
+	
+	public static int g(int p){
+		return p * p + 1;
+	}
+
+}

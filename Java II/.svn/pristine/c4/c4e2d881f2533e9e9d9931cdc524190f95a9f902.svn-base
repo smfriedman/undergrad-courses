@@ -1,0 +1,99 @@
+package hawup.client;
+
+import hawup.core.HaWUp;
+import hawup.core.ResultRunnable;
+import hawup.examples.rsa.RSABreaker;
+import hawup.examples.sleeps.Sleepers;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.math.BigInteger;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class Server {
+	final private int port;
+	private String name;
+	private short numNodes;
+	private short maxQueueSize;
+	private String password;
+	
+	public Server(int port){
+		this.port = port;
+		this.name = "BMeeksOnFleek";
+		this.numNodes = 5;
+		this.maxQueueSize = 10;
+		this.password = "xyzzy";
+	}
+	
+	public void run() throws IOException{
+		ServerSocket ss = new ServerSocket(port);
+		while(true){
+			Socket s = ss.accept();
+			Thread t1 = new Thread() {
+				public void run(){
+					try {
+						DataOutputStream dos = new DataOutputStream(s.getOutputStream());
+						DataInputStream dis = new DataInputStream(s.getInputStream());
+						
+						dos.writeUTF(name);
+						dos.writeShort(numNodes);
+						dos.writeShort(maxQueueSize);
+						
+						String clientName = dis.readUTF();
+						String clientPassword = dis.readUTF();
+						
+						if(!clientPassword.equals(password)){
+							dos.writeUTF("bye");
+							s.close();
+						}else{
+							dos.writeUTF("ok");
+						}
+	
+						HaWUp h = new HaWUp(numNodes, maxQueueSize);
+						String type = dis.readUTF();
+						if(type.equals("sleep")){
+							dos.writeUTF("ok");
+							int numTasks = dis.readInt();
+							int maxSleep = dis.readInt();
+							
+							ResultRunnable job = h.genJob(new Sleepers((int) (Math.random()*maxSleep), numTasks));
+							job.run();
+							String result = "" + job.getResult().getValue();
+							dos.writeUTF(result);
+							dos.writeUTF("done");
+							//Sleep sleep = new Sleep(clientName, clientPassword, numTasks, maxSleep);
+						} else if(type.equals("sum")){
+							dos.writeUTF("ok");
+							short lo = dis.readShort();
+							short hi = dis.readShort();
+						} else if(type.equals("rsa")){
+							dos.writeUTF("ok");
+							BigInteger num = new BigInteger(dis.readUTF());
+							BigInteger lo = new BigInteger(dis.readUTF());
+							BigInteger hi = new BigInteger(dis.readUTF());
+							ResultRunnable job = h.genJob(new RSABreaker(num, lo, hi));
+							job.run();
+							String result = "" + job.getResult().getValue();
+							dos.writeUTF(result);
+						} else {
+							dos.writeUTF("bye");
+							s.close();
+						}
+							
+					} catch (IOException e) {
+						// FIXME Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			};
+			t1.start();
+		}
+	}
+	
+	public static void main(String[] args) throws IOException{
+		Server swerve = new Server(3000);
+		swerve.run();
+	}
+}

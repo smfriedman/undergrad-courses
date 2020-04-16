@@ -1,0 +1,30 @@
+package arrays;
+
+public class ReverseIntArray {
+
+	public static void main(String[] args) {
+		int[] original = new int[100];
+		for (int i=0; i < original.length; ++i) {
+			original[i] = i;
+		}
+		// copy that array but reverse the elements
+		//   gee that's hard, so let's try just a plain copy
+		int[]  copy = new int[original.length];
+		// you might be tempted to say
+		// copy = original;
+		// but that fails, because it makes copy be the same array as original
+		for (int i=0; i < original.length; ++i) {
+			copy[original.length-1-i] = original[i];
+			// print below would not work, except halfway through
+			// System.out.print(copy[i] + " ");
+		}
+		System.out.println(original[3]);
+		original[3] = 1000;
+		System.out.println(copy[3]);
+		for (int i=0; i < original.length; ++i) {
+			System.out.print(copy[i] + " ");
+		}
+		// System.out.println();
+	}
+
+}

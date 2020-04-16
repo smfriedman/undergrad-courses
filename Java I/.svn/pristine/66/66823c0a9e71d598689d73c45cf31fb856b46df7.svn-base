@@ -1,0 +1,87 @@
+package lab10;
+
+import java.awt.Color;
+
+import sedgewick.StdDraw;
+
+public class Goal implements Drawable{
+	private double posX;
+	private double posY;
+	private double halfHeight;
+	private double halfWidth;
+	private Color color;
+	private boolean isActive;
+	private int value;
+	
+	public Goal(double posX, double posY){
+		this.posX = posX;
+		this.posY = posY;
+		this.halfHeight = .05;
+		this.halfWidth = .05;
+		this.color = Color.WHITE;
+		this.isActive = true;
+		this.value = 10;
+	}
+	
+	public double getPosX() {
+		return posX;
+	}
+
+	public void setPosX(double posX) {
+		this.posX = posX;
+	}
+
+	public double getPosY() {
+		return posY;
+	}
+
+	public void setPosY(double posY) {
+		this.posY = posY;
+	}
+
+	public double getHalfHeight() {
+		return halfHeight;
+	}
+
+	public void setHalfHeight(double halfHeight) {
+		this.halfHeight = halfHeight;
+	}
+
+	public double getHalfWidth() {
+		return halfWidth;
+	}
+
+	public void setHalfWidth(double halfWidth) {
+		this.halfWidth = halfWidth;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
+	public boolean getActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+
+	public int getValue() {
+		return value;
+	}
+
+	public void setValue(int value) {
+		this.value = value;
+	}
+
+	public void draw(){
+		StdDraw.setPenColor(color);
+		StdDraw.filledRectangle(posX, posY, halfWidth, halfHeight);
+	}
+
+}

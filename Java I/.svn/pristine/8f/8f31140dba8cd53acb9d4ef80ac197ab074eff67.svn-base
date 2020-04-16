@@ -1,0 +1,33 @@
+package types;
+
+public class MixedTypes {
+	
+	public static void main(String[] args) {
+	
+		//Which of the following will work?
+		double area = 2.0;
+		int size = 3.5;
+		
+		int x = (2 + 3) / 2;
+		System.out.print("Integer: ");
+		System.out.println(x);
+		
+		//What's going on here?
+		double z = (2 + 3) / 4;
+		System.out.print("Double: ");
+		System.out.println(z);
+		
+		//We can convert values:
+		int size2 = (int) 3.5;
+		System.out.print("Size: ");
+		System.out.println(size);
+		
+		//This can help us correct our previous issue:
+		double z2 = (double) (2 + 3) / 4;
+		System.out.print("z2 = ");
+		System.out.println(z2);
+		
+		//What will be the result of the following?
+		double a = (double) 1 / 2 + 2 / 3 + 3 / 4;
+	}
+}

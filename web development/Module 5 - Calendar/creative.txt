@@ -1,0 +1,9 @@
+Steven Firedman 431474
+Matthew Schiller 429346
+
+Entry point: http://ec2-52-89-23-219.us-west-2.compute.amazonaws.com/~stevenfriedman/calendar/homepage.html
+
+Creative portion:
+--Users can add and sort by tag
+--Users can generate a link to a static view of their calendar to share
+--Styling

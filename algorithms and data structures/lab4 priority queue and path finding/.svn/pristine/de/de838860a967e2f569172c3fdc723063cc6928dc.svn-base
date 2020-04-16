@@ -1,0 +1,46 @@
+
+public class VertexInfo {
+	private Handle handle;
+	private Vertex parent;
+	private int distance;
+	private int parentEdgeID;
+	
+	public VertexInfo(Handle handle, Vertex parent, int parentEdgeID, int distance){
+		this.handle = handle;
+		this.parent = parent;
+		this.distance = distance;
+		this.parentEdgeID = parentEdgeID;
+	}
+
+	public Handle getHandle() {
+		return handle;
+	}
+
+	public void setHandle(Handle handle) {
+		this.handle = handle;
+	}
+
+	public Vertex getParent() {
+		return parent;
+	}
+
+	public void setParent(Vertex parent) {
+		this.parent = parent;
+	}
+
+	public int getDistance() {
+		return distance;
+	}
+
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
+
+	public int getParentEdgeID() {
+		return parentEdgeID;
+	}
+
+	public void setParentEdgeID(int parentEdgeID) {
+		this.parentEdgeID = parentEdgeID;
+	}
+}

@@ -1,0 +1,56 @@
+package lab6;
+
+import sedgewick.StdDraw;
+
+/**
+ * 
+ * Steven Friedman
+ * @author stevenfriedman
+ * Recursively draws a triangular pattern
+ *
+ */
+public class Triangles {
+
+	/**
+	 * Draws triangular pattern centered at (x,y) with height height
+	 * REQUIRES: positive height
+	 * @param double x, a center x coordinate
+	 * @param double y, a center y coordinate
+	 * @param height, height of the triangle
+	 *  
+	 */
+	public static void triangle(double x, double y, double height){
+		if (height < .01) return;
+		
+		//draw first triangle
+		double[] xPoints = {x-height/2, x, x+height/2};
+		double[] yPoints = {y+height/2, y-height/2, y+height/2};
+		StdDraw.setPenColor(StdDraw.WHITE);
+		StdDraw.filledPolygon(xPoints, yPoints);
+		
+		//three subsequent subcases
+		triangle(x-height/2, y-height/4, height/2); //left
+		triangle(x, y+3*height/4, height/2); //top
+		triangle(x+height/2, y-height/4, height/2); //right
+	}
+	
+	/**
+	 * Draws triangular pattern by drawing a large triangle and calling the method triangle
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		//set scale
+		StdDraw.setXscale(0, 1);
+		StdDraw.setYscale(0, 1);
+		
+		//draw background triangle
+		StdDraw.setPenColor(StdDraw.BLACK);
+		double[] xPoints = {0, 0.5, 1};
+		double[] yPoints = {0, 1, 0};
+		StdDraw.filledPolygon(xPoints, yPoints);
+		
+		
+		triangle(.5, .25, .5);
+	}
+
+}

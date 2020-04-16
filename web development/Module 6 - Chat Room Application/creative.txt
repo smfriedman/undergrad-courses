@@ -1,0 +1,8 @@
+Steven Friedman 431474
+Matthew Schiller 429346
+
+EC2 Entry Point: ec2-52-89-4-160.us-west-2.compute.amazonsaws.com:3456
+
+Creative portion:
+--Picture Sharing
+--Styling

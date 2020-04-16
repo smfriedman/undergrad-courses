@@ -1,0 +1,42 @@
+package adt.books;
+
+import java.util.HashSet;
+
+public class Hashing {
+
+	public static boolean containsBook(PaperBook[] set, PaperBook pb) {
+		for (int i = 0; i < set.length; i++) {
+			if (set[i].equals(pb)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static void main(String[] args) {
+		PaperBook[] series = {
+				new PaperBook("Harry Potter and the Order of the Phoenix",
+						"JK Rowling"),
+				new PaperBook("Harry Potter and the Chamber of Secrets",
+						"JK Rowling"),
+				new PaperBook("Harry Potter and the Philosopher's Stone",
+						"JK Rowling"),
+				new PaperBook("Harry Potter and the Deathly Hallows",
+						"JK Rowling"),
+				new PaperBook("Harry Potter and the Goblet of Fire",
+						"JK Rowling"),
+				new PaperBook("Harry Potter and the Half-Blood Prince",
+						"JK Rowling"),
+				new PaperBook("Harry Potter and the Prisoner of Azkaban",
+						"JK Rowling") };
+
+		PaperBook query = new PaperBook(
+				"Harry Potter and the Magical Java Compiler", "David Lu");
+		PaperBook query2 = new PaperBook(
+				"Harry Potter and the Deathly Hallows", "JK Rowling");
+
+		System.out.println(containsBook(series, query));
+		System.out.println(containsBook(series, query2));
+		
+	}
+}

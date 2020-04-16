@@ -1,0 +1,31 @@
+package module2;
+
+public class iteration2 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		//average of 100 randomly generated values
+		int i3 = 0;
+		double sum = 0;
+		while (i3 < 100) {
+			sum = sum + Math.random();
+			i3 = i3 + 1;
+		}
+		System.out.println("Average: " + sum/100.0);
+		
+		//how many times it takes to flip a coin for 10 heads
+		int heads = 0;
+		int flips = 0;
+		double r;
+		while (heads < 10) {
+			r = Math.random();
+			flips = flips + 1;
+			if (r < 0.5) {
+				heads = heads + 1;
+			}
+		}	
+		System.out.println("Flips: " + flips);
+	}
+
+}

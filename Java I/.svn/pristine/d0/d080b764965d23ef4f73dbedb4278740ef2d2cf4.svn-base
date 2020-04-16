@@ -1,0 +1,20 @@
+package module1;
+
+import cse131.ArgsProcessor;
+
+public class Ordered4 {
+
+	public static void main(String[] args) {
+		
+		ArgsProcessor ap = new ArgsProcessor (args);
+		
+		int n1 = ap.nextInt("What is the value of n1?");
+		int n2 = ap.nextInt("What is the value of n2?");
+		int n3 = ap.nextInt("What is the value of n3?");
+		int n4 = ap.nextInt("What is the value of n4?");
+		
+		boolean a = (n1 > n2 && n2 > n3 && n3 > n4) || (n4 > n3 && n3 > n2 && n2 >n1);
+		System.out.println(a);
+	}
+
+}

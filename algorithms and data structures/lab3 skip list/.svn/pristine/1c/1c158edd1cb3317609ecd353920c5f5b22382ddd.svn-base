@@ -1,0 +1,16 @@
+
+public class Pillar {
+
+	Event event;
+	int height;
+	Node[] tower;
+
+	
+	public Pillar(Event event, int height){
+		this.event = event;
+		this.height = height;
+		this.tower = new Node[height];
+	}
+
+	
+}

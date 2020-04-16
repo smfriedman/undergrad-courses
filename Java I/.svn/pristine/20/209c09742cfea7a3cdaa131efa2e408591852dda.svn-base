@@ -1,0 +1,52 @@
+package adt.lists;
+
+import java.awt.Color;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
+public class ListUse {
+
+	public static void main(String[] args) {
+		List<String> eating = new LinkedList<String>();
+
+		eating.add("open mouth");
+		eating.add("insert food");
+		eating.add("chew");
+		eating.add("chew");
+		eating.add("swallow");
+
+		System.out.println(eating);
+		eating.remove(1);
+		System.out.println(eating);
+		eating.remove("swallow");
+		System.out.println(eating);
+		for (int i=0; i < 5; ++i) {
+			eating.add("chew!");
+		}
+		System.out.println(eating);
+		eating.add("swallow");
+		System.out.println(eating);
+		
+		System.out.println(eating.get(3));
+		
+		Set<String> roster = new HashSet<String>();
+		roster.add("Ron");
+		roster.add("Barbara");
+		roster.add("Fred");
+		System.out.println(roster);  // printed out in a different order
+		if (!roster.add("Barbara")) {
+			System.out.println("Add did not work, element already there");
+		}
+		System.out.println(roster);
+		
+		Set<Color> palette = new HashSet<Color>();
+		palette.add(Color.BLACK);
+		palette.add(Color.WHITE);
+		System.out.println(palette);
+		palette.add(new Color(0,0,0));
+		System.out.println(palette);
+	}
+
+}

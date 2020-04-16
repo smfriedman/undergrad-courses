@@ -1,0 +1,42 @@
+package lecture7s2;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.io.OutputStream;
+
+public class Server2 {
+	
+	final private int port;
+	
+	public Server2(int port) {
+		this.port = port;
+	}
+	
+	public void run() throws IOException {
+		ServerSocket ss = new ServerSocket(port);
+		Socket s = ss.accept(); // accept the first connection
+		// and now send 4 bytes which will be read as an integer
+		//  on other side
+		// Could do this 1) writing 4 bytes one at a time
+		//               2) using dataoutstream and writeInt
+		OutputStream os = s.getOutputStream();
+		DataOutputStream dis = new DataOutputStream(os);
+		// send
+		//  character
+		dis.writeChar('x');
+		// then x location as short
+		dis.writeShort(132);
+		// then y location as short
+		// made this mistake, sending one byte dis.write(34);
+		dis.writeShort(34);
+		
+	}
+	
+	public static void main(String[] args) throws IOException {
+		Server2 server = new Server2(3000);
+		server.run();
+	}
+
+}

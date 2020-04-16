@@ -1,0 +1,28 @@
+package studio5;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+public class Adapter {
+	private InputStream is;
+	private OutputStream os;
+	
+	public Adapter(InputStream is, OutputStream os){
+		this.is = is;
+		this.os = os;
+	}
+	
+	public void run() throws IOException{
+		int b = is.read();
+		while(b != -1){
+			os.write(b);
+			b = is.read();
+		}
+		os.flush();
+		is.close();
+		os.close();
+	}
+	
+	public main 
+}

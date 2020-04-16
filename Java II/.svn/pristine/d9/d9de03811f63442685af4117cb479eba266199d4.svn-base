@@ -1,0 +1,35 @@
+package studio1.percent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+// import javax.swing.event.ChangeEvent;
+// import javax.swing.event.ChangeListener;
+
+public class Controller extends JPanel {
+
+	public Controller() {
+		this.add(new JLabel("Controller"));
+                // add other things you want to see here:
+	}
+	
+	
+	public static void main(String[] args) {
+		Controller panel = new Controller();
+		//
+		// What you see below is what 
+		// Sedewick's code did for you in 131
+		// When you create a new JFrame, by default it can't be seen
+		//   It's a bit surprising at first, and
+		//     not a good thing when you are starting out
+		//
+		JFrame frame = new JFrame();
+		frame.add(panel);
+		frame.pack();
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+
+}
+

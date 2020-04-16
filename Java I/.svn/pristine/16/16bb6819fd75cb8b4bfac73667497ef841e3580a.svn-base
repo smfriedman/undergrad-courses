@@ -1,0 +1,54 @@
+package lab7;
+
+public class Course {
+	private String name;
+	private int credits;
+	private int seats;
+	private Student[] roster;
+	
+	public Course(String name, int credits, int seats){
+		this.name = name;
+		this.credits = credits;
+		this.seats = seats;
+		this.roster = roster;
+	}
+	
+	public int getRemainingSeats(){
+		return seats;
+	}
+	
+	public String getName(){
+		return name;
+	}
+	
+	public String toString(){
+		return name + " for " + credits + " credits";
+	}
+	
+	public boolean addStudent(Student applicant){
+		if (seats > 0){
+			seats = seats - 1;
+			return true;
+		}
+		return false;
+	}
+	
+	public void printRoster(){
+		for (int i = 0; i < roster.length; i++){
+			System.out.println("Name: " + roster[i].getName() + "    GPA: " + roster[i].getGPA());
+		}
+	}
+	
+	public double averageGPA(){
+		double sumGPA = 0;
+		for (int i = 0; i < roster.length; i++){
+			sumGPA = sumGPA + roster[i].getGPA();
+		}
+		return sumGPA/roster.length;
+	}
+	
+	
+	
+	
+	
+}

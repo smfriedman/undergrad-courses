@@ -1,0 +1,7 @@
+Matthew Schiller 429346
+Steven Friedman 431474
+
+Link to instance: ec2-52-89-23-219.us-west-2.compute.amazonaws.com
+Valid usernames for login to file sharing: "steve", "matt"
+
+For our creative portion we created a navigation bar to help the user navigate the file sharing site.

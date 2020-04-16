@@ -1,0 +1,6 @@
+$ mongo --shell
+
+> use creativeGame
+
+//2,2,3,3,-2,-2,-3,-3,6,-6,7,-7
+> db.cards.insert([{move:2,text:"Move forward two spaces"}, {move:2,text:"Move forward two spaces"}, {move:3,text:"Move forward three spaces"}, {move:3,text:"Move forward three spaces"}, {move:-2,text:"Move back two spaces"}, {move:-2,text:"Move back two spaces"}, {move:-3,text:"Move back three spaces"}, {move:-3,text:"Move back three spaces"}, {move:6,text:"Move forward six spaces"}, {move:-6,text:"Move back six spaces"}, {move:7,text:"Move forward seven spaces"}, {move:-7,text:"Move back seven spaces"}])

@@ -1,0 +1,54 @@
+package lecture5s1;
+import hawup.util.Wrappers;
+
+
+public class BadSignalWait {
+
+	private int count;
+
+	public BadSignalWait() {
+	}
+
+	public synchronized void countUp() {
+		while(true) {
+			count = count + 1;
+			System.out.println("Now count is " + count);
+			Wrappers.notifyAll(this);
+			Wrappers.sleep(1000);
+		}
+	}
+
+	public synchronized void waitDecade() {
+		while (true) {
+			while (!(count%10 == 0)) {
+				Wrappers.wait(this);
+			}
+			Wrappers.sleep(100);
+			System.out.println("Decade watcher saw i " + count);
+			Wrappers.sleep(50);
+		}
+	}
+
+	public static void main(String[] args) {
+		final BadSignalWait bsw = new BadSignalWait();
+		
+		Thread t1 = new Thread() {
+			public void run() {
+				bsw.countUp();
+			}
+		};
+
+		Thread t2 = new Thread() {
+			public void run() {
+				bsw.waitDecade();
+			}
+		};
+
+
+		t1.start();            // launch counter
+		Wrappers.sleep(2000);
+		t2.start();            // now look for decades
+
+	}
+
+}

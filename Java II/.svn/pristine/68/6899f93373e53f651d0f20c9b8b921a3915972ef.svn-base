@@ -1,0 +1,56 @@
+package hawup.examples.rsa;
+
+import java.math.BigInteger;
+import java.util.HashSet;
+import java.util.Set;
+
+import hawup.core.Task;
+import hawup.core.TasksProvider;
+
+/**
+ * 
+ * @author roncytron
+ *
+ */
+public class RSABreaker implements TasksProvider<TwoInts> {
+	
+	private BigInteger pubkey;
+	private BigInteger upperbound, lowerbound;
+
+	/**
+	 * Search for a private key whose corresponding public
+	 *    key matches the specified pubkey
+	 * @param pubkey the public key
+	 * @param upperbound the largest integer we should try as the private key
+	 */
+	public RSABreaker(BigInteger pubkey, BigInteger upperbound) {
+		this(pubkey, BigInteger.ZERO, upperbound);
+	}
+
+	public RSABreaker(BigInteger pubkey, BigInteger lowerbound, BigInteger upperbound){
+		this.pubkey = pubkey;
+		this.upperbound = upperbound;
+		this.lowerbound = lowerbound;
+	}
+	
+	@Override
+	public Set<Task<TwoInts>> getTasks(int numNodes) {
+		int numTasks = numNodes * 16;
+		Set<Task<TwoInts>> tasks = new HashSet<Task<TwoInts>>();
+		
+		BigInteger range = upperbound.subtract(lowerbound);
+		BigInteger numsPerTask = range.divide(BigInteger.valueOf(numTasks));
+		if(numsPerTask.equals(BigInteger.ZERO)){
+			numsPerTask = BigInteger.ONE;
+		}
+		BigInteger priv = lowerbound;
+		
+		while (priv.compareTo(upperbound) < 0) {
+			tasks.add(new LookForKeyBetweenLoHi(pubkey, priv, priv.add(numsPerTask)));
+			priv = priv.add(numsPerTask);
+		}
+		
+		return tasks;
+	}
+
+}

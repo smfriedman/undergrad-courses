@@ -1,0 +1,40 @@
+package maps;
+
+public class Employee implements Comparable<Employee> {
+
+	private int age;
+	private double salary;
+	
+	public Employee(int a, double s) {
+		this.age = a;
+		this.salary = s;
+	}
+	
+	public int getAge() {
+		return this.age;
+	}
+	
+	public double getSalary() {
+		return this.salary;
+	}
+	
+	@Override
+	public int compareTo(Employee e) {
+		if(this.age == e.getAge()) {
+			return 0;
+		} else if (this.age < e.getAge()) {
+			return -1;
+		} else {
+			return 1;
+		}
+	}
+	
+	public static void main(String[] args) {
+		Employee e1 = new Employee(25, 40000);
+		Employee e2 = new Employee(30, 30000);
+		
+		System.out.println(e1.compareTo(e2));
+		System.out.println(e2.compareTo(e1));
+	}
+
+}

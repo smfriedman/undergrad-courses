@@ -1,0 +1,43 @@
+package watermelons;
+
+import java.util.Arrays;
+
+public class Watermelons {
+	
+	/**
+	 * Computes the sum of each distinct pair of entries in the incoming array.
+	 * A given pair of entries has its sum computed only once.  So if you
+	 * compute the sum for entries 2 and 4, and that sum appears in your answer
+	 * array, then you do not also compute the sum of entries 4 and 2.
+	 * Depending on the input, the same sum value may appear multiple times in the result.
+	 * For example, if all of the incoming values are 0, then so are all of the returned values.
+	 * @param nums an array of integers, possibly containing duplicates
+	 * @return an array containing the sums of pairs as described above
+	 */
+	public static int[] allPairSums(int[] nums) {
+		int ansLength = 0;
+		for(int i=0; i<nums.length; i++){
+			ansLength = ansLength + (nums.length-i-1);
+		}
+		int[] ans = new int[ansLength];  // FIXME compute ans as the result you want
+		for(int i=0; i<nums.length; i++){	
+			for(int j=0; j<nums.length; j++){
+				if (i < j) Arrays.fill(ans, nums[i]+nums[j]);
+			}
+		}	
+		return ans;
+	}
+	
+	/**
+	 * The method below must COMPUTE and return a solution to the puzzle posted
+	 * on the page that describes this extension.  You must compute the solution by trying
+	 * lots of possibilities, and finding the one that yields the right answer.
+	 * You can run the unit test testPuzzleSolution to see if you are right.
+	 * @return
+	 */
+	public static int[] getSolution() {
+		int[] a = Watermelons.allPairSums();
+		return new int[] { 0 };
+	}
+
+}

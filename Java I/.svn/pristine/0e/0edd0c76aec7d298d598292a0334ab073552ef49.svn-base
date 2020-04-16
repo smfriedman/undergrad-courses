@@ -1,0 +1,110 @@
+package lab5;
+
+import studio5.Methods;
+
+public class Lab5Methods {
+
+		/**
+		 * 
+		 * @param positive integer j
+		 * @param positive integer k
+		 * @return the product of j and k
+		 */
+		public static int multPos(int j, int k) {
+			int x = 0;
+			for (int i = 0; i < k; i++) x = x + j;
+			return x;
+		}
+		
+		/**
+		 * 
+		 * @param integer j
+		 * @param integer k
+		 * @return the product of j and k
+		 */
+		public static int mult(int j, int k) {
+			int x = multPos(Math.abs(j), Math.abs(k));
+			if (j < 0) x = -x;
+			if (k < 0) x = -x;
+			return x;
+		}
+		
+		/**
+		 * 
+		 * @param integer n
+		 * @param positive integer k
+		 * @return n to the k power
+		 */
+		public static int expt(int n, int k) {
+			int x = 1;
+			for (int i = 0; i < k; i++) x = x*n;
+			return x;
+		}
+		
+		/**
+		 * 
+		 * @param string s
+		 * @return whether or not s is a palindrome
+		 */
+		public static boolean isPalindrome(String s) {
+			boolean x = true;
+			String[] letters = s.split("");
+			for(int i = 0; i < letters.length; i++) {
+				//System.out.println(letters[i]); 	//tests how letters splits s
+				if (!letters[i].equals(letters[letters.length-i-1])) x = false;
+			}
+			return x;
+		}
+		
+		/**
+		 * 
+		 * @param integer n
+		 * @return first n integers of fibonacci sequence
+		 */
+		public static int[] fibonacci(int n) {
+			int[] x = new int[n];
+			x[0] = 1;
+			if (n > 1) x[1] = 1;
+			for(int i = 2; i < n; i++) x[i] = x[i-2] + x[i-1];
+			//for(int i = 0; i < n; i++) System.out.println(x[i]);
+			return x;
+		}
+		
+		/**
+		 * 
+		 * @param double array labs
+		 * @param double array quizzes
+		 * @param dobule array exams
+		 * @param boolean studios
+		 * @param integer extensions
+		 * @return letter grade
+		 */
+		public static String computeGrade (double[] labs, double[] quizzes, double[] exams, boolean studios, int extensions) {
+			double minQuiz = quizzes[0];
+			for (int i = 0; i < quizzes.length; i++) {
+				if (quizzes[i] < minQuiz) minQuiz = quizzes[i];
+			}
+			double quizAvg = (Methods.sumArray(quizzes)-minQuiz)/(quizzes.length-1);
+			double labAvg = Methods.average(labs);
+			double examsAvg = Methods.average(exams);
+			double studioAvg = 100;
+				if (studios == false) studioAvg = 0;
+			//extensions is already a number out of 100 as an int	
+			double numGrade = .45*examsAvg + .10*quizAvg + .10*studioAvg + .15*labAvg + .20*extensions;
+			
+			String x = "";
+			if (numGrade < 60)		x = "F";
+			else if (numGrade < 70) x = "D";
+			else if (numGrade < 73) x = "C-";
+			else if (numGrade < 77) x = "C";
+			else if (numGrade < 80) x = "C+";
+			else if (numGrade < 83) x = "B-";
+			else if (numGrade < 87) x = "B";
+			else if (numGrade < 90) x = "B+";
+			else if (numGrade < 93) x = "A-";
+			else if (numGrade < 97) x = "A";
+			else 					x = "A+";
+			return x;
+		}
+
+}

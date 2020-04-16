@@ -1,0 +1,60 @@
+package lecture7s2;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Random;
+import java.io.OutputStream;
+
+public class Server3 {
+
+	final private int port;
+
+	public Server3(int port) {
+		this.port = port;
+	}
+
+	public void run() throws IOException {
+		ServerSocket ss = new ServerSocket(port);
+		char[] chars = new char[] { 'x', 'y', 'z' };
+		int cloc = 0;
+		Random r = new Random();
+		while (true) {
+			Socket s = ss.accept(); // accept the first connection
+			// and now send 4 bytes which will be read as an integer
+			//  on other side
+			// Could do this 1) writing 4 bytes one at a time
+			//               2) using dataoutstream and writeInt
+			OutputStream os = s.getOutputStream();
+			DataOutputStream dis = new DataOutputStream(os);
+			// send
+			//  character
+			dis.writeChar(chars[cloc]);  // pick a char
+			snooze(30);
+			// because this takes time, the server can't get
+			// to the next client
+			cloc = ( cloc + 1 ) % chars.length;
+			// then x location as short
+			dis.writeInt(r.nextInt());
+			// then y location as short
+			// made this mistake, sending one byte dis.write(34);
+			dis.writeInt(132);
+		}
+
+	}
+
+	public static void snooze(int secs) {
+		try {
+			Thread.sleep(secs*1000);
+		} catch(Throwable t) {
+			throw new Error(" cannot happen ");
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Server3 server = new Server3(3000);
+		server.run();
+	}
+
+}

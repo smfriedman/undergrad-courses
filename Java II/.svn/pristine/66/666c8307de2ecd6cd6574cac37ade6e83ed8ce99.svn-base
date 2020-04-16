@@ -1,0 +1,73 @@
+package lecturens2;
+
+import java.util.Random;
+
+public class Concatter {
+
+	private String string;
+
+	public Concatter() {
+		this.string = "";
+	}
+
+	public synchronized void append(String s) {
+		// quick thing would be
+		// this.string = this.string + s;
+		// the above operation is not thread-safe
+		//  so I will slow this down to widen the window
+		//  for mischief to happen
+		char[] sarray = s.toCharArray();
+		for (char c : sarray) {
+			String before = this.string;
+			// window now open for bad things
+			snooze(200);
+			// almost end of window
+			String after = before + c;
+			this.string = after;
+		}
+	}
+
+	public String toString() {
+		return this.string;
+	}
+
+	public static void main(String[] args) {
+		// below works fine
+		//		Concatter cc = new Concatter();
+		//		cc.append("abc");
+		//		cc.append("123");
+		//		System.out.println("We have " + cc);
+		// now let's do the appends concurrently
+		final Concatter cc = new Concatter();
+		//
+		// one append goes in to another new thread
+		//
+		final Random r = new Random();
+		new Thread() {
+			public void run() {
+				snooze(r.nextInt(1000));
+				cc.append("abc");
+			}
+		}.start();
+		// the other one happens here
+		snooze(r.nextInt(1000));
+		cc.append("123");
+		//
+		// wait a second for both to complete (I should do Thread.join)
+		// you shouldn't do this!  You should do thread.join
+		snooze(1000);
+		System.out.println("We have " + cc);
+
+
+	}
+
+	public static void snooze(int ms) {
+		try {
+			Thread.sleep(ms);
+		} catch (InterruptedException e) {
+			// FIXME Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}

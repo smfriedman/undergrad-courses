@@ -1,0 +1,38 @@
+package ChoiceAndIteration;
+
+public class ItemDrop {
+
+	public static void main(String[] args) {
+		//Variables we need:
+		
+		double g = 9.81;
+
+		//The item starts falling at time == 0.
+		//How long are we in the "drop zone?"
+		int timeUnderTree = 1;
+		
+		int fallHeight = 10;
+
+		//Compute the necessary times:
+		double fallTime = Math.sqrt(2 * fallHeight / g); //t = (2d / g)^(1/2)
+
+		//If the "item" falls, set it to true, otherwise false
+		boolean letGo = true;
+
+		//We'll use a nested if statement to model what happens
+		if (letGo) {
+			//Check to see if it is a hit
+			if (fallTime < timeUnderTree) {
+		        System.out.println("Ouch! a squirrel hit you in the face.");
+		        System.out.println("It was travelling " + g*fallTime + "meters per second");
+			} else {
+				System.out.println("You hear something hit the ground nearby.");
+			}
+		}
+		else { //Stayed put, nothing happens
+		    System.out.println("The squirrel smiles down upon thee.");
+		}
+
+	}
+
+}

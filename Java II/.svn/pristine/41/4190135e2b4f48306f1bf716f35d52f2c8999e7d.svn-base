@@ -1,0 +1,44 @@
+package lecture7s1;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class Server3 {
+
+	final private int port;
+
+	// works fine with client 2
+	
+	public Server3(int port) {
+		this.port = port;
+	}
+
+	public void run() throws IOException {
+		//  establish service at the port
+		char[] chars = new char[] { 'x', 'y', 'z' };
+		int cloc = 0;
+		ServerSocket ss = new ServerSocket(port);
+		while (true) {
+			// wait for a connection
+			Socket s = ss.accept();
+			// send 4 bytes (an int)
+			// now send 4 bytes
+			OutputStream os = s.getOutputStream();
+			DataOutputStream dos = new DataOutputStream(os);
+			dos.writeChar(chars[cloc]);
+			// cloc goes 0, 1, 2, 0, 1, 2, ....
+			cloc = (cloc + 1) % chars.length;
+			dos.writeInt(132132);
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		Server3 server = new Server3(3000);
+		server.run();
+
+	}
+
+}

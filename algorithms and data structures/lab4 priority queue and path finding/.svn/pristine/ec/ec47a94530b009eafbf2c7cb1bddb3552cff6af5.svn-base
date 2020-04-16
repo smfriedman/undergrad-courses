@@ -1,0 +1,36 @@
+
+public class VertexInfo {
+	private Handle handle;
+	private Vertex parent;
+	private int numEdges;
+	
+	public VertexInfo(Handle handle, Vertex parent, int numEdges){
+		this.handle = handle;
+		this.parent = parent;
+		this.numEdges = numEdges;
+	}
+
+	public Handle getHandle() {
+		return handle;
+	}
+
+	public void setHandle(Handle handle) {
+		this.handle = handle;
+	}
+
+	public Vertex getParent() {
+		return parent;
+	}
+
+	public void setParent(Vertex parent) {
+		this.parent = parent;
+	}
+
+	public int getNumEdges() {
+		return numEdges;
+	}
+
+	public void setNumEdges(int numEdges) {
+		this.numEdges = numEdges;
+	}
+}

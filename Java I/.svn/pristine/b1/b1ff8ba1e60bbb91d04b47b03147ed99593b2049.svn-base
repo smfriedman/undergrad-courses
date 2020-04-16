@@ -1,0 +1,20 @@
+package expectedvalue;
+
+import cse131.ArgsProcessor;
+
+public class ExpectedValue {
+
+	public static void main(String[] args) {
+		ArgsProcessor ap = new ArgsProcessor(args);
+		double p = ap.nextDouble("Probability of success as gamer? (0 to 1)");
+		
+		int expValGamer = (int)(p*190000 + (1-p)*5000);
+		int progSalary = (int)(Math.random()*50000 + 110000);
+		
+		System.out.println("Gamer: $" + expValGamer);
+		System.out.println("Programmer: $" + progSalary);
+		System.out.print("Should you be a programmer? " + (progSalary > expValGamer));
+
+	}
+
+}

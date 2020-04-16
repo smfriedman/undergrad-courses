@@ -1,0 +1,102 @@
+package lab10;
+
+import java.awt.Color;
+
+import sedgewick.StdDraw;
+
+public class Frog {
+	private double posX;
+	private double posY;
+	private double halfHeight;
+	private double halfWidth;
+	private Color color;
+	private int lives;
+	private double speed;
+	
+	public Frog(){
+		this.posX = 0;
+		this.posY = 0;
+		this.halfHeight = 0.1;
+		this.halfWidth = 0.1;
+		this.color = color.GREEN;
+		this.lives = 5;
+		this.speed = .1;
+	}
+	
+	public double getPosX() {
+		return posX;
+	}
+
+	public void setPosX(double posX) {
+		this.posX = posX;
+	}
+
+	public double getPosY() {
+		return posY;
+	}
+
+	public void setPosY(double posY) {
+		this.posY = posY;
+	}
+
+	public double getHalfHeight() {
+		return halfHeight;
+	}
+
+	public void setHalfHeight(double halfHeight) {
+		this.halfHeight = halfHeight;
+	}
+
+	public double getHalfWidth() {
+		return halfWidth;
+	}
+
+	public void setHalfWidth(double halfWidth) {
+		this.halfWidth = halfWidth;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
+	public int getLives() {
+		return lives;
+	}
+
+	public void setLives(int lives) {
+		this.lives = lives;
+	}
+
+	public double getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
+
+	public void move(){
+		//if each key is pressed move by speed
+	}
+	
+	public void collide(Drawable d){
+		//helper method that cycles through all objects
+			if (this.getHalfHeight() + d.getHalfHeight() < Math.abs(this.getPosY() - d.getPosY())
+					|| this.getHalfWidth() + d.getHalfWidth() < Math.abs(this.getPosX() - d.getPosX())){
+				
+				
+			}
+		//if car, lives -1 and reset
+		//if goal, score +amount, and reset
+	}
+	
+	public void draw(){
+		StdDraw.setPenColor(color);
+		StdDraw.filledRectangle(posX, posY, halfWidth, halfHeight);
+	}
+	
+}

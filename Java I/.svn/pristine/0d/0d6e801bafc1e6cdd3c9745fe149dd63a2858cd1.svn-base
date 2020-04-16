@@ -1,0 +1,49 @@
+package methods;
+
+import java.awt.Color;
+
+import sedgewick.StdDraw;
+
+public class DrawMethods2 {
+
+	public static void eye(double cx, double cy, double r) {
+		
+		// Draw Eye
+		StdDraw.setPenColor(Color.WHITE);
+		StdDraw.filledCircle(cx, cy, r);
+		
+		StdDraw.setPenColor();
+		// Outline Eye
+		StdDraw.circle(cx, cy, r);
+		// Draw Pupil
+		StdDraw.filledCircle(cx, cy, r/2);
+	}
+
+	public static void face(double cx, double cy, double r, Color color) {
+
+		// Draw Head
+		StdDraw.setPenColor(color);
+		StdDraw.filledCircle(cx, cy, r);
+		
+		// Draw two eyes
+		eye(cx+r/3, cy+r/4, r/4);
+		eye(cx-r/3, cy+r/4, r/4);
+
+		
+		StdDraw.setPenColor();
+		// Outline head
+		StdDraw.circle(cx, cy, r);
+		// Draw smile
+		StdDraw.arc(cx, cy, r/2, 180, 360);
+	}
+
+	public static void main(String[] args) {
+		Color[] colors = {Color.YELLOW, Color.BLUE, Color.RED, Color.GREEN};
+		
+		for(int i=0;i<500;i++){
+			Color c = colors[ (int)(Math.random()*colors.length) ];
+			face(Math.random(), Math.random(), Math.random()/4, c);
+		}
+	}
+
+}
